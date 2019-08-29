@@ -6,20 +6,25 @@ module.exports = class util {
     {
         try
         {
-        if(typeof N=='string')
-        throw "Enter a variable to calculate Harmonic Mean";
-        if(typeof N=='')
-        throw "The number should not be empty"
+        if(typeof N=='string') throw "Enter a variable to calculate ";
+        if(typeof N=='') throw "The number should not be empty";
+    
     }
     catch(error)
     {
-        //console.log(error);
+        console.log(error);
         return error;
+    }
+    if(N<0)
+    { 
+        var m=2*this.pow(N+1);
+        return m;       
     }
     if (N == 0)
         return 1;
     var m = 2 * this.pow(N - 1)
         return m;
+        
     }
 
 
@@ -29,6 +34,7 @@ module.exports = class util {
         {
         if(typeof N=='string') throw "Enter a variable to calculate Harmonic Mean";
         if(typeof N=='') throw "The number should not be empty";
+        
     }
     catch(error)
     {
@@ -36,16 +42,32 @@ module.exports = class util {
     return error;
     }
         if (N == 0)
-            return;
+            return 0;
         if (N == 1)
             return 1;
+            if(N>1)
         var Har = 1 / N + (this.har(N - 1));
+         
+        if(N < 0 )
+        var Har = 1 / N + (this.har(N + 1));
 
         return Har;
     }
 
 
     dayOfWeek(m, d, y) {
+
+        try
+        {
+            if(typeof m=='' || typeof d=='' ||typeof y=='') throw "The variable should not be empty";
+            if(typeof m=='string' || typeof d=='string' || typeof y=='string') throw "Dont enter string";
+            if(m>12 || d>31 ) throw "Out of bound Value";
+        }
+        catch(error)
+        {
+            console.log(error);
+            return error;
+        }
         var y1 = y - (14 - m) / 12;
         var x = (parseInt(y1)) + (parseInt(y1)) / 4 - (parseInt(y1)) / 100 + (parseInt(y1)) / 400;
         var m1 = m + (12 * ((14 - m) / 12)) - 2;
@@ -80,6 +102,19 @@ module.exports = class util {
     }
 
     temperatureConversion(temp, type) {
+        
+        try{
+            if(typeof type!='C' || typeof type!='F' ) throw "Enter correct type";
+            if(typeof type=='' || typeof temp=='') throw "Do not enter empty values";
+            if(typeof temp=='string') throw "Enter a variable";     
+
+        }
+        catch(error)
+        {
+            console.log(error);
+            return error;
+
+        }
         if (type == 'C') {
             var fah = temp * (9 / 5) + 32;
             console.log("Temperature in Fahrenheit= " + fah);
