@@ -1,8 +1,8 @@
 var r=require('readline-sync');
 
-var d=r.question("Enter Day");
-var m=r.question("Enter month");
-var y=r.question("Enter year");
+var d=parseInt(r.question("Enter Day"),0);
+var m=parseInt(r.question("Enter month"),0);
+var y=parseInt(r.question("Enter year"),0);
 
 let s=require('../utility/util');
  

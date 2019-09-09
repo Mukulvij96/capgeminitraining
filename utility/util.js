@@ -1,7 +1,4 @@
 module.exports = class util {
-
-             
-    
     pow(N) 
     {
         try
@@ -212,19 +209,41 @@ module.exports = class util {
 
     }
 
-matrix(M,N)
+Matrix(M,N)
 {
+    var matrix=new Array();
     for(var i=0;i<M;i++)
     {
-mat[i]=new Array();
+matrix[i]=new Array();
         for(var j=0;j<N;j++)
         { 
-            var num=readline.question("Enter the number");
-mat[i][j] = num;
+            if(i==0)
+            {
+                switch(j)
+                {
+                    case 0:matrix[0][0]='Su';
+                    break;
+                    case 1:matrix[0][1]='Mo';
+                    break;
+                    case 2:matrix[0][2]='Tu';
+                    break;
+                    case 3:matrix[0][3]='Wed';
+                    break;
+                    case 4:matrix[0][4]='Th';
+                    break;
+                    case 5:matrix[0][5]='Fr';
+                    break;
+                    case 6:matrix[0][6]='Sat';
+                    break;
+                    default:console.log('Invalid Date');
+                }
+                
+            }
+
 
         }
     }
-return mat.valueOf();
+return matrix.valueOf();
 }
 
 random(coup, y) {
@@ -247,4 +266,23 @@ random(coup, y) {
     return coupon;
 
 }
+firstDayOfWeek( year, month){
+    year -= month < 3;
+    return (year + year/4 - year/100 + year/400 + this.tick[month-1] + 1) % 7;
+}
+primeChecker(number)
+{
+    var count=0;
+    for(var i=1;i<=Math.sqrt(number);i++)
+    {
+        if(number%i==0)
+        count++;
+    }
+    if(count==1)
+    return true;
+    else
+    return false;
+    
+}
+
 }
