@@ -1,0 +1,53 @@
+[
+    {
+      "stockName": "Reliance",
+      "sharePrice": 400,
+      "totalShare": 100000
+    },
+    {
+      "stockName": "Tata",
+      "sharePrice": 400,
+      "totalShare": 98823
+    },
+    {
+      "stockName": "Capgemini",
+      "sharePrice": 4000,
+      "totalShare": 100000
+    },
+    {
+      "stockName": "Infosys",
+      "sharePrice": 400,
+      "totalShare": 100000
+    },
+    {
+      "stockName": "ION",
+      "sharePrice": 400,
+      "totalShare": 100000
+    },
+    {
+      "stockName": "Airtel",
+      "sharePrice": 4000,
+      "totalShare": 100000
+    },
+    {
+      "stockName": "ICICI",
+      "sharePrice": 400,
+      "totalShare": 100000
+    },
+    {
+      "stockName": "HSBC",
+      "sharePrice": 400,
+      "totalShare": 100000
+    },
+    {
+      "stockName": "HDFC",
+      "sharePrice": 4000,
+      "totalShare": 100000
+    },
+    {
+      "stockName": "Dell",
+      "sharePrice": 150,
+      "totalShare": 500000
+    }
+  ]
+  
