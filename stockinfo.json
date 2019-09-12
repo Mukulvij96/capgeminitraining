@@ -1,0 +1,39 @@
+{
+    "StockMarket":
+    [
+  {
+    "Name": "Reliance Industries",
+    "NumberOfShares": 335675,
+    "ValueOfEachShare": 1199.75
+  },
+  {
+    "Name": "Tata Consultancy",
+    "NumberOfShares": 18219,
+    "ValueOfEachShare": 2227.4
+  },
+  {
+    "Name": "HDFC Bank",
+    "NumberOfShares": 72825,
+    "ValueOfEachShare": 2240.6
+  },
+  {
+    "Name": "ITC Ltd",
+    "NumberOfShares": 141438,
+    "ValueOfEachShare": 243.8
+  },
+  {
+    "Name": "Wipro",
+    "NumberOfShares": 74514,
+    "ValueOfEachShare": 2131.9
+  },
+  {
+    "Name": "Google",
+    "NumberOfShares": 425668,
+    "ValueOfEachShare": 1000
+  },
+  {
+    "Name": "Capgemini",
+    "NumberOfShares": 34702,
+    "ValueOfEachShare": 786.8
+  }
+]}
