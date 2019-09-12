@@ -294,7 +294,7 @@ class Banking {
             this.current.next = node;
 
         }
-        this.print();
+       return true;
     }
     print() {
         if (this.isEmpty()) {
@@ -319,7 +319,7 @@ class Banking {
         //element to be removed from the front of the row
         var current = this.front;
         this.front=current.next;
-        this.print();
+        return current;
 
     }
 }

@@ -1,0 +1,38 @@
+[
+  {
+    "firstName": "Mukul",
+    "lastName": "Vij",
+    "address": "Ahata Ugar Sain",
+    "city": "Ferozepur",
+    "state": "Punjab",
+    "zip": "152001",
+    "phoneNumber": "9888107076"
+  },
+  {
+    "firstName": "Kanav",
+    "lastName": "Garg",
+    "address": "B013AG001 Street No:13,Lakhi Colony",
+    "city": "Barnala",
+    "state": "Punjab",
+    "zip": "148100",
+    "phoneNumber": "9478403131"
+  },
+  {
+    "firstName": "Parry",
+    "lastName": "Bhattal",
+    "address": "593,Street No:10,Kishan Bagh Colony",
+    "city": "Sangrur",
+    "state": "Punjab",
+    "zip": "148001",
+    "phoneNumber": "9780033258"
+  },
+  {
+    "firstName": "Ram",
+    "lastName": "Kumar",
+    "address": "Churchgate",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "zip": "444444",
+    "phoneNumber": "999999999"
+  }
+]
