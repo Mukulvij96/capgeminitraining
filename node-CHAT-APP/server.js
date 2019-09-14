@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const io=require("socket.io")(server)
+//const io=require("socket.io")(server)
 
+const route=require('./app/routes/register.routes')
+//var expressValidator = require('express-validator');
 
 // create express app
 const app = express();
@@ -11,8 +13,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
-
+app.use("/",route)
 // Configuring the database
+//app.use('/',expressValidator);
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
 
@@ -34,8 +37,7 @@ app.get('/', (req, res) => {
 });
 
 // listen for requests
-var fp = require("find-free-port")
-app.listen(fp(3000, function (err, freePort) {
-}), () => {
+// require('./app/routes/register.routes')(app)
+app.listen(3000, () => {
     console.log("Server is listening on port 3000");
 });
