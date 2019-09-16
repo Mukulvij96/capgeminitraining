@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 //const io=require("socket.io")(server)
 
-const route=require('./app/routes/register.routes')
+const route = require('./app/routes/register.routes')
 //var expressValidator = require('express-validator');
 
 // create express app
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
-app.use("/",route)
+app.use("/", route)
 // Configuring the database
 //app.use('/',expressValidator);
 const dbConfig = require('./config/database.config.js');
