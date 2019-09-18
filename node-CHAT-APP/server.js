@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 //const io=require("socket.io")(server)
 
-const route = require('./app/routes/register.routes')
+const route = require('./chatapp/routes/register.routes')
 //var expressValidator = require('express-validator');
 
 // create express app
@@ -40,4 +40,4 @@ app.get('/', (req, res) => {
 // require('./app/routes/register.routes')(app)
 app.listen(3000, () => {
     console.log("Server is listening on port 3000");
-});
+});      

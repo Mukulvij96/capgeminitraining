@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 var BCRYPT_SALT_ROUNDS = 12;
@@ -24,7 +25,7 @@ const registerSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    loginToken: {
+    Token: {
         type: String
     }
 
@@ -89,7 +90,7 @@ class UserModel {
                         console.log("----LOGIN SUCCESSFULLY----")
                         var token = jwt.sign({ email: res.email }, 'Secret Token', { expiresIn: '1hr' })
                         // body.loginToken = token;
-                        User.update({ email: body.email }, { loginToken: token }, (err) => {
+                        User.update({ email: body.email }, { Token: token }, (err) => {
                             if (err)
                                 callback(err);
                         })
@@ -115,13 +116,15 @@ class UserModel {
         })
     }
     forget(userInput, callback) {
+        //var localstorage='';
         User.findOne({ email: userInput.email }, (err, user) => {
             if (!user) {
                 callback({ message: 'Email is not registered' })
             }
             else {
-                var forgotToken = jwt.sign({ _id: user._id, name: user.name, email: user.email }, 'hey', { expiresIn: '10m' });
-                User.update({ email: user.email }, { token: forgotToken }, (err, user) => {
+                var forgotToken = jwt.sign({ _id: user._id, name: user.name, email: user.email }, 'Secret Token', { expiresIn: '1hr' });
+                //localstorage.setItem('forgotToken', forgotToken)
+                User.update({ email: user.email }, { Token: forgotToken }, (err, user) => {
                     if (err) {
                         callback(err);
                     } else {
@@ -139,7 +142,7 @@ class UserModel {
                     to: 'prabhnoor.parry@gmail.com',
                     from: 'er.mukulvij96@gmail.com',
                     subject: 'Password Reset',
-                    text: 'Please click on the given link to reset your password http://localhost:3000/reset/' + forgotToken + '\n'
+                    text: 'The following link will be active only for 1 hour .Please click on the given link to reset your password http://localhost:3000/reset/' + forgotToken + '\n'
                 }
                 smtpTransport.sendMail(mailOptions, (err, result) => {
                     if (err) {
@@ -150,6 +153,42 @@ class UserModel {
                 })
             }
         })
+    }
+    reset(body, callback) {
+
+        User.findOne({ email: body.email, Token: body.Token }, (err, res) => {
+            if (err)
+                callback("The token has expired ");
+            if (res)
+                var salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
+            var hashNewPassword = bcrypt.hashSync(body.newPassword, salt);
+            //console.log(hashNewPassword);
+            //console.log(res.password);
+            //console.log(res.Token);
+            bcrypt.compare(res.password, body.newPassword, (err, res) => {
+                if (err) {
+                    //  console.log(hashNewPassword);
+                    // res.password=hashNewPassword;
+                    callback("Password already Changed ");
+                }
+                if (!err) {
+                    User.update({ email: body.email }, { passowrd: hashPassword }, (err) => {
+                        if (err)
+                            console.log(hashNewPassword);
+                        callback(err);
+                    })
+                    callback("Password changed ");
+                }
+            })
+            // res.password=hashNewPassword;
+            // callback("Password changed ");
+
+            //callback("You will now reset the password ")
+        })
+        //localStorage.getItem('forgotToken',forgotToken);
+        //console.log(body.token);
+        //User.findOne({email:body.email,forgotToken:forgot})
+
     }
 }
 

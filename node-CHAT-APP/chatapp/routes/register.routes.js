@@ -34,12 +34,15 @@ router.post('/login', [
   (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).jsonp(errors.array());
+       res.status(422).jsonp(errors.array());
     } else {
       //console.log(req.body);
-      return userController.loginController(req, res);
+       userController.loginController(req, res);
     }
   });
 
-  router.post('/forgot',userController.forgotPasswordController)
+  router.post('/forgot',userController.forgotPasswordController);
+//route for connecting with Forgot Password Controller
+  // router.post('/reset',userController.resetPasswordController);
+//route for connecting with Reset Password Controller
 module.exports = router

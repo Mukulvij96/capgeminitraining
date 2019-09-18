@@ -22,6 +22,17 @@ exports.loginService = (body, callback) => {
 exports.forgotPasswordService = (body,callback) => {
     userModel.forget(body , (err,result) => {
         if(err){
+            console.log("Error in sending set Password mail ");
+            callback(err);
+        }
+        else{
+            callback(null,result)
+        }
+    })
+}
+exports.resetPasswordService = (body,callback) => {
+    userModel.reset(body , (err,result) => {
+        if(err){
             console.log("Error in setting new Password ");
             callback(err);
         }

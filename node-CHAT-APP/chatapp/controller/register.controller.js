@@ -43,12 +43,12 @@ exports.loginController = (req, res) => {
                 responseResult.success = false;
                 responseResult.errors = err;
                 console.log("Error returned");
-                return res.status(400).send(responseResult);
+                res.status(400).send(responseResult);
             } else {
                 responseResult.success = true;
                 responseResult.result = result;
                 //console.log("Result returned");
-                return res.status(200).send(responseResult);
+                res.status(200).send(responseResult);
             }
         })
     }
@@ -65,12 +65,34 @@ exports.forgotPasswordController = (req, res) => {
                 responseResult.success = false;
                 responseResult.errors = err;
                 //console.log("Error returned");
-                return res.status(400).send(responseResult);
+                res.status(400).send(responseResult);
             } else {
                 responseResult.success = true;
                 responseResult.result = result;
                 //console.log("Result returned");
-                return res.status(200).send(responseResult);
+                res.status(200).send(responseResult);
+            }
+        })
+    }
+}
+exports.resetPasswordController = (req, res) => {
+    let responseResult = {};
+    console.log("Inside reset Password controller");
+    //console.log(req.body);
+
+    {
+        userService.resetPasswordService(req.body, (err, result) => {
+
+            if (err) {
+                responseResult.success = false;
+                responseResult.errors = err;
+                //console.log("Error returned");
+                res.status(400).send(responseResult);
+            } else {
+                responseResult.success = true;
+                responseResult.result = result;
+                //console.log("Result returned");
+                res.status(200).send(responseResult);
             }
         })
     }

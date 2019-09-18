@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+
+<body style="background-color: turquoise;">
+        <h1  style="text-align: center" style="font: bold,xx-large" >-------WELCOME TO THE WORLD OF CHAT APP------</h1> 
+<div ng-app="chatapp" ng-controller="registerController" >
+
+        <p>For new User ,click on Register</p>  
+        <!-- <button type="submit" onclick="windows.location.href='file:///home/admin1/Desktop/Mukulvij96/node-CHAT-APP/register.html'" > Register! </button> -->
+        <form>
+         <input type="button" value="Register!" onclick="parent.location='/home/admin1/Desktop/Mukulvij96/node-CHAT-APP/register.html'"/>
+     
+        </form>
+        <p>For already existing User,click on the Login </p>
+        Email:<input type="email" placeholder="example@xyz.com" ng-model="email"><br>
+        Password:<input type="password" placeholder="8characters" ng-model="password"><br>
+
+        <button type="button" onclick="alert('Now You will go to Login Page')"> Login! </button> 
+</div>
+   
+<script>
+var app=angular.module("chatapp",[]);
+app.controller("registerController",function($scope) {
+    $scope.email="";
+    $scope.password="";
+});
+
+</script>
+ 
+   <!-- <p>For new User ,click on Register</p>  
+   <button type="submit" onclick="windows.location.href='file:///home/admin1/Desktop/Mukulvij96/node-CHAT-APP/register.html'" > Register! </button>
+   <form>
+    <input type="button" value="Register!" onclick="parent.location='/home/admin1/Desktop/Mukulvij96/node-CHAT-APP/register.html'"/>
+
+   </form>
+   <p>For already existing User,click on the Login </p>  
+   <button type="button" onclick="alert('Now You will go to Login Page    ')"> Login! </button>   -->
+    
+</body>
+    </html>
