@@ -14,16 +14,19 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
 app.use("/", route)
+
 // Configuring the database
 //app.use('/',expressValidator);
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
-
+app.use(express.static('./UI'))
 mongoose.Promise = global.Promise;
 
+mongoose.set('useNewUrlParser',true)
 // Connecting to the database
 mongoose.connect(dbConfig.url, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology:true
 }).then(() => {
     console.log("Successfully connected to the database");
 }).catch(err => {
@@ -31,6 +34,7 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
+app.use(bodyParser.json())
 // define a simple route
 app.get('/', (req, res) => {
     res.json({ "message": "Welcome to the new trend,CHAT APP. Now dont feel far away from your loved ones.Ping them with one click and spread Happiness. " });

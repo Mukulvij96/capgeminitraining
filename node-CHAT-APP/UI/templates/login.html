@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"> </script>
+        
+<h1 style="text-align: center" style="font: bold,xx-large">-------WELCOME TO THE WORLD OF CHAT APP------</h1>
+</head>
+<body>
+<div >
+
+    <p>For new User ,click on Register</p> 
+    <a href="http://localhost:3000/#!/register"><button>REGISTER</button></a>
+    <!-- <button type="submit" onclick="windows.location.href='file:///home/admin1/Desktop/Mukulvij96/node-CHAT-APP/register.html'" > Register! </button> -->
+    <!-- <form> -->
+        <!-- <input type="button" value="Register!"
+            onclick="parent.location='/home/admin1/Desktop/Mukulvij96/node-CHAT-APP/UI/templates/register.html'" /> -->
+
+    <!-- </form> -->
+    <p>For already existing User,click on the Login </p> 
+    
+    Email:
+    <input type="email" placeholder="example@xyz.com" ng-model="email"><br>
+    Password:
+    <input type="password" placeholder="********" ng-model="password"><br>
+
+    <button type="submit" ng-click=loginController()> LOGIN! </button><br><br><br>
+
+    <a href="http://localhost:3000/?#!/forgot"> Forgot Paasword?</a>
+
+</div>
+
+</body>
+</html>

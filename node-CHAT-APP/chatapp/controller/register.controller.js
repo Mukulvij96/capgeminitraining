@@ -1,4 +1,4 @@
-const userService = require('../../app/services/userservices');
+const userService = require('../services/userservices');
 //const { check, validationResult } = require('express-validator');
 // const express=require('express');
 //  var validator=express.Router();
@@ -15,7 +15,8 @@ const userService = require('../../app/services/userservices');
 //   }
 // })
 exports.registerController = (req, res) => {
-
+console.log("inside controller");
+console.log(req.body)
     let responseResult = {};
     {
         userService.registerService(req.body, (err, result) => {

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 var BCRYPT_SALT_ROUNDS = 12;
 const jwt = require('jsonwebtoken');
-var hbs = require('nodemailer-express-handlebars');
+// var hbs = require('nodemailer-express-handlebars');
 email = process.env.MAILER_EMAIL_ID || 'auth_email_address@gmail.com',
     pass = process.env.MAILER_PASSWORD || 'auth_email_pass'
 nodemailer = require('nodemailer');
@@ -53,6 +53,9 @@ class UserModel {
         // {
         //     callback("Email already exists ");
         // }
+        console.log("model body",body),
+        body=JSON.parse(JSON.stringify(body))
+        console.log(body.firstname);
         var salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
         var hashPassword = bcrypt.hashSync(body.password, salt);
         const user = new User({

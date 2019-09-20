@@ -1,7 +1,9 @@
-const userModel = require('../../app/models/register.models');
+const userModel = require('../models/register.models');
 
 exports.registerService = (body, callback) => {
+    // console.log("services" + JSON.stringify(body) , body.firstName)
     userModel.register(body, (err, result) => {
+        // console.log("services" +body)
         if (err)
             callback(err);
         else
