@@ -31,10 +31,14 @@ angular.module('chatapp').service('services', function ($http) {
         $http({
             method: 'POST',
             url: 'http://localhost:3000/reset',
+           headers:{
+               token:token
+           },
             data: dataObj
         })
             .then(function (success) {
                 console.log("data after api call is success", success);
+                $state.go('login')
             }, function (error) {
                 console.log("data after api call is error", error);
             })
