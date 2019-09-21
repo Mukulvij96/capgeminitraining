@@ -1,4 +1,4 @@
-angular.module('chatapp').controller('resetController',['$scope','service',  function ($scope, service) {
+angular.module('chatapp').controller('resetController',  function ($scope, service) {
 
     $scope.resetController = function () {
        let data = {
@@ -8,4 +8,4 @@ angular.module('chatapp').controller('resetController',['$scope','service',  fun
        console.log("data--", data);
        service.reset(data);
     }
-}])
+})

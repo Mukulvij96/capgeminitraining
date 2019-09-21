@@ -1,9 +1,4 @@
-////     app.controller("loginController", [$scope, function ($scope) {
-//         console.log($scope);
-//         $scope.email = "";
-//         $scope.password = "";
-//     }])
-angular.module('chatapp').controller('regController',['$scope','service',  function ($scope, service) {
+angular.module('chatapp').controller('registerController',function ($scope, services) {
 
    $scope.registerController = function () {
       let data = {
@@ -13,18 +8,6 @@ angular.module('chatapp').controller('regController',['$scope','service',  funct
          "password": $scope.password
       }
       console.log("data--", data);
-      service.register(data);
+      services.register(data);
    }
-
-   //  function random() {
-   //     console.log(XSDVSDS)
-
-   //  }
-   //  random()
-   //var obj={}
-   //obj.name=$scope.name;
-   //obj.email=$scope.email;
-   //obj.password=$scope.password;
-   //obj.confirmPassword=$scope.confirmPassword;
-   //services.registerrr($http,$log,$scope);
-}])
+})

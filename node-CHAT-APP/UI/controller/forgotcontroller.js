@@ -1,4 +1,4 @@
-angular.module('chatapp').controller('forgotController',['$scope','service',  function ($scope, service) {
+angular.module('chatapp').controller('forgotController',  function ($scope, service) {
 
     $scope.forgotController = function () {
        let data = {
@@ -9,4 +9,4 @@ angular.module('chatapp').controller('forgotController',['$scope','service',  fu
        console.log("data--", data);
        service.forgot(data);
     }
-}])
+})

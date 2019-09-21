@@ -1,4 +1,4 @@
-angular.module('chatapp').service('service',['$http',function($http){
+angular.module('chatapp').service('service',function($http){
 
     this.reset=function(dataObj){
     console.log("dataObj",dataObj);
@@ -13,4 +13,4 @@ angular.module('chatapp').service('service',['$http',function($http){
     console.log("data after api call is error", error);
     })
     }
-    }])
+    })

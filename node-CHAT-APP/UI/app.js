@@ -9,7 +9,7 @@ application.config(function ($stateProvider, $urlRouterProvider) {
         .state('register', {
             url: '/register',
             templateUrl: './templates/register.html',
-            controller: 'regController',
+            controller: 'registerController',
 
         })
 

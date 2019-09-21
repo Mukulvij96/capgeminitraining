@@ -1,4 +1,4 @@
-angular.module('chatapp').controller('loginController',['$scope','service',  function ($scope, service) {
+angular.module('chatapp').controller('loginController',  function ($scope, service) {
 
     $scope.loginController = function () {
        let data = {
@@ -9,4 +9,4 @@ angular.module('chatapp').controller('loginController',['$scope','service',  fun
        console.log("data--", data);
        service.login(data);
     }
-}])
+})
