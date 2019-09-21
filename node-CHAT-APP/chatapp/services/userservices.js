@@ -21,7 +21,7 @@ exports.loginService = (body, callback) => {
         }
     })
 }
-exports.forgotPasswordService = (body,callback) => {
+exports.forgetPasswordService = (body,callback) => {
     userModel.forget(body , (err,result) => {
         if(err){
             console.log("Error in sending set Password mail ");
@@ -32,8 +32,8 @@ exports.forgotPasswordService = (body,callback) => {
         }
     })
 }
-exports.resetPasswordService = (body,callback) => {
-    userModel.reset(body , (err,result) => {
+exports.resetPasswordService = (req,callback) => { console.log("In services")
+    userModel.reset(req, (err,result) => {
         if(err){
             console.log("Error in setting new Password ");
             callback(err);

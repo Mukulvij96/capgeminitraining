@@ -54,13 +54,13 @@ exports.loginController = (req, res) => {
         })
     }
 }
-exports.forgotPasswordController = (req, res) => {
+exports.forgetPasswordController = (req, res) => {
     let responseResult = {};
     console.log("Inside forgot Password controller");
     //console.log(req.body);
 
     {
-        userService.forgotPasswordService(req.body, (err, result) => {
+        userService.forgetPasswordService(req.body, (err, result) => {
 
             if (err) {
                 responseResult.success = false;
@@ -82,7 +82,7 @@ exports.resetPasswordController = (req, res) => {
     //console.log(req.body);
 
     {
-        userService.resetPasswordService(req.body, (err, result) => {
+        userService.resetPasswordService(req, (err, result) => {
 
             if (err) {
                 responseResult.success = false;

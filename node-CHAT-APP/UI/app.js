@@ -19,14 +19,14 @@ application.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'loginController',
 
         })
-        .state('forgot', {
-            url: '/forgot',
-            templateUrl: './templates/forgot.html',
-            controller: 'forgotController',
+        .state('forget', {
+            url: '/forget',
+            templateUrl: './templates/forget.html',
+            controller: 'forgetController',
 
         })
         .state('reset', {
-            url: '/reset',
+            url: '/reset/:token',
             templateUrl: './templates/reset.html',
             controller: 'resetController',
 

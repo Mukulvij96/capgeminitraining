@@ -25,7 +25,10 @@ const registerSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    Token: {
+    loginToken: {
+        type: String
+    },
+    forgetToken: {
         type: String
     }
 
@@ -53,8 +56,8 @@ class UserModel {
         // {
         //     callback("Email already exists ");
         // }
-        console.log("model body",body),
-        body=JSON.parse(JSON.stringify(body))
+        console.log("model body", body),
+            body = JSON.parse(JSON.stringify(body))
         console.log(body.firstname);
         var salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
         var hashPassword = bcrypt.hashSync(body.password, salt);
@@ -85,36 +88,24 @@ class UserModel {
                     if (!res) {
                         console.log("Password Entered is Wrong");
                         console.log("----LOGIN UNSUCCESSFUL----");
-                        callback(!res);
+                        callback("Password Doesn't Matches");
                     }
                     else {
                         console.log(res);
                         console.log("Verified both password and email ")
                         console.log("----LOGIN SUCCESSFULLY----")
-                        var token = jwt.sign({ email: res.email }, 'Secret Token', { expiresIn: '1hr' })
+                        var logintoken = jwt.sign({ email: res.email }, 'Secret Token', { expiresIn: '3hr' })
                         // body.loginToken = token;
-                        User.update({ email: body.email }, { Token: token }, (err) => {
+                        User.update({ email: body.email }, { loginToken: logintoken }, (err) => {
                             if (err)
                                 callback(err);
                         })
 
-                        console.log(token);
+                        console.log(logintoken);
                         callback(null, "Login Successfully");
                     }
                 })
-                // Login.findOne({password:body.password},(err,res) => {
-                //     if(err)
-                //     {
-                //     console.log("Password entered is Wrong ")
-                //     callback(err);
-                //     }
-                //     if(res)
-                //     {
-                //         // login.save((err,res) => {
-                //     if(err)
-                //     callback(err);
-                //     else
-                //     {       
+
             }
         })
     }
@@ -125,9 +116,9 @@ class UserModel {
                 callback({ message: 'Email is not registered' })
             }
             else {
-                var forgotToken = jwt.sign({ _id: user._id, name: user.name, email: user.email }, 'Secret Token', { expiresIn: '1hr' });
+                var forgotToken = jwt.sign({ _id: user._id, email: user.email }, 'Secret Token', { expiresIn: '1hr' });
                 //localstorage.setItem('forgotToken', forgotToken)
-                User.update({ email: user.email }, { Token: forgotToken }, (err, user) => {
+                User.update({ email: user.email }, { forgetToken: forgotToken }, (err, user) => {
                     if (err) {
                         callback(err);
                     } else {
@@ -157,44 +148,46 @@ class UserModel {
             }
         })
     }
-    reset(body, callback) {
-
-        User.findOne({ email: body.email, Token: body.Token }, (err, res) => {
-            if (err)
+    reset(req, callback) {
+        console.log("In models")
+        // console.log(req.useremail)
+        // console.log(req.headers["token"])
+        
+        User.findOne({ email: req.useremail, forgetToken: req.headers["token"] }, (err, res) => {
+            if (!res) {
+                console.log("In error")
                 callback("The token has expired ");
-            if (res)
-                var salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
-            var hashNewPassword = bcrypt.hashSync(body.newPassword, salt);
-            //console.log(hashNewPassword);
-            //console.log(res.password);
-            //console.log(res.Token);
-            bcrypt.compare(res.password, body.newPassword, (err, res) => {
-                if (err) {
-                    //  console.log(hashNewPassword);
-                    // res.password=hashNewPassword;
-                    callback("Password already Changed ");
-                }
-                if (!err) {
-                    User.update({ email: body.email }, { passowrd: hashPassword }, (err) => {
-                        if (err)
-                            console.log(hashNewPassword);
-                        callback(err);
+            }
+            if (res) {
+                // console.log("result")
+                // console.log(req.body.confirmPassword);
+                // console.log(res.password);
+                    bcrypt.compare(req.body.confirmPassword, res.password, (response) => {
+                        if (!response) {
+                            //  console.log("inside compares "+res.password)
+                            // console.log("Inside compare "+body.newPassword)
+                            var salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
+                            var hashPassword = bcrypt.hashSync(req.body.confirmPassword, salt);
+                            User.findByIdAndUpdate(res._id,  {password: hashPassword} ,{new:true}, (error, response) => {
+                                if (error)
+                                    callback("The ID is not there");
+                                if (response) {
+                                    callback(null, "The password has been changed");
+                                }
+                                else {
+                                    console.log("YOYO");
+                                    callback("Password already entered before");
+                                }
+                            })
+                        }
+
                     })
-                    callback("Password changed ");
+
                 }
-            })
-            // res.password=hashNewPassword;
-            // callback("Password changed ");
-
-            //callback("You will now reset the password ")
-        })
-        //localStorage.getItem('forgotToken',forgotToken);
-        //console.log(body.token);
-        //User.findOne({email:body.email,forgotToken:forgot})
-
+                      })
     }
-}
 
+}
 
 
 module.exports = new UserModel();
