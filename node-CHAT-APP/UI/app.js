@@ -31,6 +31,12 @@ application.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'resetController',
 
         })
+        .state('Dashboard',{
+            url:'/Dashboard',
+            templateUrl:'./templates/Dashboard.html',
+            controller:'getAllUsersController'
+
+        })
     $urlRouterProvider.otherwise('/index')
 
     // .when('register',{

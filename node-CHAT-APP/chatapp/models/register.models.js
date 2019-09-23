@@ -136,7 +136,7 @@ class UserModel {
                     to: 'prabhnoor.parry@gmail.com',
                     from: 'er.mukulvij96@gmail.com',
                     subject: 'Password Reset',
-                    text: 'The following link will be active only for 1 hour .Please click on the given link to reset your password http://localhost:3000/reset/' + forgotToken + '\n'
+                    text: 'The following link will be active only for 1 hour .Please click on the given link to reset your password http://localhost:3000/#!/reset/' + forgotToken + '\n'
                 }
                 smtpTransport.sendMail(mailOptions, (err, result) => {
                     if (err) {
@@ -162,12 +162,12 @@ class UserModel {
                 // console.log("result")
                 // console.log(req.body.confirmPassword);
                 // console.log(res.password);
-                    bcrypt.compare(req.body.confirmPassword, res.password, (response) => {
+                    bcrypt.compare(req.body.password, res.password, (response) => {
                         if (!response) {
                             //  console.log("inside compares "+res.password)
                             // console.log("Inside compare "+body.newPassword)
                             var salt = bcrypt.genSaltSync(BCRYPT_SALT_ROUNDS);
-                            var hashPassword = bcrypt.hashSync(req.body.confirmPassword, salt);
+                            var hashPassword = bcrypt.hashSync(req.body.password, salt);
                             User.findByIdAndUpdate(res._id,  {password: hashPassword} ,{new:true}, (error, response) => {
                                 if (error)
                                     callback("The ID is not there");
@@ -185,6 +185,21 @@ class UserModel {
 
                 }
                       })
+    }
+    getAllUsers(req,callback)
+    {
+        User.find({},{firstName:1,lastName:1,email:1},(err,res) => {
+            if(err)
+            callback("There are no users present, Database empty ");
+            if(res)
+            {
+                // console.log(res);
+                callback(null,res)
+            }
+
+        })
+
+        
     }
 
 }

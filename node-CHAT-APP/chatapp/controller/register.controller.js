@@ -98,3 +98,26 @@ exports.resetPasswordController = (req, res) => {
         })
     }
 }
+
+exports.getAllUsersController = (req,res) => {
+    let responseResult = {};
+    console.log("Inside getAllUsers controller");
+    //console.log(req.body);
+
+    {
+        userService.getAllUsersService( req,(err, result,next) => {
+
+            if (err) {
+                responseResult.success = false;
+                responseResult.errors = err;
+                //console.log("Error returned");
+                res.status(400).send(responseResult);
+            } else {
+                responseResult.success = true;
+                responseResult.result = result;
+                //console.log("Result returned");
+                res.status(200).send(responseResult);
+            }
+        })
+    }
+}

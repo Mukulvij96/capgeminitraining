@@ -14,6 +14,22 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
 app.use("/", route)
+var http = require('http').Server(app);
+var io = require('socket.io')(http)
+//Whenever someone connects this gets executed
+io.on('connection', function(socket) {
+    console.log('A user connected');
+    
+        socket.emit('testerEvent!',{description:"Hey this Chat app is developed by Mukul Vij"});
+     
+    //Whenever someone disconnects this piece of code executed
+    socket.on('disconnect', function () {
+       console.log('A user disconnected');
+    });
+ });
+ http.listen(3000, function() {
+    console.log('Server is listening on port 3000 ');
+ });
 
 // Configuring the database
 //app.use('/',expressValidator);
@@ -37,11 +53,11 @@ mongoose.connect(dbConfig.url, {
 app.use(bodyParser.json())
 // define a simple route
 app.get('/', (req, res) => {
-    res.json({ "message": "Welcome to the new trend,CHAT APP. Now dont feel far away from your loved ones.Ping them with one click and spread Happiness. " });
+    res.sendFile('index.html');
 });
 
 // listen for requests
 // require('./app/routes/register.routes')(app)
-app.listen(3000, () => {
-    console.log("Server is listening on port 3000");
-});      
+// app.listen(3000, () => {
+//     console.log("Server is listening on port 3000");
+// });      

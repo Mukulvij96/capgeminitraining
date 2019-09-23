@@ -47,4 +47,6 @@ router.post('/login', [
 //route for connecting with Forgot Password Controller
   router.post('/reset',util.authUser,userController.resetPasswordController);
 //route for connecting with Reset Password Controller
+router.get('/getAllUsers',userController.getAllUsersController)
+//route for connecting with getAllUsers Controller
 module.exports = router

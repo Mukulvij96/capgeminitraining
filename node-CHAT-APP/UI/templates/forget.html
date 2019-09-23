@@ -3,13 +3,20 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"> </script>
-    <h1 style="color: crimson">FOR SENDING PASSOWRD CHANGE REQUEST YOU NEED TO ENTER EMAIL</h1>
+   <style>
+   h1{
+       color: royalblue;
+       font-size: x-large;
+       text-align: justify
+   }
+   </style>
+<h1>Enter your email to get password change link</h1>
 </head>
 
 <body>
     <div>
     Email:
-    <input type="email" placeholder="example@xyz.com" ng-model="email"><br>
+    <input type="email" placeholder="example@xyz.com" ng-model="email"><br><br>
     <button type="submit" ng-click="forgetController()"> SEND REQUEST </button>
     </div>
 </body>

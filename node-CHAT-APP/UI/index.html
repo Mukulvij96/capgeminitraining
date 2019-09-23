@@ -2,8 +2,58 @@
 <html>
 
 <head >
+    <style>
+    body{
+        background-image:url("download.png");
+        height: 100%;
+        background-position:inherit;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }</style>
+<h1>
+    <style>
+    h1{
+        text-align: start;
+        color: royalblue;
+        font-size:xx-large;
+        border:1px brown ;
+        
+    }
+    </style>
+    Chat App</h1>
 
-    <!-- CSS (load bootstrap)
+<style>
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+        }
+        
+        li {
+          float: left;
+        }
+        
+        li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+        
+        li a:hover {
+          background-color: #111;
+        }
+        </style>
+        <ul>
+                <li><a class="active" href="./index.html">Home</a></li>
+                <li><a href="http://localhost:3000/#!/login">Login</a></li>
+                <li><a href="./templates/about.html">About</a></li>
+              </ul>
+    
+<!-- CSS (load bootstrap)
     
     < <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <style>
@@ -12,12 +62,14 @@
 
     <!-- JS (load angular, ui-router, and our custom js file) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.js"></script>
+    <script src = "/socket.io/socket.io.js"></script>
     <script src="./app.js"></script>
     <script src="./controller/registercontroller.js"></script>
     <script src="./controller/logincontroller.js"></script>
     <script src="./controller/forgetcontroller.js"></script>
     <script src="./controller/resetcontroller.js"></script>
+    <script src="./controller/getAllUsersController.js"></script>
     <script src="./services/userservices.js"></script>
 
 </head>
@@ -40,7 +92,11 @@
    <div class="container">
        <div ui-view></div>
    </div>
+        <!-- <div>
+            <a href="http://localhost:3000/#!/Dashboard">GET USERS</a>
+        </div> -->
         <!-- <ui-view></ui-view> -->
+        
 </body>
 <!-- MAIN CONTENT -->
 <!-- <div class="container"> -->

@@ -43,3 +43,14 @@ exports.resetPasswordService = (req,callback) => { console.log("In services")
         }
     })
 }
+exports.getAllUsersService = (req,callback) => { console.log("In services")
+    userModel.getAllUsers( req,(err,result) => {
+        if(err){
+            console.log("Error ");
+            callback(err);
+        }
+        else{
+            callback(null,result)
+        }
+    })
+}
