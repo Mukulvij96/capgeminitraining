@@ -19,9 +19,9 @@ var io = require('socket.io')(http)
 //Whenever someone connects this gets executed
 io.on('connection', function(socket) {
     console.log('A user connected');
-    
-        socket.emit('testerEvent!',{description:"Hey this Chat app is developed by Mukul Vij"});
-     
+    setTimeout(function(){
+        socket.emit('testerEvent!',{description:"Hey this Chat app is developed by Mukul Vij"})
+    },5000)
     //Whenever someone disconnects this piece of code executed
     socket.on('disconnect', function () {
        console.log('A user disconnected');

@@ -5,6 +5,7 @@ angular.module('chatapp').controller('loginController',  function ($scope, servi
 
           "email": $scope.email,
           "password": $scope.password
+          
        }
        console.log("data--", data);
        services.login(data);

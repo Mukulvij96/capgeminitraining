@@ -1,0 +1,35 @@
+<script src="/socket.io/socket.io.js"></script>
+<script> var socket=io() ;
+function user(){
+    socket.emit('User',document.getElementById('name'));
+
+};
+
+    socket.on('LoggedIn',function loggedIn(data){
+        users++;
+        document.getElementById(data).firstName;
+    })
+
+
+</script>
+
+
+//backend
+var express=require('express');
+var http=require('http').Server(express);
+var io=require('socket.io')(http)
+
+
+io.on('connection',function(socket){
+    console.log("A user connected");
+    socket.on('User',function(data){
+        console.log(data);
+
+        if(User.findById(data._id,(err,res) => {
+            if(err)
+            callback("User Not Found");
+            if(res)
+            socket.emit('LoggedIn',{res.firstName});
+        })
+    })
+})

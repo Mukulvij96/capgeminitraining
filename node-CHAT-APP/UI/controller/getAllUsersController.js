@@ -12,12 +12,11 @@ services.getAllUsers((err,res) =>{
     return err;
     if(res)
     {
-        console.log(res);
+        //console.log(res);
         $scope.data=res;
         // console.log(res.data.result);
         // $scope.data=JSON.stringify(res);
-
-        console.log("After clicking " +$scope.data)
+        //console.log("After clicking " +$scope.data)
     }
 })
 })

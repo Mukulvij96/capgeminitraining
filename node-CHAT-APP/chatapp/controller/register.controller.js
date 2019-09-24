@@ -49,6 +49,7 @@ exports.loginController = (req, res) => {
                 responseResult.success = true;
                 responseResult.result = result;
                 //console.log("Result returned");
+                responseResult.onlineToken=true;
                 res.status(200).send(responseResult);
             }
         })

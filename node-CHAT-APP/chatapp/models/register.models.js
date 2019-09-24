@@ -30,7 +30,12 @@ const registerSchema = mongoose.Schema({
     },
     forgetToken: {
         type: String
+    },
+    onlineToken:{
+        type:Boolean,
+        default:null
     }
+    
 
 },
     { timestamps: true });
@@ -96,12 +101,13 @@ class UserModel {
                         console.log("----LOGIN SUCCESSFULLY----")
                         var logintoken = jwt.sign({ email: res.email }, 'Secret Token', { expiresIn: '3hr' })
                         // body.loginToken = token;
-                        User.update({ email: body.email }, { loginToken: logintoken }, (err) => {
+                        
+                        User.update({ email: body.email }, { loginToken: logintoken, onlineToken:true }, (err) => {
                             if (err)
                                 callback(err);
                         })
 
-                        console.log(logintoken);
+                        // console.log(logintoken);
                         callback(null, "Login Successfully");
                     }
                 })
