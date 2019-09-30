@@ -1,81 +1,38 @@
-<!DOCTYPE html>
-<html lang="en-US">
+<div class="bod" fxFlex="100" fxLayoutAlign="center center">
 
-<head>
-    <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
-    <style>
-        body {
-            background-color: white;
-            box-sizing: inherit;
-        }
+    <mat-card fxFlex="35" fxFlex.xs="100" class="login-Container" fxLayout="column" fxLayoutAlign="center center">
 
-        body {
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
-        }
-
-        .header {
-            size: 2px;
-            margin-left: 28%;
-            margin-top: 0%;
-            
-        }
-
-        .Page {
-            width: 500px;
-            height: 500px;
-            background-color: white;
-            border-width: 2px;
-            border-color: black;
-            border-style: dashed;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-
-            margin: auto;
-        }
-
-        .Text {
-            width: 50%;
-            height: 42px;
-            background: white;
-            font-size: 18px;
-            margin-top: 10%;
-            margin-left: 20%;
-            border-width: 0px;
-            border-style: solid;
-            border-color: blue;
-            text-shadow: 2px;
-
-            /* width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box; */
-
-
-        }
-        p{
-            color: blue;
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <div class="Page">
-        <div class="header">
+        <mat-card-content class="fundooNotesLogo" fxFlex="15" fxLayoutAlign="center center">
             <img src="../../../assets/images/FundooNotes.jpeg">
-        </div>
-        <div class="Text">
-            <input type="email" ng-model="email"><br>
-            <p>Forgot Email?</p>
-        </div>
-    </div>
-</body>
-
-</html>
+        </mat-card-content>
+        <mat-toolbar class="title" fxLayoutAlign="center stretch">
+            <span>Sign In</span>
+        </mat-toolbar>
+        <mat-card-content>
+            <form class="my-form">
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput name="email" [formControl]="email" required>
+                    <mat-error *ngIf="email.invalid"> {{getEmailInvalidMessage()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput name="password" [formControl]="password" [type]="hide ? 'password' : 'text'">
+                    <mat-error *ngIf="password.invalid">{{getPasswordInvalidMessage()}}</mat-error>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </form>
+            <mat-card-actions>
+                <p fxLayout="column" fxLayoutAlign="space-around center">
+                    <a [routerLink]="['/forgotPassword']">Forgot password?</a></p>
+            </mat-card-actions>
+            <mat-card-actions class="button" fxLayout="row" fxLayoutAlign="space-around center">
+                <button mat-raised-button (click)="loginUser(email.value,password.value)">Login</button>
+                <button mat-raised-button [routerLink]="['/register']">Register</button>
+            </mat-card-actions>
+        </mat-card-content>
+    </mat-card>
+</div>

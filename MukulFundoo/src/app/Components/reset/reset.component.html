@@ -1,0 +1,29 @@
+<div class="bod" fxFlex="100" fxLayoutAlign="center center">
+        <mat-card fxFlex="40" fxFlex.xs="100" class="reset-container" fxLayout="column"
+            fxLayoutAlign="space-around stretch">
+            <mat-card-content class="fundooNotesLogo" fxFlex="15" fxLayoutAlign="center center">
+                <img src="../../../assets/images/FundooNotes.jpeg">
+            </mat-card-content>
+            <mat-toolbar class="title" fxLayoutAlign="center stretch">
+                <span>Change your Password</span>
+            </mat-toolbar>
+            <mat-card-content>
+                <form class="my-form">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput name="password" [formControl]="password" required>
+                        <mat-error *ngIf="password.invalid"> {{getPasswordInvalidMessage()}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Confirm Password</mat-label>
+                            <input matInput name="confirmPassword" [formControl]="confirmPassword" required>
+                            <mat-error *ngIf="password.invalid"> {{getPasswordInvalidMessage()}}</mat-error>
+                        </mat-form-field>
+                </form>
+                <mat-card-actions class="button" fxLayoutAlign="center center">
+                    <button mat-raised-button (click)="forgotUser(email.value)">Reset Password</button>
+                </mat-card-actions>
+            </mat-card-content>
+        </mat-card>
+    
+    </div>
