@@ -15,6 +15,7 @@ import { AppServiceService } from './app-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ForgotComponent } from './Components/forgot/forgot.component';
 import { ResetComponent } from './Components/reset/reset.component';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,8 @@ import { ResetComponent } from './Components/reset/reset.component';
     LoginComponent,
     RegisterComponent,
     ForgotComponent,
-    ResetComponent
- 
+    ResetComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

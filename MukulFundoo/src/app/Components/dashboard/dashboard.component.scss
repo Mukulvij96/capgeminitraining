@@ -1,0 +1,21 @@
+@import '../../styles/colors.scss'; 
+@import '../../styles/constants.scss';
+
+body{
+    background-color: $bgcolor;
+}
+.bod{
+    background-color:$bgcolor1;
+}
+.toolbar-card{
+    padding:$paddingToolbar;
+}
+.toolbar-container{
+    background-color: $bgcolor1;
+}
+.search-container{
+    height: $searchBarHeight;
+    width:$searchBarWidth;
+    background-color: $searchBarColor;
+}
+

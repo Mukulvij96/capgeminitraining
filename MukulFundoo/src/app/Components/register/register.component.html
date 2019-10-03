@@ -37,13 +37,13 @@
                         <mat-label>Confirm Password</mat-label>
                         <input matInput name="confirmPassword" [formControl]="confirmPassword"
                             [type]="hide ? 'password' : 'text'">
-                        <mat-error *ngIf="password.invalid">{{getMatchedPasswordsMessage()}} </mat-error>
+                        <mat-error *ngIf="password.invalid || password.value!=confirmPassword.value">{{getMatchedPasswordsMessage()}} </mat-error>
                     </mat-form-field>
                 </mat-card-content>
             </form>
             <mat-card-actions class="button" fxLayout="row" fxLayoutAlign="space-around center">
                 <a [routerLink]="['./login']">Sign in instead</a>
-                <button mat-raised-button
+                <button mat-raised-button [disabled]="validate()"
                     (click)="registerUser(firstName.value,lastName.value,email.value,password.value,confirmPassword.value)">Register</button>
             </mat-card-actions>
         </mat-card-content>

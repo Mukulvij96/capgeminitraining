@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
 
   hide=true;
   // public hide: Boolean = true;
+  public Regex=""
   public firstName = new FormControl('', [Validators.required]);
   public lastName = new FormControl('', [Validators.required]);
   public email = new FormControl('', [Validators.required, Validators.email]);
@@ -33,13 +34,15 @@ export class RegisterComponent implements OnInit {
       return ("Minimum Length of 8 ")
     }
   }
-  getMatchedPasswordsMessage(password, confirmPassword) {
-    if (password != confirmPassword)
-      return ("Password doesn't matches")
-    else
-      return ("Password Matches")
+  getMatchedPasswordsMessage() {
+    
   }
-
+validate(fname,lname,email,pass,password,confirmPassword){
+  if(fname || lname || email || pass || (password!=confirmPassword))
+  return true
+  else
+  return false
+}
   registerUser(firstName,lastName,email,confirmPassword){
     let user=
     {

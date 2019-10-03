@@ -36,6 +36,12 @@ export class LoginComponent implements OnInit {
       return("Minimum Length of 8 ")
     }
   }
+  validate(email,password){
+if(email|| password)
+return true;
+else
+return false;
+  }
   loginUser(email,password){
     let user={
       "email":email,

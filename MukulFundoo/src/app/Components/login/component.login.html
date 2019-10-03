@@ -30,7 +30,7 @@
                     <a [routerLink]="['/forgotPassword']">Forgot password?</a></p>
             </mat-card-actions>
             <mat-card-actions class="button" fxLayout="row" fxLayoutAlign="space-around center">
-                <button mat-raised-button (click)="loginUser(email.value,password.value)">Login</button>
+                <button mat-raised-button [disabled]="validate(email.invalid,password.invalid)" (click)="loginUser(email.value,password.value)">Login</button>
                 <button mat-raised-button [routerLink]="['/register']">Register</button>
             </mat-card-actions>
         </mat-card-content>
