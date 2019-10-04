@@ -17,7 +17,7 @@
       <input matInput placeholder="Take a Note" name="description" [formControl]="description">
     </mat-form-field>
     <mat-action-row fxLayoutAlign="space-between center">
-      <app-icontray>{{close}}</app-icontray>
+      <app-icontray>(saveNote)="updateNotes($event)"</app-icontray>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>

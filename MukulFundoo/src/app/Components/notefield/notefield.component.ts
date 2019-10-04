@@ -10,17 +10,30 @@ import { NoteService } from '../../app-service.service';
 })
 export class NotefieldComponent implements OnInit {
 
-  save:Boolean;
+  
   note:Notes;
   public description=new FormControl('');
   public title=new FormControl('');
 
   close:Boolean;
-  constructor() { }
+  constructor(private noteService:NoteService) { }
 
   ngOnInit() {
   }
-
+updateNotes(){
+  this.note={ 
+    title:this.title.value,
+    description:this.description.value
+  }
+  this.noteService.postRequest(this.note,'user/addNotes').subscribe((data:any) => {
+  
+    if(data!=undefined){
+      if(data.data.success){
+        console.log("Note Added")
+      }  
+    }
+  })
+}
 
 }
 
