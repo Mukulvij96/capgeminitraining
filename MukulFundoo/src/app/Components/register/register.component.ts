@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
 
   hide=true;
   // public hide: Boolean = true;
-  public Regex=""
+  
   public firstName = new FormControl('', [Validators.required]);
   public lastName = new FormControl('', [Validators.required]);
   public email = new FormControl('', [Validators.required, Validators.email]);

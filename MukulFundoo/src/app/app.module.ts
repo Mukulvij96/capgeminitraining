@@ -16,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ForgotComponent } from './Components/forgot/forgot.component';
 import { ResetComponent } from './Components/reset/reset.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { NotefieldComponent } from './Components/notefield/notefield.component';
+import { IconbarComponent } from './Components/iconbar/iconbar.component';
+import { IcontrayComponent } from './Components/icontray/icontray.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
     ForgotComponent,
     ResetComponent,
     DashboardComponent,
+    NotefieldComponent,
+    IconbarComponent,
+    IcontrayComponent,
   ],
   imports: [
     BrowserModule,

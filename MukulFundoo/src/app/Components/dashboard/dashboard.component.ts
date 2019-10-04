@@ -11,11 +11,8 @@ import { map } from 'rxjs/operators';
 })
 export class DashboardComponent implements OnInit {
 
-  version = VERSION;
-  mode = 'side'
-  opened = true;
-  layoutGap = '64';
-  fixedInViewport = true;
+  
+  
   constructor() { }
 
   ngOnInit() {

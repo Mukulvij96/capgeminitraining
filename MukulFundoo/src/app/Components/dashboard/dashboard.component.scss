@@ -5,17 +5,23 @@ body{
     background-color: $bgcolor;
 }
 .bod{
-    background-color:$bgcolor1;
+    background:$bgcolor;
 }
 .toolbar-card{
     padding:$paddingToolbar;
 }
 .toolbar-container{
-    background-color: $bgcolor1;
+    background-color: $bgcolor2;
 }
 .search-container{
     height: $searchBarHeight;
     width:$searchBarWidth;
     background-color: $searchBarColor;
 }
-
+.sideNav-container{
+    height:100%;  
+}
+.sideNav-drawer{
+    width:20%;
+    background-color: $bgcolor;
+}

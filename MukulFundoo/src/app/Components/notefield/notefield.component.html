@@ -1,0 +1,23 @@
+<mat-accordion fxFlex="75">
+  <mat-expansion-panel class="expansion-container" fxFlex.xs="100" hideToggle="true" [expanded]="panelOpenState" #example>
+    <mat-expansion-panel-header>
+      <mat-panel-title fxLayoutAlign="start center">
+        Take a Note..
+      </mat-panel-title>
+      <mat-panel-description fxLayoutAlign="end center">
+          <mat-icon *ngIf="!example.expanded"></mat-icon>
+          <mat-icon *ngIf="example.expanded"></mat-icon>
+        <app-iconbar></app-iconbar>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Title" name="title" [formControl]="title">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Take a Note" name="description" [formControl]="description">
+    </mat-form-field>
+    <mat-action-row fxLayoutAlign="space-between center">
+      <app-icontray>{{close}}</app-icontray>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

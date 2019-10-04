@@ -5,6 +5,7 @@ import { RegisterComponent} from './Components/register/register.component'
 import { ForgotComponent } from './Components/forgot/forgot.component'
 import { ResetComponent } from './Components/reset/reset.component'
 import { DashboardComponent } from './Components/dashboard/dashboard.component'
+import { NotefieldComponent } from './Components/notefield/notefield.component';
 const routes: Routes = [
   
     { path: 'login', component: LoginComponent },

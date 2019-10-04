@@ -1,46 +1,59 @@
-
-
-    <mat-toolbar fxFlex="100" fxFlex.xs="100" class="toolbar-container" 
-        fxLayoutAlign="space-between center">
-        <button mat-icon-button (click)="drawer.toggle()">
-            <mat-icon>list</mat-icon>
+<mat-toolbar class="toolbar-container" fxLayoutAlign="space-between center">
+    <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>list</mat-icon>
+    </button>
+    <img src='../../../assets/images/FundooNotes1.jpeg' fxHide.lt-md="true">
+    <form class="my-form" fxFlex="50" fxFlex.xs="100" fxLayout="row" FxLayoutAlign="start stretch">
+        <input type="search" class="search-container" name="searchBar" placeholder="Search" appearance="outline"
+            fxHide.lt-sm="true">
+    </form>
+    <div class="icon-tray" fxFlex="15" fxFlex.xs="100" fxLayout="row" fxLayoutAlign="space-around stretch">
+        <button mat-icon-button fxHide.md="true" (click)="opened = !opened">
+            <mat-icon>search</mat-icon>
         </button>
-       
-        <img src='../../../assets/images/FundooNotes1.jpeg' fxHide.lt-md="true">
-        
-        <form class="my-form" fxFlex="50" fxFlex.xs="100" fxLayout="row" FxLayoutAlign="start stretch">
-            <input type="search" class="search-container" name="searchBar" placeholder="Search" fxHide.lt-md="true">
-        </form>
-        <div class="icon-tray" fxFlex="15" fxFlex.xs="100" fxLayout="row" fxLayoutAlign="space-around stretch">
-            <button mat-icon-button (click)="opened = !opened">
-                <mat-icon>refresh</mat-icon>
+        <button mat-icon-button (click)="opened = !opened">
+            <mat-icon>refresh</mat-icon>
+        </button>
+        <button mat-icon-button (click)="opened = !opened">
+            <mat-icon>list_view</mat-icon>
+        </button>
+        <button mat-icon-button (click)="opened = !opened">
+            <mat-icon>settings</mat-icon>
+        </button>
+    </div>
+    <div fxFlex="10" fxFlex.xs="100" fxLayout="row" fxLayoutAlign="start center">
+        <button mat-icon-button (click)="opened = !opened">
+            <mat-icon>grid_on</mat-icon>
+        </button>
+        <button mat-icon-button (click)="opened =!opened">
+            <mat-icon>email</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+<mat-drawer-container class="sideNav-container">
+    <mat-drawer class="sideNav-drawer" #drawer mode="side">
+        <mat-nav-list fxLayout="column" fxLayoutAlign="space-around stretch">
+            <button mat-icon-button>
+                <mat-icon>note</mat-icon>Notes
             </button>
-            <button mat-icon-button (click)="opened = !opened">
-                <mat-icon>list_view</mat-icon>
+            <button mat-icon-button>
+                <mat-icon>notifications_none</mat-icon>Reminders
             </button>
-            <button mat-icon-button (click)="opened = !opened">
-                <mat-icon>settings</mat-icon>
+            <hr width=100% color="black">
+            <p>Labels</p>
+            <button mat-icon-button>
+                <mat-icon>edit</mat-icon>Edit Labels
             </button>
-        </div>
-        <div fxFlex="10" fxFlex.xs="100" fxLayout="row" fxLayoutAlign="start center">
-            <button mat-icon-button (click)="opened = !opened">
-                <mat-icon>grid_on</mat-icon>
+            <hr width=100% color="black">
+            <button mat-icon-button>
+                <mat-icon>archive</mat-icon>Archive
             </button>
-            <button mat-icon-button (click)="opened =!opened">
-                <mat-icon>email</mat-icon>
+            <button mat-icon-button>
+                <mat-icon>delete_outline</mat-icon>Trash
             </button>
-        </div>
-    </mat-toolbar>
-
-   <div fxLayout="column">
-        <mat-drawer-container>
-                <mat-drawer #drawer mode="side" class="sideNav-container" >
-                    <mat-nav-list fxLayout="column" fxLayoutAlign="space-between stretch">
-                        <button mat-button>Click me! <mat-icon>view_headline</mat-icon></button>
-                        <button mat-button>Click me! <mat-icon>view_headline</mat-icon> </button>
-                        <button mat-button>Click me! <mat-icon>view_headline</mat-icon> </button>
-                        <button mat-button>Click me! <mat-icon>view_headline</mat-icon> </button>
-                    </mat-nav-list>
-                </mat-drawer>
-            </mat-drawer-container>   
-   </div>
+        </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content fxFlex="90" fxFlex.xs="100" fxLayout="column" fxLayoutAlign="start center">
+         <app-notefield></app-notefield>     
+    </mat-drawer-content>
+</mat-drawer-container>
