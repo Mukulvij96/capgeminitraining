@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {VERSION} from '@angular/material';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
+
 
 
 @Component({

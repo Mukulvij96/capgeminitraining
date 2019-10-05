@@ -1,15 +1,12 @@
-<div fxLayoutAlign="space-around center">
-    <button mat-icon-button matTooltip="Save">
-        <mat-icon>
-            save
-        </mat-icon>
-    </button>
+<div>
     <button mat-icon-button matTooltip="Add Reminder">
         <mat-icon>
             add_alert
         </mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Choose color">
+    <button mat-icon-button matTooltip="Choose color" (click)="openColorPallete()">
+            <!-- <p [style.color]="color1"></p>
+            <input  [(colorPicker)]="color1" (colorPickerChange)="onChangeColor($event)"> -->
         <mat-icon>
             palette
         </mat-icon>
@@ -24,7 +21,11 @@
             archive
         </mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Close Note" (click)="saveNotes()">
-        <mat-icon>close</mat-icon>
+    <button mat-icon-button matTooltip="Options">
+        <mat-icon>
+            more_vert
+        </mat-icon>
+    </button>
+    <button mat-button matTooltip="Close Note" (click)="saveNotes()">Close
     </button>
 </div>

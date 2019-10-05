@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter,ViewContainerRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Notes } from '../models/noteModel';
 import { NoteService } from '../../app-service.service';
+import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 
 @Component({
   selector: 'app-notefield',
@@ -16,25 +17,33 @@ export class NotefieldComponent implements OnInit {
   public title=new FormControl('');
 
   close:Boolean;
-  constructor(private noteService:NoteService) { }
+  constructor(private noteService:NoteService,public vcRef: ViewContainerRef, 
+    private cpService: ColorPickerService) { }
 
   ngOnInit() {
   }
-updateNotes(){
+updateNotes($event){
   this.note={ 
     title:this.title.value,
     description:this.description.value
   }
-  this.noteService.postRequest(this.note,'user/addNotes').subscribe((data:any) => {
-  
-    if(data!=undefined){
-      if(data.data.success){
-        console.log("Note Added")
-      }  
-    }
+  console.log("Emitted data" ,this.note )
+  this.noteService.postRequest(this.note,'/addNotes').subscribe((data:any) => {
+      console.log("added")  
   })
 }
 
+public colorEvent(color: string): Cmyk {
+  const hsva = this.cpService.stringToHsva(color);
+
+  const rgba = this.cpService.hsvaToRgba(hsva);
+
+
+  console.log(color);
+   console.log(rgba);
+  
+  return this.cpService.rgbaToCmyk(rgba);
+}
 }
 
 

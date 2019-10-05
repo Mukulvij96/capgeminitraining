@@ -1,5 +1,5 @@
-import { Component, OnInit, Output ,EventEmitter } from '@angular/core';
-
+import { Component, OnInit, Output ,EventEmitter,ViewContainerRef } from '@angular/core';
+import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 
 @Component({
   selector: 'app-icontray',
@@ -15,16 +15,24 @@ export class IcontrayComponent implements OnInit {
 
   ngOnInit() {
   }
-  panelOpenState: boolean = false;
+  panelOpenState: boolean = true;
 
   togglePanel() {
-      this.panelOpenState != this.panelOpenState;
-      this.close.emit(this.panelOpenState);
+      this.panelOpenState =false;
   }
 
   saveNotes(){
     this.save=true;
     this.togglePanel();
+    console.log("Clicking save")
     this.saveNote.emit(this.save);
   }
+  open:Boolean=true;
+  @Output() changeColorEvent=new EventEmitter<Boolean>();
+  
+  openColorPallete(){
+    this.open=false;
+    this.changeColorEvent.emit(this.open);
+  }
+
 }

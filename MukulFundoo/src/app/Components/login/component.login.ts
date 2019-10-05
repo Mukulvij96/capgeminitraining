@@ -49,7 +49,7 @@ return false;
     }
   
  this.appService.postRequest(user,'user/login').subscribe ((data:any) => {
-  //  localStorage.getItem("id","data.id");
+   sessionStorage.setItem("id",data.id);
 
       console.log("Login Successful")
       this.routing.navigate(['/dashboard'])

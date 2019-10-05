@@ -1,23 +1,26 @@
-<mat-accordion fxFlex="75">
-  <mat-expansion-panel class="expansion-container" fxFlex.xs="100" hideToggle="true" [expanded]="panelOpenState" #example>
+<mat-accordion fxFlex="75" >
+  <mat-expansion-panel class="expansion-container" fxFlex.xs="100" hideToggle="true" [style.background-color]="color1" [(colorPicker)]="color1" (changeColorEvent)="colorEvent($event)" #example>
     <mat-expansion-panel-header>
       <mat-panel-title fxLayoutAlign="start center">
         Take a Note..
       </mat-panel-title>
       <mat-panel-description fxLayoutAlign="end center">
-          <mat-icon *ngIf="!example.expanded"></mat-icon>
-          <mat-icon *ngIf="example.expanded"></mat-icon>
+        <mat-icon *ngIf="!example.expanded"></mat-icon>
+        <mat-icon *ngIf="example.expanded"></mat-icon>
         <app-iconbar></app-iconbar>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-form-field class="full-width">
-      <input matInput placeholder="Title" name="title" [formControl]="title">
+      <textarea matInput placeholder="Title" name="title" [formControl]="title" cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"></textarea>
     </mat-form-field>
     <mat-form-field class="full-width">
-      <input matInput placeholder="Take a Note" name="description" [formControl]="description">
+      <textarea input matInput placeholder="Take a Note" name="description" [formControl]="description"
+        cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3">
+      </textarea>
     </mat-form-field>
-    <mat-action-row fxLayoutAlign="space-between center">
-      <app-icontray>(saveNote)="updateNotes($event)"</app-icontray>
+    <mat-action-row fxLayoutAlign="space-around start">
+      <app-icontray (saveNote)="updateNotes($event)"></app-icontray>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
