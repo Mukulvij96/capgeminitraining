@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../environments/environment'
+import { HttpHeaders } from '@angular/common/http'
  @Injectable({
   providedIn: 'root'
 })
@@ -11,8 +12,28 @@ export class AppServiceService {
   }
 }
 export class NoteService{
+
   constructor(private http:HttpClient){}
-  postRequest(user,url:String){
-    return this.http.post(environment.baseurl+url,user);
+  
+getEncodedData(data){
+  const formBody=[];
+  for(const property in data){
+  const encodedKey=encodeURIComponent(property);
+  const encodedValue=encodeURIComponent(data[property]);
+  formBody.push(encodedKey+'='+encodedValue);
   }
+  return formBody.join ('&');
+  }
+
+  postRequest(data,options){
+    let httpOptions={
+    headers:new HttpHeaders({
+    'Content-type':'application/x-www-form-urlencoded',
+    'Authorization':localStorage.getItem('id')
+    })
+    } 
+    return this.http.post(environment.baseurl+'notes/'+options,this.getEncodedData(data),httpOptions)
+  }
+  
 }
+

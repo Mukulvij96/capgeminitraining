@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { AppServiceService } from './app-service.service';
+import { AppServiceService, NoteService } from './app-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ForgotComponent } from './Components/forgot/forgot.component';
 import { ResetComponent } from './Components/reset/reset.component';
@@ -19,6 +19,11 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { NotefieldComponent } from './Components/notefield/notefield.component';
 import { IconbarComponent } from './Components/iconbar/iconbar.component';
 import { IcontrayComponent } from './Components/icontray/icontray.component';
+import { AuthGuard } from './auth.guard';
+import { StorageServiceModule } from 'ngx-webstorage-service';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { DisplayComponent } from './Components/display/display.component';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +36,9 @@ import { IcontrayComponent } from './Components/icontray/icontray.component';
     NotefieldComponent,
     IconbarComponent,
     IcontrayComponent,
+    DisplayComponent,
+    
+   
   ],
   imports: [
     BrowserModule,
@@ -41,10 +49,12 @@ import { IcontrayComponent } from './Components/icontray/icontray.component';
     ReactiveFormsModule,
     CommonModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    StorageServiceModule,
+    ColorPickerModule,
     
   ],
-  providers: [AppServiceService],
+  providers: [AppServiceService,NoteService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
