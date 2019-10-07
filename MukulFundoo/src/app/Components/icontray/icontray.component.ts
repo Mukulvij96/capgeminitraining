@@ -1,5 +1,6 @@
-import { Component, OnInit, Output ,EventEmitter,ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewContainerRef } from '@angular/core';
 import { ColorPickerService, Cmyk } from 'ngx-color-picker';
+import { NoteService } from '../../app-service.service'
 
 @Component({
   selector: 'app-icontray',
@@ -8,31 +9,59 @@ import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 })
 export class IcontrayComponent implements OnInit {
 
-  save:Boolean=false;
+  save: Boolean = false;
   @Output() saveNote = new EventEmitter<Boolean>();
-  @Output() close=new EventEmitter<Boolean>(); 
-  constructor() { }
+  @Output() close = new EventEmitter<Boolean>();
+  constructor(public vcRef: ViewContainerRef,
+    private cpService: ColorPickerService,private noteService:NoteService) { }
 
   ngOnInit() {
   }
+  // colorArray =
+  // [[
+  //     { 'color': '#B39DDB', 'name': 'purple' },
+  //     { 'color': '#F48FB1', 'name': 'pink' },
+  //     { 'color': '#FFAB40', 'name': 'brown' },
+  //     { 'color': '#E0E0E0', 'name': 'gray' }
+  // ],
+  // [
+  //     { 'color': '#FFFFFF', 'name': 'White' },
+  //     { 'color': '#E53935', 'name': 'Red' },
+  //     { 'color': '#EF6C00', 'name': 'Orange' },
+  //     { 'color': '#FFEB3B', 'name': 'Yellow' }],
+  // [
+  //     { 'color': '#B2FF59', 'name': 'green' },
+  //     { 'color': '#69F0AE', 'name': 'teal' },
+  //     { 'color': '#81D4FA', 'name': 'blue' },
+  //     { 'color': '#0288D1', 'name': 'darkblue' }
+  // ]]
+
   panelOpenState: boolean = true;
 
   togglePanel() {
-      this.panelOpenState =false;
+    this.panelOpenState = false;
   }
 
-  saveNotes(){
-    this.save=true;
+  saveNotes() {
+    this.save = true;
     this.togglePanel();
     console.log("Clicking save")
     this.saveNote.emit(this.save);
   }
-  open:Boolean=true;
-  @Output() changeColorEvent=new EventEmitter<Boolean>();
-  
-  openColorPallete(){
-    this.open=false;
-    this.changeColorEvent.emit(this.open);
-  }
+  open: Boolean = true;
+
+// getNotes(){
+//   this.noteService.getRequest('/getNotesList').subscribe((data:any) => {
+//     console.log(data);
+//     console.log("retrieved")  
+// })
+
+@Output() colorEvent=new EventEmitter<String>();
+
+// color:String="" 
+
 
 }
+
+
+

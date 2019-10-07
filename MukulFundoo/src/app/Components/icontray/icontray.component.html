@@ -1,10 +1,10 @@
 <div>
-    <button mat-icon-button matTooltip="Add Reminder">
+    <button mat-icon-button matTooltip="Add Reminder" (click)="getNotes()">
         <mat-icon>
             add_alert
         </mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Choose color" (click)="openColorPallete()">
+    <button mat-icon-button matTooltip="Choose color" >
             <!-- <p [style.color]="color1"></p>
             <input  [(colorPicker)]="color1" (colorPickerChange)="onChangeColor($event)"> -->
         <mat-icon>

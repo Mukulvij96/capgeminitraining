@@ -1,7 +1,24 @@
-
-<mat-grid-list cols="3" rowHeight="4:1">
-        <mat-grid-tile>1</mat-grid-tile>
-        <mat-grid-tile>2</mat-grid-tile>
-        <mat-grid-tile>3</mat-grid-tile>
-        <mat-grid-tile>4</mat-grid-tile>
-      </mat-grid-list>
+<mat-grid-list cols="3" rowHeight="1:1" fxLayoutAlign="space-around start" *ngFor="let data of data ;let i=index">
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>{{data.title}}</mat-card-title>
+      <mat-card-content>{{data.description}}</mat-card-content>
+      <mat-action-row><app-icontray></app-icontray></mat-action-row>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>dhfkjdskjfdshfdshfdklsh</mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>fdfdhsldsfdlsdsvkldshnvdhvlnj</mat-card>
+  </mat-grid-tile>
+  <!-- <mat-grid-tile fxLayoutAlign="start start">
+    <app-notefield></app-notefield>
+  </mat-grid-tile>
+  <mat-grid-tile fxLayoutAlign="start start">
+    <app-notefield></app-notefield>
+  </mat-grid-tile>
+  <mat-grid-tile fxLayoutAlign="start start">
+      <app-notefield></app-notefield>
+    </mat-grid-tile> -->
+</mat-grid-list>

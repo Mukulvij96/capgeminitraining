@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NoteService } from '../../app-service.service'
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DisplayComponent implements OnInit {
 
-  constructor() { }
+  constructor(private noteService:NoteService) { }
 
   ngOnInit() {
-  }
-
+    this.noteService.getRequest('/getNotesList').subscribe((data:any) => {
+      console.log(data.data.data);
+      console.log("retrieved")  
+  })
+}
 }

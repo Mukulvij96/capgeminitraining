@@ -34,6 +34,16 @@ getEncodedData(data){
     } 
     return this.http.post(environment.baseurl+'notes/'+options,this.getEncodedData(data),httpOptions)
   }
+
+  getRequest(options){
+    let httpOptions={
+      headers:new HttpHeaders({
+      'Content-type':'application/x-www-form-urlencoded',
+      'Authorization':sessionStorage.getItem('id')
+      })
+      } 
+    return this.http.get(environment.baseurl+'notes'+options,httpOptions);
+  }
   
 }
 

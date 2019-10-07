@@ -33,18 +33,25 @@ updateNotes($event){
   })
 }
 
-public colorEvent(color: string): Cmyk {
-  const hsva = this.cpService.stringToHsva(color);
+// public changeColor(color: string): Cmyk {
+//   const hsva = this.cpService.stringToHsva(color);
 
-  const rgba = this.cpService.hsvaToRgba(hsva);
+//   const rgba = this.cpService.hsvaToRgba(hsva);
 
 
-  console.log(color);
-   console.log(rgba);
+//   console.log(color);
+//    console.log(rgba);
   
-  return this.cpService.rgbaToCmyk(rgba);
+//   return this.cpService.rgbaToCmyk(rgba);
+// }
+// changColor($event){
+//   console.log($event);
+//   this.noteService.postRequest(this.note,'/addNotes').subscribe((data:any) => {
+//     console.log("added") 
+// })
+ 
 }
-}
+
 
 
 

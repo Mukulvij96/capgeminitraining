@@ -2,16 +2,16 @@
 @import '../../styles/constants.scss';
 
 body{
-    background-color: $bgcolor;
+    background-color: $bgcolor1;
 }
 .bod{
-    background:$bgcolor;
+    background:$bgcolor1;
 }
 .toolbar-card{
     padding:$paddingToolbar;
 }
 .toolbar-container{
-    background-color: $bgcolor2;
+    background-color: $bgcolor1;
 }
 .search-container{
     height: $searchBarHeight;
@@ -19,9 +19,11 @@ body{
     background-color: $searchBarColor;
 }
 .sideNav-container{
-    height:100%;  
+    height:100%;
+    width:100%;  
 }
 .sideNav-drawer{
     width:20%;
-    background-color: $bgcolor;
+    background-color: $bgcolor1; 
 }
+
