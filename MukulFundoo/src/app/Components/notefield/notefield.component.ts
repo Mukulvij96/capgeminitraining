@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter,ViewContainerRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter,ViewContainerRef, Input, ClassProvider } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Notes } from '../models/noteModel';
 import { NoteService } from '../../app-service.service';
 import { ColorPickerService, Cmyk } from 'ngx-color-picker';
+
 
 @Component({
   selector: 'app-notefield',
@@ -13,6 +14,7 @@ export class NotefieldComponent implements OnInit {
 
   
   note:Notes;
+  @Input() noteId:Notes
   public description=new FormControl('');
   public title=new FormControl('');
 
@@ -29,28 +31,17 @@ updateNotes($event){
   }
   console.log("Emitted data" ,this.note )
   this.noteService.postRequest(this.note,'/addNotes').subscribe((data:any) => {
-      console.log("added")  
+      console.log("added") 
+      
   })
 }
-
-// public changeColor(color: string): Cmyk {
-//   const hsva = this.cpService.stringToHsva(color);
-
-//   const rgba = this.cpService.hsvaToRgba(hsva);
-
-
-//   console.log(color);
-//    console.log(rgba);
-  
-//   return this.cpService.rgbaToCmyk(rgba);
-// }
-// changColor($event){
-//   console.log($event);
-//   this.noteService.postRequest(this.note,'/addNotes').subscribe((data:any) => {
-//     console.log("added") 
-// })
- 
+togglePane($event){
+ console.log("closed") 
 }
+
+
+}
+
 
 
 

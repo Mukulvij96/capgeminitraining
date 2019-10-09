@@ -36,7 +36,8 @@
             <button mat-icon-button>
                 <mat-icon>note</mat-icon>Notes
             </button>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="router.navigate(['/display'])">
+                <!-- <app-display fxFlex="100" fxLayout="column wrap" fxLayoutAlign="space-evenly stretch"></app-display> -->
                 <mat-icon>notifications_none</mat-icon>Reminders
             </button>
             <mat-divider></mat-divider>
@@ -48,25 +49,13 @@
             <button mat-icon-button>
                 <mat-icon>archive</mat-icon>Archive
             </button>
-            <button mat-icon-button>
+            <button mat-icon-button >
                 <mat-icon>delete_outline</mat-icon>Trash
             </button>
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content fxLayout="column" fxLayoutAlign="start center">
         <app-notefield></app-notefield> 
-        <!-- <mat-grid-list cols="2" rowHeight="2:1">
-                <mat-grid-tile>1</mat-grid-tile>
-                <mat-grid-tile>2</mat-grid-tile>
-                <mat-grid-tile>3</mat-grid-tile>
-                <mat-grid-tile>4</mat-grid-tile>
-              </mat-grid-list>   -->
-              <app-display fxFlex="70"></app-display>
+              <app-display fxFlex="70" fxLayout="column wrap" fxLayoutAlign="space-evenly stretch"></app-display>
     </mat-drawer-content>
-
-    <!-- <mat-drawer-content fxLayout="row" fxLayoutAlign="space-around start">
-        <app-notefield></app-notefield>
-        <app-notefield></app-notefield>
-        <app-notefield></app-notefield>
-    </mat-drawer-content> -->
 </mat-drawer-container>

@@ -5,7 +5,9 @@ export interface Notes{
     checklist?:String;
     isPined?:Boolean;
     isArchived?:Boolean;
+    isDeleted?:Boolean;
     color?:String;
     reminder?:String;
     collaberators?:String;
+    id?:String;
 }

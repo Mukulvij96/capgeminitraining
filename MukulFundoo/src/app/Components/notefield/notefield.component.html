@@ -1,5 +1,5 @@
 <mat-accordion fxFlex="75" >
-  <mat-expansion-panel class="expansion-container" fxFlex.xs="100" hideToggle="true" #example>
+  <mat-expansion-panel class="expansion-container" fxFlex.xs="100" hideToggle="true" #example >
     <mat-expansion-panel-header>
       <mat-panel-title fxLayoutAlign="start center">
         Take a Note..
@@ -20,7 +20,7 @@
       </textarea>
     </mat-form-field>
     <mat-action-row fxLayoutAlign="space-around start">
-      <app-icontray (saveNote)="updateNotes($event)"></app-icontray>
+      <app-icontray (saveNote)="updateNotes($event)" ></app-icontray>
     </mat-action-row> 
   </mat-expansion-panel>
 </mat-accordion>

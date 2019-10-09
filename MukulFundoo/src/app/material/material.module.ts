@@ -1,5 +1,5 @@
 import { NgModule } from  '@angular/core';
-import {MatNativeDateModule,MatDatepickerModule,MatIconModule,MatButtonModule,MatCheckboxModule, MatToolbarModule, MatCardModule,MatFormFieldModule,MatInputModule,MatRadioModule,MatListModule, MatSidenavModule, MatExpansionModule, MatTooltipModule, MatGridListModule,} from  '@angular/material';
+import {MatNativeDateModule,MatDatepickerModule,MatIconModule,MatButtonModule,MatCheckboxModule, MatToolbarModule, MatCardModule,MatFormFieldModule,MatInputModule,MatRadioModule,MatListModule, MatSidenavModule, MatExpansionModule, MatTooltipModule, MatGridListModule, MatMenuModule,} from  '@angular/material';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {A11yModule} from '@angular/cdk/a11y';
@@ -25,7 +25,8 @@ imports: [MatNativeDateModule,MatDatepickerModule,MatIconModule,MatButtonModule,
     CdkTableModule,
 MatExpansionModule,
 MatTooltipModule,
-MatGridListModule],
+MatGridListModule,
+MatMenuModule,MatButtonModule],
  
 exports: [MatNativeDateModule,FormsModule,ReactiveFormsModule,
 MatDatepickerModule,MatIconModule,MatButtonModule,MatCheckboxModule, MatToolbarModule, MatCardModule,MatFormFieldModule,MatInputModule,MatListModule,MatRadioModule,MatSidenavModule,BidiModule,
@@ -38,7 +39,8 @@ CdkStepperModule,
 CdkTableModule,
 MatExpansionModule,
 MatTooltipModule,
-MatGridListModule],
+MatGridListModule,MatMenuModule,
+MatButtonModule],
  
 })
  

@@ -26,15 +26,25 @@ getEncodedData(data){
   }
 
   postRequest(data,options){
-    let httpOptions={
-    headers:new HttpHeaders({
-    'Content-type':'application/x-www-form-urlencoded',
-    'Authorization':localStorage.getItem('id')
-    })
-    } 
+      let httpOptions={
+      headers:new HttpHeaders({
+      'Content-type':'application/x-www-form-urlencoded',
+      'Authorization':sessionStorage.getItem('id')
+      })
+      }
     return this.http.post(environment.baseurl+'notes/'+options,this.getEncodedData(data),httpOptions)
   }
-
+postJson(data,options){
+  let httpOptions={
+    headers:new HttpHeaders({
+    'Content-type':'application/json',
+    'Authorization':sessionStorage.getItem('id')
+    })
+    }
+    console.log("In service",data)
+  return this.http.post(environment.baseurl+'notes'+options,(data),httpOptions);
+  
+}
   getRequest(options){
     let httpOptions={
       headers:new HttpHeaders({

@@ -48,7 +48,7 @@ validate(fname,lname,email,pass,password,confirmPassword){
     {
       "firstName":firstName,
       "lastName": lastName,
-      "service":"basic",
+      "service":"advance",
       "email": email,
       "password":confirmPassword ,
       

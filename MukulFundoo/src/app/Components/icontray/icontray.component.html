@@ -4,9 +4,7 @@
             add_alert
         </mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Choose color" >
-            <!-- <p [style.color]="color1"></p>
-            <input  [(colorPicker)]="color1" (colorPickerChange)="onChangeColor($event)"> -->
+    <button mat-icon-button matTooltip="Choose color" [matMenuTriggerFor]="menu_color">
         <mat-icon>
             palette
         </mat-icon>
@@ -21,11 +19,20 @@
             archive
         </mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Options">
+    <button mat-icon-button matTooltip="Options" [matMenuTriggerFor]="more_options">
         <mat-icon>
             more_vert
         </mat-icon>
     </button>
+    <mat-menu #more_options="matMenu" [overlapTrigger]="false">
+        <mat-action-list role="list">
+            <button mat-list-item (click)=deleteNotes()>Delete</button>
+        </mat-action-list>
+    </mat-menu>
     <button mat-button matTooltip="Close Note" (click)="saveNotes()">Close
     </button>
+    <mat-menu class="palette" #menu_color="matMenu" [overlapTrigger]="false">
+        <button mat-mini-fab *ngFor="let color1 of colorArray"
+            [ngStyle]="{'background':color1.color}" (click)="changeColor(color1.color)"></button>
+    </mat-menu>
 </div>
