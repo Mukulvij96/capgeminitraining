@@ -8,7 +8,8 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component'
 import { NotefieldComponent } from './Components/notefield/notefield.component';
 import { AuthGuard } from './auth.guard';
 import { DisplayComponent } from './Components/display/display.component'
-
+import { TrashnotesComponent } from './Components/trashnotes/trashnotes.component'
+import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.component';
 const routes: Routes = [
 
   {
@@ -28,14 +29,26 @@ const routes: Routes = [
     component: ResetComponent
   },
   {
-    path: 'dashboard',
+    path: '',
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard], 
+    children:[
+      {
+        path: 'display',
+        component: DisplayComponent
+      },
+      {
+        path: 'trash',
+        component: TrashnotesComponent,
+      },
+      {
+        path: 'archive',
+        component: ArchivenotesComponent,
+      }
+    ]
+  
   },
-  {
-    path: 'display',
-    component: DisplayComponent
-  },
+  
   // otherwise redirect to home
   {
     path: '**',
@@ -43,9 +56,4 @@ const routes: Routes = [
   }
 
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+export const routing=RouterModule.forRoot(routes);

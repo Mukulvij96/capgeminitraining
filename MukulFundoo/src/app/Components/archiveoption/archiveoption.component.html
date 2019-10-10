@@ -1,0 +1,13 @@
+<div>
+        <button mat-icon-button matTooltip="Options" [matMenuTriggerFor]="more_options">
+            <mat-icon>
+                more_vert
+            </mat-icon>
+        </button>
+        <mat-menu #more_options="matMenu" [overlapTrigger]="false">
+            <mat-action-list>
+                    <button mat-list-item (click)="unarchiveNotes()">Unarchive</button>
+                    <button mat-list-item (click)="deleteNotes()">Delete</button>
+            </mat-action-list>
+        </mat-menu>
+    </div>

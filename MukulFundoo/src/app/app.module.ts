@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { MyMaterialModule} from './material/material.module'
-import { AppRoutingModule } from './app-routing.module';
+import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/component.login';
 import { RegisterComponent } from './Components/register/register.component';
@@ -23,6 +23,10 @@ import { AuthGuard } from './auth.guard';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { DisplayComponent } from './Components/display/display.component';
+import { TrashnotesComponent } from './Components/trashnotes/trashnotes.component';
+import { TrashoptionComponent } from './Components/trashoption/trashoption.component';
+import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.component';
+import { ArchiveoptionComponent } from './Components/archiveoption/archiveoption.component';
 
 
 @NgModule({
@@ -37,12 +41,16 @@ import { DisplayComponent } from './Components/display/display.component';
     IconbarComponent,
     IcontrayComponent,
     DisplayComponent,
+    TrashnotesComponent,
+    TrashoptionComponent,
+    ArchivenotesComponent,
+    ArchiveoptionComponent,
     
    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    routing,
     BrowserAnimationsModule,
     MyMaterialModule,
     FormsModule,

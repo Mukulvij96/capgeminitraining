@@ -30,13 +30,14 @@
         </button>
     </div>
 </mat-toolbar>
+<mat-divider></mat-divider>
 <mat-drawer-container class="sideNav-container" fxLayout="column">
     <mat-drawer class="sideNav-drawer" #drawer mode="side">
         <mat-nav-list fxLayout="column" fxLayoutAlign="space-around stretch">
-            <button mat-icon-button>
+            <button mat-icon-button (click)="displayAvailableNotes()">
                 <mat-icon>note</mat-icon>Notes
             </button>
-            <button mat-icon-button (click)="router.navigate(['/display'])">
+            <button mat-icon-button >
                 <!-- <app-display fxFlex="100" fxLayout="column wrap" fxLayoutAlign="space-evenly stretch"></app-display> -->
                 <mat-icon>notifications_none</mat-icon>Reminders
             </button>
@@ -46,16 +47,15 @@
                 <mat-icon>edit</mat-icon>Edit Labels
             </button>
             <mat-divider></mat-divider>
-            <button mat-icon-button>
+            <button mat-icon-button (click)=displayArchiveNotes()>
                 <mat-icon>archive</mat-icon>Archive
             </button>
-            <button mat-icon-button >
+            <button mat-icon-button (click)=displayTrashNotes()>
                 <mat-icon>delete_outline</mat-icon>Trash
             </button>
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content fxLayout="column" fxLayoutAlign="start center">
-        <app-notefield></app-notefield> 
-              <app-display fxFlex="70" fxLayout="column wrap" fxLayoutAlign="space-evenly stretch"></app-display>
+        <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

@@ -12,7 +12,8 @@ export class IcontrayComponent implements OnInit {
   note: Notes
   panelOpenState: boolean = true;
   save: Boolean = false;
-
+  archive:Boolean=false
+  @Output() displayNoteAfterArchive=new EventEmitter<Boolean>();
   @Input() noteId: Notes;
   @Output() saveNote = new EventEmitter<Boolean>();
   @Output() close = new EventEmitter<Boolean>();
@@ -72,6 +73,21 @@ delete:Boolean=false;
    let newColor = color
     this.colorEvent.emit(newColor);
     console.log("color", color);
+  }
+  
+
+  archiveNotes(){
+    const data = {
+      "noteIdList": [this.noteId],
+      "isArchived": true
+    }
+    console.log("emitted", data)
+    this.noteService.postJson(data, '/archiveNotes').subscribe((data: any) => {
+      console.log("deleted note", data)
+      console.log("trash");    
+      this.archive=true
+      this.displayNoteAfterArchive.emit(this.archive); 
+    })
   }
 }
 

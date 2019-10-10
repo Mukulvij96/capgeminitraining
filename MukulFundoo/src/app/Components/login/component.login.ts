@@ -52,7 +52,7 @@ return false;
    sessionStorage.setItem("id",data.id);
 
       console.log("Login Successful")
-      this.routing.navigate(['/dashboard'])
+      this.routing.navigate([''])
   
  })
 

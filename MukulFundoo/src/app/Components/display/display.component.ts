@@ -35,13 +35,17 @@ export class DisplayComponent implements OnInit {
       console.log("My Array is",this.notes)
       
       var finalNotes=this.notes.filter(function(check) {
-        return check.isDeleted== false
+        if(check.isDeleted== false && check.isArchived==false)
+        return true;
       })
       this.notes=finalNotes.reverse()
       console.log("retrieved")
     })
   }
   display($event){
+    this.displayNotes()
+  }
+  displayArch($event){
     this.displayNotes()
   }
 }
