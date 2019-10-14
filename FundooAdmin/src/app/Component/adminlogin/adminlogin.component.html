@@ -1,6 +1,7 @@
+
 <div class="container">
     <h2>Stacked form</h2>
-    <form action="/action_page.php">
+    <form>
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
@@ -14,7 +15,7 @@
           <input class="form-check-input" type="checkbox" name="remember"> Remember me
         </label>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-primary" (click)="adminLogin()">Submit</button>
     </form>
   </div>
   

@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-sm bg-white ">
+    <ul class="navbar-nav d-flex flex-row justify-content-around">
+        <li class="nav-item">
+            <img src="../../../assets/images/FundooNotes1.jpeg">
+        </li>
+        <li class="nav-item" style="padding-left: 30px">
+            <button type="button" class="btn btn-flex justify-content-around bg-info" style="margin-top: 12px"
+                (click)=getUsers()>Get Users</button>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Admin Settings</a>
+        </li>
+    </ul>
+</nav>
+<div class="search-container">
+    <input class="form-control d-flex justify-content-center form-bordered" id="myInput" type="text" placeholder="Search..">
+</div>
+<div class="card-group d-flex flex-row justify-content-center">
+    <div class="card ">
+        <p class="text-center" >Basic Users</p>
+        <div class="card-body text-center" id='basicData'></div>
+        <button class="btn btn-flex justify-content-around btn-bordered " (click)=getBasicUsers()>Get Basic Users</button>
+    </div>
+    <div class="card ">
+        <p class="text-center">Advance Users</p>
+        <div class="card-body text-center" id="advanceData"></div>
+        <button class="btn btn-flex justify-content-around btn-bordered" (click)=getAdvanceUsers()>Get Advance Users</button>
+    </div>
+</div>
+<div class="container table-responsive">
+    <table class="table table-hover table-bordered table-flex  ">
+        <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>Service</th>
+            </tr>
+        </thead>
+        <tbody id="usersTable">
+        </tbody>
+    </table>
+</div>

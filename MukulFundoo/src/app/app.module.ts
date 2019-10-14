@@ -27,6 +27,7 @@ import { TrashnotesComponent } from './Components/trashnotes/trashnotes.componen
 import { TrashoptionComponent } from './Components/trashoption/trashoption.component';
 import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.component';
 import { ArchiveoptionComponent } from './Components/archiveoption/archiveoption.component';
+import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { ArchiveoptionComponent } from './Components/archiveoption/archiveoption
     TrashoptionComponent,
     ArchivenotesComponent,
     ArchiveoptionComponent,
+    DialogboxComponent,
     
    
   ],

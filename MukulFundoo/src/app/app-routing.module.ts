@@ -10,6 +10,7 @@ import { AuthGuard } from './auth.guard';
 import { DisplayComponent } from './Components/display/display.component'
 import { TrashnotesComponent } from './Components/trashnotes/trashnotes.component'
 import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.component';
+import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
 const routes: Routes = [
 
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: 'archive',
         component: ArchivenotesComponent,
+      },
+      { 
+        path: 'dialogbox',
+        component: DialogboxComponent
       }
     ]
   

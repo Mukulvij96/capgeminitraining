@@ -4,15 +4,18 @@ import { NgModule } from '@angular/core';
 import { routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminloginComponent } from './Component/adminlogin/adminlogin.component';
-
+import { DashboardComponent } from './Component/dashboard/dashboard.component';
+import {NgxPaginationModule} from 'ngx-pagination'
 @NgModule({
   declarations: [
     AppComponent,
-    AdminloginComponent
+    AdminloginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
-    routing
+    routing,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
