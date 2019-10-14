@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { NoteService } from '../../app-service.service'
 import { Notes } from '../models/noteModel'
+import { DataserviceService } from 'src/app/dataservice.service';
 // import { NotefieldComponent } from '../notefield/notefield.component';
 @Component({
   selector: 'app-display',
@@ -9,14 +10,14 @@ import { Notes } from '../models/noteModel'
 })
 export class DisplayComponent implements OnInit {
 
-  constructor(private noteService: NoteService) { }
-
+  constructor(private noteService: NoteService,private data:DataserviceService) { }
+  message:String=""
   notes: Notes[]
   @Input() noteId: Notes
 
   ngOnInit() {
-      this.displayNotes();
-    
+    this.data.currentMessage$.subscribe(message => {this.checkNotes()})   
+    this.displayNotes()
   }
   setColor($event, id) {
     const data = {
@@ -25,7 +26,7 @@ export class DisplayComponent implements OnInit {
     }
     this.noteService.postJson(data, '/changesColorNotes').subscribe((data: any) => {
       console.log("Color Updated")
-      this.displayNotes()
+      
     })
   }
 
@@ -47,6 +48,11 @@ export class DisplayComponent implements OnInit {
   }
   displayArch($event){
     this.displayNotes()
+  }
+  checkNotes(){
+    if(this.message=="Note Added")
+    this.displayNotes();
+    this.message=""
   }
 }
 

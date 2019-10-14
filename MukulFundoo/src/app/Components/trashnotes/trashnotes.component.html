@@ -6,6 +6,6 @@
     </div>
     <mat-card-footer>
         <!-- <app-icontray [noteId]="value.id" ></app-icontray> -->
-        <app-trashoption ></app-trashoption>
+        <app-trashoption (foreverDeleteEvent)="deleteForever($event,value.id)" (retrieveEvent)=retrieve($event,value.id)></app-trashoption>
     </mat-card-footer>
 </mat-card>

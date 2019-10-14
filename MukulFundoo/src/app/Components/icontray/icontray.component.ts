@@ -10,7 +10,7 @@ import { Notes } from '../models/noteModel'
 })
 export class IcontrayComponent implements OnInit {
   note: Notes
-  panelOpenState: boolean = true;
+  panelOpenState: boolean = false;
   save: Boolean = false;
   archive:Boolean=false
   @Output() displayNoteAfterArchive=new EventEmitter<Boolean>();
@@ -43,13 +43,13 @@ export class IcontrayComponent implements OnInit {
 
 
   togglePanel() {
-    this.panelOpenState = false;
+    this.panelOpenState = true;
     this.close.emit(this.panelOpenState);
   }
   saveNotes() {
     this.save = true;
-    this.togglePanel();
     console.log("Clicking save")
+    this.togglePanel();
     this.saveNote.emit(this.save);
   }
   @Output() displayNoteAfterDelete=new EventEmitter<Boolean>();

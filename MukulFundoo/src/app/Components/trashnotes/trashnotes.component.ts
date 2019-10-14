@@ -25,4 +25,24 @@ export class TrashnotesComponent implements OnInit {
       console.log("retrieved")
     })
   }
+
+  deleteForever($event,id){
+    const data={
+      "noteIdList":[id]
+    }
+    this.noteService.postJson(data,'/deleteForeverNotes').subscribe((data:any) => {
+      console.log("Deleted Forever");
+      this.displayNotes();
+    })
+  }
+  retrieve($event,id){
+    const data={
+      "noteIdList":[id],
+      "isDeleted":false
+    }
+    this.noteService.postJson(data,'/trashNotes').subscribe((data:any) => {
+      console.log("Note Retrieved");
+      this.displayNotes();
+    })
+  }
 }
