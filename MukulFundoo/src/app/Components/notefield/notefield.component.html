@@ -19,7 +19,7 @@
         cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3">
       </textarea>
     </mat-form-field>
-    <mat-action-row fxLayoutAlign="space-around start">
+    <mat-action-row fxFlex="100" fxLayout="row" fxLayoutAlign="space-around start">
       <app-icontray (saveNote)="updateNotes($event)" (close)="toggle(example)" ></app-icontray>
     </mat-action-row> 
   </mat-expansion-panel>

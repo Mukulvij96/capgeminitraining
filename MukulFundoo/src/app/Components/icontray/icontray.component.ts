@@ -74,8 +74,6 @@ delete:Boolean=false;
     this.colorEvent.emit(newColor);
     console.log("color", color);
   }
-  
-
   archiveNotes(){
     const data = {
       "noteIdList": [this.noteId],

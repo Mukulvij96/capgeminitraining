@@ -1,11 +1,13 @@
-<mat-card *ngFor="let value of notes; let i = index" class="grid-item" fxLayout=" wrap"
-    fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}'>
-    <div>
-        <mat-card-title>{{value.title}}</mat-card-title>
-        <mat-card-content>{{value.description}}</mat-card-content>
-    </div>
-    <mat-card-footer>
-        <!-- <app-icontray [noteId]="value.id" ></app-icontray> -->
-        <app-trashoption (foreverDeleteEvent)="deleteForever($event,value.id)" (retrieveEvent)=retrieve($event,value.id)></app-trashoption>
-    </mat-card-footer>
-</mat-card>
+<div fxLayout="row" fxLayoutAlign="space-evenly stretch">
+        <mat-card *ngFor="let value of notes; let i = index" class="grid-item" fxLayout=" wrap"
+        fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}'>
+        <div>
+            <mat-card-title>{{value.title}}</mat-card-title>
+            <mat-card-content>{{value.description}}</mat-card-content>
+        </div>
+        <mat-card-footer>
+            <!-- <app-icontray [noteId]="value.id" ></app-icontray> -->
+            <app-trashoption (foreverDeleteEvent)="deleteForever($event,value.id)" (retrieveEvent)=retrieve($event,value.id)></app-trashoption>
+        </mat-card-footer>
+    </mat-card>
+</div>

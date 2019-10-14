@@ -1,0 +1,14 @@
+<div mat-dialog-content fxLayout="column" fxLayoutGap="10px">
+      <mat-form-field class="full-width">
+            <textarea matInput placeholder="Title" name="title" [formControl]="title" cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" ></textarea>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+            <textarea input matInput placeholder="Take a Note" name="description" [formControl]="description"
+                  cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" >
+                              </textarea>
+      </mat-form-field>
+      <div fxFlex="100" fxLayout="row">
+            <app-icontray (saveNote)="updateNotes($event)"></app-icontray>
+      </div>
+</div>
