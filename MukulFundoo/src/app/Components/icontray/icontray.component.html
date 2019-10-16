@@ -1,4 +1,4 @@
-<div>
+<div class="icontray-container" fxlayoutAlign="space-around stretch"> 
     <button mat-icon-button matTooltip="Add Reminder" (click)="getNotes()">
         <mat-icon>
             add_alert
@@ -29,8 +29,6 @@
             <button mat-list-item (click)=deleteNotes()>Delete</button>
         </mat-action-list>
     </mat-menu>
-    <button mat-button matTooltip="Close Note" (click)="saveNotes()">Close
-    </button>
     <mat-menu class="palette" #menu_color="matMenu" [overlapTrigger]="false">
         <button mat-mini-fab *ngFor="let color1 of colorArray"
             [ngStyle]="{'background':color1.color}" (click)="changeColor(color1.color)"></button>

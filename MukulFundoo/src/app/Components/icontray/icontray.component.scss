@@ -1,4 +1,17 @@
-.palette{
-width:10px;
-height:10px
+
+.mat-icon{
+    font-size: 15px;
 }
+// .icontray-container{
+   
+// }
+::ng-deep .palette {
+    width: 147px !important; 
+    height: 115px !important; 
+  }
+  .mat-mini-fab{
+    width: 30px;
+    height: 30px;
+    margin:1.5px;
+    
+  }

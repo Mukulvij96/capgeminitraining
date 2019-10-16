@@ -11,15 +11,14 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout'
-import { AppServiceService, NoteService } from './app-service.service';
+import { AppServiceService, NoteService } from './services/appservices/app-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ForgotComponent } from './Components/forgot/forgot.component';
 import { ResetComponent } from './Components/reset/reset.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { NotefieldComponent } from './Components/notefield/notefield.component';
-import { IconbarComponent } from './Components/iconbar/iconbar.component';
 import { IcontrayComponent } from './Components/icontray/icontray.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './authguard/auth.guard';
 import { StorageServiceModule } from 'ngx-webstorage-service';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { DisplayComponent } from './Components/display/display.component';
@@ -39,7 +38,6 @@ import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
     ResetComponent,
     DashboardComponent,
     NotefieldComponent,
-    IconbarComponent,
     IcontrayComponent,
     DisplayComponent,
     TrashnotesComponent,

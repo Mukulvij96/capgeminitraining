@@ -7,7 +7,7 @@
     left: 0%;
     right: 0%;
     margin: auto;
-    background-color:$bgcolor;
+    background-color:$bgcolor1;
   
   }
   .forgot-Container{
@@ -34,7 +34,7 @@
     padding-right: 40px;
     padding-top: 16px;
     padding-bottom: 6px;
-    background-color:$bgcolor1;
+    background-color:$bgcolor3;
   }
   // .fundooNotesLogo{
   // }
@@ -50,5 +50,10 @@
       background-color:$bgcolor;
       //left:5%;
    }
-   
-  
+   img{
+     height:100px;
+     width:100px;
+   }
+   .fundooNotesLogo{
+     margin-bottom:-24px;
+   }

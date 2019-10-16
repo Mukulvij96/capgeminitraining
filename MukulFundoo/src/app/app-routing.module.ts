@@ -6,7 +6,7 @@ import { ForgotComponent } from './Components/forgot/forgot.component'
 import { ResetComponent } from './Components/reset/reset.component'
 import { DashboardComponent } from './Components/dashboard/dashboard.component'
 import { NotefieldComponent } from './Components/notefield/notefield.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './authguard/auth.guard';
 import { DisplayComponent } from './Components/display/display.component'
 import { TrashnotesComponent } from './Components/trashnotes/trashnotes.component'
 import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.component';

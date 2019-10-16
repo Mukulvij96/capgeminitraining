@@ -2,16 +2,16 @@
 @import '../../styles/constants.scss';
 
 body{
-    background-color: $bgcolor1;
+    background-color: $bgcolor3;
 }
 .bod{
-    background:$bgcolor1;
+    background:$bgcolor3;
 }
 .toolbar-card{
     padding:$paddingToolbar;
 }
 .toolbar-container{
-    background-color: $bgcolor1;
+    background-color: $bgcolor3;
     
 }
 .search-container{
@@ -27,4 +27,6 @@ body{
     width:20%;
     background-color: $bgcolor1; 
 }
-
+.span{
+    margin-left: 20px;
+}

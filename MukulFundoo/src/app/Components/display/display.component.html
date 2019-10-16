@@ -1,12 +1,16 @@
-<app-notefield></app-notefield>
-<mat-card *ngFor="let value of notes; let i = index" class="grid-item" fxLayout="column"
-  fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (click)="openDialog(this.value)">
-  <div >
-    <mat-card-title >{{value.title}}</mat-card-title>
-    <mat-card-content >{{value.description}}</mat-card-content>
+  <app-notefield></app-notefield>
+
+<div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start" >
+  <mat-card *ngFor="let value of notes; let i = index" class="grid-item" fxLayout="column"
+  fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseover)=showIcon(value.id) (mouseout)="hideIcon()">
+  <div (click)="openDialog(this.value)" >
+    <mat-card-title fxLayout="row wrap">{{value.title}}</mat-card-title>
+    <mat-card-content fxLayout="row wrap" >{{value.description}}</mat-card-content>
   </div>
-  <mat-card-footer>
+  <mat-card-footer > 
     <app-icontray [noteId]="value.id" (displayNoteAfterDelete)="display($event)"
       (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"></app-icontray>
   </mat-card-footer>
 </mat-card>
+</div>
+  

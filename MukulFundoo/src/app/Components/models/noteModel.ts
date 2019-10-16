@@ -9,5 +9,5 @@ export interface Notes{
     color?:String;
     reminder?:String;
     collaberators?:String;
-    id?:String;
+    noteId?:String;
 }

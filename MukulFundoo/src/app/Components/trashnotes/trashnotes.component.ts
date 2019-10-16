@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataserviceService } from 'src/app/dataservice.service';
-import { NoteService } from 'src/app/app-service.service';
+import { DataserviceService } from 'src/app/services/data services/dataservice.service';
+import { NoteService } from 'src/app/services/appservices/app-service.service';
 import { Notes } from '../models/noteModel'
 
 @Component({

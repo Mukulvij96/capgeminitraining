@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms'
-import { AppServiceService } from '../../app-service.service'
+import { AppServiceService } from '../../services/appservices/app-service.service'
 import { Router, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-reset',

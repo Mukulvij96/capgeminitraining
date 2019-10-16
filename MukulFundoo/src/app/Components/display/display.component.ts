@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
-import { NoteService } from '../../app-service.service'
+import { NoteService } from '../../services/appservices/app-service.service'
 import { Notes } from '../models/noteModel'
-import { DataserviceService } from 'src/app/dataservice.service';
+import { DataserviceService } from 'src/app/services/data services/dataservice.service';
 import { MatDialog,MatDialogConfig } from '@angular/material';
 import { DialogboxComponent } from '../dialogbox/dialogbox.component';
 import { PatternValidator } from '@angular/forms';
@@ -17,11 +17,14 @@ export class DisplayComponent implements OnInit {
   constructor(private noteService: NoteService,private data:DataserviceService,private dialog:MatDialog) { }
   message:String=""
   notes: Notes[]
+  hoverId:string="";
   @Input() noteId: Notes
 
   ngOnInit() {
-    this.data.currentMessage$.subscribe(message => {this.checkNotes()})   
-    this.displayNotes()
+    this.data.currentMessage$.subscribe(message => {
+      this.message=message;
+      this.checkNotes()})   
+    this.displayNotes();
   }
   setColor($event, id) {
     const data = {
@@ -54,12 +57,13 @@ export class DisplayComponent implements OnInit {
     this.displayNotes()
   }
   checkNotes(){
+    console.log(this.message);
     if(this.message=="Note Added")
     this.displayNotes();
     this.message=""
   }
 private dialogRef;
-hover:boolean=false;
+// hover:boolean=false;
   openDialog(value){
     const dialogConfig = new MatDialogConfig();
 
@@ -69,7 +73,7 @@ hover:boolean=false;
     dialogConfig.data = {
       title:value.title,
       description:value.description,
-      recordId:value.id,
+      id:value.id,
       color:value.color
     }
     console.log(dialogConfig.data);
@@ -80,5 +84,12 @@ hover:boolean=false;
       this.displayNotes();
     });
   }
+showIcon(id){
+this.hoverId=id;
+}
+hideIcon(){
+  
+}
+
 }
 

@@ -1,9 +1,30 @@
-.expansion-container{
-    width:150%; 
+// .expansion-container{
+//     width:150%; 
 .full-width{
-    width: 100%
+    width:34vw;
+    border:none;
+    outline:none;
 }
+.take-note-container{
+    width:35vw;
+    margin-left:150px;
+    margin-top:5px;
+    padding:8px;
 }
-mat-accordion{
-    margin-top: 10px;
+.icon-container{
+    width:35vw;
 }
+.img.style{
+    width:18px;
+    height:18px;
+}
+// mat-accordion{
+//     margin-top: 10px;
+// }
+// .mat-action-row{
+//     padding-top:10px;
+//     padding-bottom: 10px;
+//     padding-left:5px;
+//     padding-right:5px;
+
+// }
