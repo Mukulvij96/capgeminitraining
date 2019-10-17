@@ -1,16 +1,32 @@
 .mat-dialog-content{
     padding-left: 0px;
     padding-right: 0px;
+    padding-top:0px;
     min-width: 300px;
+}
+::ng-deep.mat-dialog-container{
+    padding-top:0px;
+    padding-bottom:0px;
 }
 .mat-card{
     width:450px;
-    min-height: 120px;
+    min-height: 153px;
 }
 .close-button{
     width:200px;
     padding-bottom:6px;
     padding-left:80px;
 }
-
+.full-width{
+    outline: none;
+    border:none;
+    padding:5px;
+    font-size: 20px;
+}
+.full-width-title{
+    outline: none;
+    border:none;
+    padding:5px;
+    font-size: 30px;
+}
 

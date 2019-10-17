@@ -21,8 +21,9 @@ export class NotefieldComponent implements OnInit {
   public title = new FormControl('');
   color: String = ""
   close: Boolean;
-  showTitle:Boolean=false;
+  showTitle:Boolean=true;
   pin:Boolean=false;
+  
   constructor(private noteService: NoteService, public vcRef: ViewContainerRef,
     private cpService: ColorPickerService, private data: DataserviceService) { }
   message: String = ""
@@ -30,11 +31,12 @@ export class NotefieldComponent implements OnInit {
   ngOnInit() {
     this.data.currentMessage$.subscribe(message => this.message = message)
   }
-  addNotes() {
+  addNotes(pinValue) {
     this.note = {
       title: this.title.value,
       description: this.description.value,
-      color: this.color
+      color: this.color,
+      isPined:pinValue
     }
     console.log("Emitted data", this.note)
     this.noteService.postRequest(this.note, '/addNotes').subscribe((data: any) => {
@@ -42,16 +44,12 @@ export class NotefieldComponent implements OnInit {
       this.note=null;
       this.newMessage();
       this.color = ""
+      this.pin=false;
       console.log("added");
 
     })
   }
-  // @Input() expanded;
-  // panelOpenState:boolean=false;
-  // toggle(example) {
-  //   example.expanded = !example.expanded;
-  //   console.log("closed")
-  // }
+
   newMessage() {
     this.data.changeMessage("Note Added");
   }
@@ -64,15 +62,10 @@ export class NotefieldComponent implements OnInit {
     this.showTitle = !this.showTitle
   }
   pinNotes(){
-    this.pin= !this.pin
-    const data={
-      "noteIdList":[this.note.noteId],
-      "isPined":true
-    }
-    this.noteService.postRequest(data,'/pinUnpinNotes').subscribe((data:any)=> {
-      console.log("Pined Note");
-    })
+    this.pin = !this.pin
   }
+  
+  
 }
 
 

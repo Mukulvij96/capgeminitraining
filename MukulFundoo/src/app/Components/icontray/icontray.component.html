@@ -1,4 +1,4 @@
-<div class="icontray-container" fxlayoutAlign="space-around stretch"> 
+<div class="icontray-container" fxlayoutAlign="space-around stretch">
     <button mat-icon-button matTooltip="Add Reminder" (click)="getNotes()">
         <mat-icon>
             add_alert
@@ -19,18 +19,33 @@
             archive
         </mat-icon>
     </button>
-    <button mat-icon-button matTooltip="Options" [matMenuTriggerFor]="more_options">
+    <button mat-icon-button matTooltip="Options" [matMenuTriggerFor]="rootMenu">
         <mat-icon>
             more_vert
         </mat-icon>
     </button>
-    <mat-menu #more_options="matMenu" [overlapTrigger]="false">
-        <mat-action-list role="list">
-            <button mat-list-item (click)=deleteNotes()>Delete</button>
-        </mat-action-list>
+    <mat-menu #rootMenu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item (click)=deleteNotes()>Delete note</button>
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item [matMenuTriggerFor]="subMenu">Add Labels</button>
     </mat-menu>
+    <mat-menu #subMenu="matMenu">
+        <div class="label-container" (click) = "$event.stopPropagation()">
+            <div>
+                <mat-card-title>Label Note</mat-card-title>
+            </div>
+            <div>
+                <input class="full-width-label" autocomplete="off" input matInput placeholder="Add Label name" name="label"
+                    [formControl]="label" (keyup.enter)="createLabel()">
+            </div>
+            <div class="checkbox-list" >
+                <mat-checkbox fxLayout="column" fxLayoutAlign="space-between start" *ngFor="let value of storedLabels;let i-index" (click)=selectCheckbox(value.id) 
+                >{{value.label}}</mat-checkbox>
+            </div>
+        </div>
+        </mat-menu>
     <mat-menu class="palette" #menu_color="matMenu" [overlapTrigger]="false">
-        <button mat-mini-fab *ngFor="let color1 of colorArray"
-            [ngStyle]="{'background':color1.color}" (click)="changeColor(color1.color)"></button>
+        <button mat-mini-fab *ngFor="let color1 of colorArray" [ngStyle]="{'background':color1.color}"
+            (click)="changeColor(color1.color)"></button>
     </mat-menu>
 </div>

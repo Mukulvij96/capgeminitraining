@@ -1,13 +1,11 @@
 
-
-
 <div mat-dialog-content fxLayout="column"  class="container" >
      <mat-card fxLayout="column" fxFlex="100" [ngStyle]='{background:note.color}'>
-            <textarea matInput name="title" [formControl]="title" cdkTextareaAutosize
-                  #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" value="{{note.title}}"></textarea>
-            <textarea matInput name="description" [formControl]="description"
-                  cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-                  value="{{note.description}}">
+            <textarea class="full-width-title" matInput name="title" [formControl]="title" cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" value="{{note.title}}" [ngStyle]='{background:note.color}'></textarea>
+            <textarea class="full-width" matInput name="description" [formControl]="description"
+                  cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                  value="{{note.description}}" [ngStyle]='{background:note.color}'>
                               </textarea>
       <div fxFlex="100" fxLayout="row">
             <app-icontray (colorEvent)=setColor($event)></app-icontray>

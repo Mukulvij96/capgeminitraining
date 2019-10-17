@@ -4,6 +4,13 @@
     width:34vw;
     border:none;
     outline:none;
+    font-size:12px; 
+}
+.full-width-title{
+    width:34vw;
+    border:none;
+    outline:none; 
+    font-size:18px;
 }
 .take-note-container{
     width:35vw;
@@ -17,6 +24,9 @@
 .img.style{
     width:18px;
     height:18px;
+}
+.description-container{
+    padding-top:10px;
 }
 // mat-accordion{
 //     margin-top: 10px;

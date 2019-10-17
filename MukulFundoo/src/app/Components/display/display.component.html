@@ -1,8 +1,27 @@
   <app-notefield></app-notefield>
+ 
+  <p class="header">PINNED</p>
+<div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start" >
+  <mat-card *ngFor="let value of pinnedNotes; let i = index" class="grid-item" fxLayout="column"
+  fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseenter)="hover(value.id)" (mouseleave)="hover(value.id)" >
+  <div (click)="openDialog(this.value)" >
+    <mat-card-title fxLayout="row wrap">{{value.title}}</mat-card-title>
+    <mat-card-content fxLayout="row wrap" >{{value.description}}</mat-card-content>
+  </div>
+  <div>
+    <label *ngFor="let value of labels">{{value.labels}}</label>
+  </div>
+  <mat-card-footer  [style.visibility]="{ visibility: hoverId==value.id ? 'visible' :'hidden'}" > 
+    <app-icontray  [noteId]="value.id" (displayNoteAfterDelete)="display($event)"
+      (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)" (checkboxEvent)=showLabel($event)></app-icontray>
+  </mat-card-footer>
+</mat-card>
+</div>
 
+<p class="header">OTHERS</p>
 <div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start" >
   <mat-card *ngFor="let value of notes; let i = index" class="grid-item" fxLayout="column"
-  fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseover)=showIcon(value.id) (mouseout)="hideIcon()">
+  fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' >
   <div (click)="openDialog(this.value)" >
     <mat-card-title fxLayout="row wrap">{{value.title}}</mat-card-title>
     <mat-card-content fxLayout="row wrap" >{{value.description}}</mat-card-content>
@@ -13,4 +32,3 @@
   </mat-card-footer>
 </mat-card>
 </div>
-  

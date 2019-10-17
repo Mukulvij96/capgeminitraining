@@ -2,7 +2,9 @@ import { Component, OnInit, Output, EventEmitter, ViewContainerRef, Input } from
 import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 import { NoteService } from '../../services/appservices/app-service.service'
 import { Notes } from '../models/noteModel'
-
+import { FormControl } from '@angular/forms';
+import { LabelserviceService } from 'src/app/services/labelservice/labelservice.service';
+import { Labels } from '../models/labelModel';
 @Component({
   selector: 'app-icontray',
   templateUrl: './icontray.component.html',
@@ -13,17 +15,20 @@ export class IcontrayComponent implements OnInit {
   panelOpenState: boolean = false;
   save: Boolean = false;
   archive: Boolean = false
+  labels: Labels
+  storedLabels: Labels[]
+
   @Output() displayNoteAfterArchive = new EventEmitter<Boolean>();
   @Input() noteId: Notes;
   @Output() saveNote = new EventEmitter<Boolean>();
   @Output() close = new EventEmitter<Boolean>();
   @Output() colorEvent = new EventEmitter<string>();
-
+  public label = new FormControl('');
   constructor(public vcRef: ViewContainerRef,
-    private cpService: ColorPickerService, private noteService: NoteService) { }
+    private cpService: ColorPickerService, private noteService: NoteService, private labelService: LabelserviceService) { }
 
   ngOnInit() {
-
+    this.getLabels()
   }
   colorArray =
     [
@@ -45,16 +50,7 @@ export class IcontrayComponent implements OnInit {
       { 'color': '#0288D1', 'name': 'darkblue' }
 
     ]
-  // togglePanel() {
-  //   this.panelOpenState = true;
-  //   this.close.emit(this.panelOpenState);
-  // }
-  // saveNotes() {
-  //   this.save = true;
-  //   console.log("Clicking save")
-  //   this.togglePanel();
-  //   this.saveNote.emit(this.save);
-  // }
+
   @Output() displayNoteAfterDelete = new EventEmitter<Boolean>();
   delete: Boolean = false;
   deleteNotes() {
@@ -89,6 +85,30 @@ export class IcontrayComponent implements OnInit {
       this.archive = true
       this.displayNoteAfterArchive.emit(this.archive);
     })
+  }
+  createLabel() {
+    this.labels = {
+      label: this.label.value,
+      userId: sessionStorage.getItem('userId'),
+      isDeleted: false,
+
+    }
+    this.labelService.postRequest(this.labels, 'noteLabels').subscribe((data: any) => {
+      console.log("Label Has been set", data);
+      this.getLabels();
+    })
+  }
+  getLabels() {
+
+    this.labelService.getRequest('noteLabels/getNoteLabelList').subscribe((data: any) => {
+      console.log("Labels", data.data.details)
+      this.storedLabels = data.data.details;
+
+    })
+  }
+@Output() checkboxEvent=new EventEmitter<String>();
+  selectCheckbox(id){
+    this.checkboxEvent.emit(id);
   }
 }
 

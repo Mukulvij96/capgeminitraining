@@ -1,4 +1,34 @@
- 
+
+<mat-card class="take-note-container" [ngStyle]='{background:color}' >
+  <div class="head-container" (click)="show()" *ngIf=showTitle  >Take a Note..
+  </div>
+
+  <div *ngIf=!showTitle fxLayout="row" class="title-container">
+      <textarea class="full-width-title" input matInput placeholder="Title" name="title" [formControl]="title"
+      cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" [ngStyle]='{background:color}'>
+    </textarea>
+    <div>
+      <img style="height: 18px" *ngIf=!pin src="../../../assets/images/icons8-pin-50.png" (click)=pinNotes()>
+    </div>
+    <div>
+      <img style="height: 18px" *ngIf=pin src="../../../assets/images/icons8-pin-50 (1).png">
+    </div>
+  </div>
+  <div *ngIf=!showTitle class="description-container">
+      <textarea class="full-width" matInput placeholder="Description" name="description" [formControl]="description" cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" [ngStyle]='{background:color}'></textarea>
+  </div>
+  <div *ngIf=!showTitle class="icon-container" fxLayout="row">
+    <app-icontray fxLayoutAlign="space-between stretch"  (colorEvent)="setColor($event)"></app-icontray>
+    <button mat-button matTooltip="Close Note" (click)="addNotes(pin)"  >Close</button>
+  </div>
+</mat-card>
+
+  
+
+
+
+
 <!-- <mat-accordion fxFlex="60" style="padding-left: 150px">
   <mat-expansion-panel class="expansion-container" fxFlex.xs="100" hideToggle="true" [expanded]="panelOpenState" [ngStyle]='{background:color}' #example >
     <mat-expansion-panel-header >
@@ -26,28 +56,3 @@
     </mat-action-row> 
   </mat-expansion-panel>
 </mat-accordion>   -->
-
-
-
-<mat-card class="take-note-container" [ngStyle]='{background:color}' >
-  <div class="head-container" (click)="show()" *ngIf=!showTitle>Take a Note..
-  </div>
-
-  <div *ngIf=showTitle fxLayout="row">
-      <textarea class="full-width" input matInput placeholder="Title" name="title" [formControl]="title"
-      cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" [ngStyle]='{background:color}'>
-    </textarea>
-    <img style="height: 18px" *ngIf=pin src="../../../assets/images/icons8-pin-50.png" (click)=pinNotes()>
-    <img style="height: 18px" *ngIf=!pin src="../../../assets/images/icons8-pin-50 (1).png" (click)=pinNotes()>
-  </div>
-  <div *ngIf=showTitle >
-      <textarea class="full-width" matInput *ngIf=!showTitle placeholder="Description" name="description" [formControl]="description" cdkTextareaAutosize
-      #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" [ngStyle]='{background:color}'></textarea>
-  </div>
-  <div *ngIf=showTitle class="icon-container" fxLayout="row">
-    <app-icontray fxLayoutAlign="space-between stretch"  (colorEvent)="setColor($event)"></app-icontray>
-    <button mat-button matTooltip="Close Note" (click)="addNotes()" (click)="toggle(example)" >Close</button>
-  </div>
-</mat-card>
-
-  
