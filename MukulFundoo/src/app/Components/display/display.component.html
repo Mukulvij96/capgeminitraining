@@ -1,34 +1,46 @@
-  <app-notefield></app-notefield>
- 
-  <p class="header">PINNED</p>
-<div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start" >
-  <mat-card *ngFor="let value of pinnedNotes; let i = index" class="grid-item" fxLayout="column"
-  fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseenter)="hover(value.id)" (mouseleave)="hover(value.id)" >
-  <div (click)="openDialog(this.value)" >
-    <mat-card-title fxLayout="row wrap">{{value.title}}</mat-card-title>
-    <mat-card-content fxLayout="row wrap" >{{value.description}}</mat-card-content>
-  </div>
-  <div>
-    <label *ngFor="let value of labels">{{value.labels}}</label>
-  </div>
-  <mat-card-footer  [style.visibility]="{ visibility: hoverId==value.id ? 'visible' :'hidden'}" > 
-    <app-icontray  [noteId]="value.id" (displayNoteAfterDelete)="display($event)"
-      (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)" (checkboxEvent)=showLabel($event)></app-icontray>
-  </mat-card-footer>
-</mat-card>
+<app-notefield></app-notefield>
+
+<p class="header">PINNED</p>
+<div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start">
+  <mat-card fxFlex="30" *ngFor="let value of pinnedNotes" class="grid-item" fxLayout="column"
+    fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseover)=hover(value.id)
+    (mouseout)=hover(value.id)>
+    <div fxFlex="70" (click)="openDialog(this.value)">
+      <mat-card-title fxLayout="row wrap">{{value.title}}</mat-card-title>
+      <mat-card-content fxLayout="row wrap">{{value.description}}</mat-card-content>
+    </div>
+    <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
+      <label *ngFor="let labels of value.noteLabels" class="label-item"
+        [ngStyle]='{background:value.color}'>{{labels.label}} 
+        <mat-icon class="close-icon" (click)=removeLabel(value.id,labels.id)>close</mat-icon>
+      </label>
+    </div>
+    <mat-card-footer fxFlex="15" [style.visibility]="{ visibility:value.id==hoverId ? 'visibile' : 'hidden'}">
+      <app-icontray [noteId]="value.id" (displayNoteAfterDelete)="display($event)"
+        (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"
+        (checkboxEvent)=showLabel($event,value.id)></app-icontray>
+    </mat-card-footer>
+  </mat-card>
 </div>
 
 <p class="header">OTHERS</p>
-<div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start" >
-  <mat-card *ngFor="let value of notes; let i = index" class="grid-item" fxLayout="column"
-  fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' >
-  <div (click)="openDialog(this.value)" >
-    <mat-card-title fxLayout="row wrap">{{value.title}}</mat-card-title>
-    <mat-card-content fxLayout="row wrap" >{{value.description}}</mat-card-content>
-  </div>
-  <mat-card-footer > 
-    <app-icontray [noteId]="value.id" (displayNoteAfterDelete)="display($event)"
-      (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"></app-icontray>
-  </mat-card-footer>
-</mat-card>
+<div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start">
+  <mat-card fxFlex="30" *ngFor="let value of notes; let i = index" class="grid-item" fxLayout="column"
+    fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}'>
+    <div fxFlex="70" (click)="openDialog(this.value)">
+      <mat-card-title fxLayout="row wrap">{{value.title}}</mat-card-title>
+      <mat-card-content fxLayout="row wrap">{{value.description}}</mat-card-content>
+    </div>
+    <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
+      <label *ngFor="let labels of value.noteLabels" class="label-item"
+        [ngStyle]='{background:value.color}'>{{labels.label}} <mat-icon class="close-icon"
+          (click)=removeLabel(value.id,labels.id)>close</mat-icon>
+    </label>
+    </div>
+    <mat-card-footer fxFlex="15">
+      <app-icontray [noteId]="value.id" (displayNoteAfterDelete)="display($event)"
+        (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"
+        (checkboxEvent)=showLabel($event,value.id)></app-icontray>
+    </mat-card-footer>
+  </mat-card>
 </div>

@@ -30,20 +30,21 @@
         <button mat-menu-item [matMenuTriggerFor]="subMenu">Add Labels</button>
     </mat-menu>
     <mat-menu #subMenu="matMenu">
-        <div class="label-container" (click) = "$event.stopPropagation()">
+        <div class="label-container" (click)="$event.stopPropagation()">
             <div>
                 <mat-card-title>Label Note</mat-card-title>
             </div>
             <div>
-                <input class="full-width-label" autocomplete="off" input matInput placeholder="Add Label name" name="label"
-                    [formControl]="label" (keyup.enter)="createLabel()">
+                <input class="full-width-label" autocomplete="off" input matInput placeholder="Add Label name"
+                    name="label" [formControl]="label" (keyup.enter)="createLabel()">
             </div>
             <div class="checkbox-list" >
-                <mat-checkbox fxLayout="column" fxLayoutAlign="space-between start" *ngFor="let value of storedLabels;let i-index" (click)=selectCheckbox(value.id) 
-                >{{value.label}}</mat-checkbox>
+                <mat-checkbox (click)="$event.stopPropagation()" *ngFor="let label of storedLabels;let i-index" fxLayout="column" fxLayoutAlign="space-between start"
+                     [value]="label" (change)=selectCheckbox($event) (click)="changeValue(label)"  >
+                    {{label.label}}</mat-checkbox>
             </div>
         </div>
-        </mat-menu>
+    </mat-menu>
     <mat-menu class="palette" #menu_color="matMenu" [overlapTrigger]="false">
         <button mat-mini-fab *ngFor="let color1 of colorArray" [ngStyle]="{'background':color1.color}"
             (click)="changeColor(color1.color)"></button>

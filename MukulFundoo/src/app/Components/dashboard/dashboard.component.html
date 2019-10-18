@@ -5,7 +5,7 @@
     <img src='../../../assets/images/FundooNotes1.jpeg' fxHide.lt-md="true">
     <form class="my-form" fxFlex="50" fxFlex.xs="100" fxLayout="row" FxLayoutAlign="start stretch">
         <input type="search" class="search-container" name="searchBar" placeholder="Search" appearance="outline"
-            fxHide.lt-sm="true">
+            fxHide.lt-sm="true" (ngModel)="searchText" autocomplete="off">
     </form>
     <div class="icon-tray" fxFlex="15" fxFlex.xs="100" fxLayout="row" fxLayoutAlign="space-around stretch">
         <button mat-icon-button fxHide.md="true" (click)="opened = !opened">
@@ -25,10 +25,35 @@
         <button mat-icon-button (click)="opened = !opened">
             <mat-icon>grid_on</mat-icon>
         </button>
-        <button mat-icon-button (click)="opened =!opened">
-            <mat-icon>email</mat-icon>
+        <button mat-icon-button [matMenuTriggerFor]="imageMenu">
+            <mat-icon class="icon-item">panorama_fisheye</mat-icon>
         </button>
     </div>
+    <div>
+        <mat-menu class="image-menu" #imageMenu="matMenu" [overlapTrigger]="false">
+            <mat-card class="image-menu-container" fxFlex="100" fxLayout="column" fxLayoutAlign="space-between stretch">
+                <mat-card-content class="content-container" fxFlex="75" fxLayout="row">
+                    <div fxFlex="50">
+                        <button class="image-button" mat-fab >Change</button>
+                    </div>
+                    <div fxFlex="50">
+                            <p class="name-container"  fxLayoutGap="6px">{{firstName}} {{lastName}}</p>
+                            <p class="email-container">{{email}}</p>
+                    </div>
+                </mat-card-content>
+                <mat-card-footer class="footer-container" fxLayout="row" fxLayoutGap="20px"
+                    fxLayoutAlign="space-between stretch">
+                    <div>
+                        <button class="button-item" (click)="registerAccount()">Add Account</button>
+                    </div>
+                    <div>
+                        <button class="button-item" (click)=logout()>Logout</button>
+                    </div>
+                </mat-card-footer>
+            </mat-card>
+        </mat-menu>
+    </div>
+
 </mat-toolbar>
 <mat-divider></mat-divider>
 <mat-drawer-container class="sideNav-container" fxLayout="column">
@@ -37,7 +62,7 @@
             <button mat-icon-button (click)="displayAvailableNotes()">
                 <mat-icon>note</mat-icon><span>Notes</span>
             </button>
-            <button mat-icon-button >
+            <button mat-icon-button>
                 <!-- <app-display fxFlex="100" fxLayout="column wrap" fxLayoutAlign="space-evenly stretch"></app-display> -->
                 <mat-icon>notifications_none</mat-icon>Reminders
             </button>
@@ -55,7 +80,7 @@
             </button>
         </mat-nav-list>
     </mat-drawer>
-    <mat-drawer-content fxLayout="row" fxLayoutAlign="center start" >
+    <mat-drawer-content fxLayout="row" fxLayoutAlign="center start">
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

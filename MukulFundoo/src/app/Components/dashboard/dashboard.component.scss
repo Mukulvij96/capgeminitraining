@@ -30,3 +30,39 @@ body{
 .span{
     margin-left: 20px;
 }
+.icon-item{
+    padding-right:5px;
+    font-size:35px;
+}
+::ng-deep.image-menu{
+    .mat-menu-content:not(:empty) {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+}
+.image-menu-container{
+    width:250px;
+    height:150px;
+    padding:16px;
+    padding-top:10px;
+}
+.footer-container{
+    padding:15px;
+    
+}
+.content-container{
+    margin:0px;
+}
+.name-container{
+    font-weight: bold;
+    margin-bottom:0px;
+}
+.email-container{
+    margin-top:0px;
+    color: #666;
+}
+.image-button{
+    font-size: 80%;
+    height:80px;
+    width:80px;
+}

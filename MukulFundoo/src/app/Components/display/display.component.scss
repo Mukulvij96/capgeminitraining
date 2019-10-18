@@ -11,6 +11,7 @@
   width:20vw;
   word-break: break-all;
   min-height:15vh;
+  padding:10px;
 }
 .display-container{
   width:65vw;
@@ -22,4 +23,23 @@
     font-weight: 500;
     line-height: 1rem;
     text-transform: uppercase;
+}
+.label-container{
+  padding-top: 5px;
+  padding-bottom:5px;
+  width:17vw;
+  height:inherit;
+}
+.label-item{
+  padding-left:2px;
+  padding-top:2px;
+border-radius: 25%;
+font-size:12px;
+cursor: pointer;
+filter: brightness(80%)
+}
+.close-icon{
+  font-size:10px;
+  height:10px;
+  width:10px;
 }

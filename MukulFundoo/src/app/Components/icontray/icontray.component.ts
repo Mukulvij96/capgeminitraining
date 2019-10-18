@@ -5,6 +5,7 @@ import { Notes } from '../models/noteModel'
 import { FormControl } from '@angular/forms';
 import { LabelserviceService } from 'src/app/services/labelservice/labelservice.service';
 import { Labels } from '../models/labelModel';
+import { FormGroup,FormBuilder,FormArray } from '@angular/forms'
 @Component({
   selector: 'app-icontray',
   templateUrl: './icontray.component.html',
@@ -15,8 +16,10 @@ export class IcontrayComponent implements OnInit {
   panelOpenState: boolean = false;
   save: Boolean = false;
   archive: Boolean = false
-  labels: Labels
   storedLabels: Labels[]
+  interestFormGroup : FormGroup
+  labels:any;
+  selected: any;
 
   @Output() displayNoteAfterArchive = new EventEmitter<Boolean>();
   @Input() noteId: Notes;
@@ -24,11 +27,14 @@ export class IcontrayComponent implements OnInit {
   @Output() close = new EventEmitter<Boolean>();
   @Output() colorEvent = new EventEmitter<string>();
   public label = new FormControl('');
-  constructor(public vcRef: ViewContainerRef,
-    private cpService: ColorPickerService, private noteService: NoteService, private labelService: LabelserviceService) { }
+  
 
+  constructor(public vcRef: ViewContainerRef,
+    private cpService: ColorPickerService, private noteService: NoteService, private labelService: LabelserviceService, private formBuilder: FormBuilder) { }
+   
   ngOnInit() {
     this.getLabels()
+    
   }
   colorArray =
     [
@@ -86,6 +92,7 @@ export class IcontrayComponent implements OnInit {
       this.displayNoteAfterArchive.emit(this.archive);
     })
   }
+  
   createLabel() {
     this.labels = {
       label: this.label.value,
@@ -101,16 +108,41 @@ export class IcontrayComponent implements OnInit {
   getLabels() {
 
     this.labelService.getRequest('noteLabels/getNoteLabelList').subscribe((data: any) => {
-      console.log("Labels", data.data.details)
       this.storedLabels = data.data.details;
 
     })
   }
 @Output() checkboxEvent=new EventEmitter<String>();
-  selectCheckbox(id){
-    this.checkboxEvent.emit(id);
+check:Boolean=false;
+selectCheckbox($event){
+//   const labels = <FormArray>this.interestFormGroup.get('labels') as FormArray;
+
+//   if($event.checked){
+//     labels.push(new FormControl($event.label.value))
+//   }
+//   else{
+//     const i=labels.controls.findIndex(x=> x.value === $event.label.value);
+//     labels.removeAt(i);
+//   }
+//   // this.checkboxEvent.emit(label);
+// console.log("Yeah",labels);  
+
+if($event.checked){
+  console.log("checked");
+  console.log("find",$event.source.value);
+  this.checkboxEvent.emit($event.source.value)
+  
+}
+  else{
+    console.log("Not checked");
   }
 }
+changeValue(check){
+  check = !check
+}
+}
+
+
 
 
 

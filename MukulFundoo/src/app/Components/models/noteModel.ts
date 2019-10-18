@@ -10,4 +10,5 @@ export interface Notes{
     reminder?:String;
     collaberators?:String;
     noteId?:String;
+    noteLabels?:String;
 }

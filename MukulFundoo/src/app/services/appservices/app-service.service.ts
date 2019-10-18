@@ -10,6 +10,7 @@ export class AppServiceService {
   postRequest(user,url:string){
     return this.http.post(environment.baseurl+url,user);
   }
+
 }
 export class NoteService{
 

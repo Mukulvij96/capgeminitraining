@@ -49,8 +49,12 @@ export class LoginComponent implements OnInit {
     }
 
     this.appService.postRequest(user, 'user/login').subscribe((data: any) => {
+      console.log("Login Data",data)
       sessionStorage.setItem("id", data.id);
       sessionStorage.setItem("userId", data.userId);
+      sessionStorage.setItem("firstName",data.firstName)
+      sessionStorage.setItem("lastName",data.lastName)
+      sessionStorage.setItem("email",data.email)
       console.log("Login Successful")
       this.routing.navigate([''])
 

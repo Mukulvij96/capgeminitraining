@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit, Output, Input, ɵConsole } from '@angular/core';
 import { NoteService } from '../../services/appservices/app-service.service'
 import { Notes } from '../models/noteModel'
 import { DataserviceService } from 'src/app/services/data services/dataservice.service';
@@ -20,9 +20,10 @@ export class DisplayComponent implements OnInit {
   notes: Notes[]
   pinnedNotes: Notes[]
   hoverId: any
-  labels:Labels[]
+  labels: Labels[]
+  noteLabels:Labels[]
   @Input() noteId: Notes
-
+  @Input() searchBox:any;
   ngOnInit() {
     this.data.currentMessage$.subscribe(message => {
       this.message = message;
@@ -65,6 +66,7 @@ export class DisplayComponent implements OnInit {
           return true;
       })
       this.pinnedNotes = finalPinnedNotes.reverse()
+        console.log("Pinned Notes",this.pinnedNotes)
     })
   }
   display($event) {
@@ -106,16 +108,39 @@ export class DisplayComponent implements OnInit {
         this.displayPinnedNotes()
       });
   }
-  hover(val){
-this.hoverId=val;
-console.log("Hovering")
+  hover(val) {
+    this.hoverId = val;
+    console.log("Hovering")
   }
 
-  showLabel($event){
-    console.log($event);
-  }
-       
-  
-
+  showLabel($event, id) {
+    const labelData={
+      "noteId":[id],
+      "lableId":[$event.id]
+    }
+    this.noteService.postJson(labelData,'/'+id+'/addLabelToNotes/'+$event.id+'/add').subscribe((data:any) => {
+      console.log("Notes after label is added",data);
+    })
+    this.displayNotes()
+    this.displayPinnedNotes()
 }
+
+removeLabel(id,labelId){
+  
+  const labelData={
+    "noteId":[id],
+    "lableId":[labelId]
+  }
+  console.log("remove",labelData);
+  this.noteService.postJson(labelData,'/'+id+'/addLabelToNotes/'+labelId+'/remove').subscribe((data:any) => {
+    console.log("Notes after label is removed" ,data);
+  })
+  this.displayNotes();
+  this.displayPinnedNotes();
+}
+  }
+
+
+
+
 
