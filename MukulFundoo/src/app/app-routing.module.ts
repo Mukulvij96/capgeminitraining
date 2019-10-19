@@ -11,6 +11,7 @@ import { DisplayComponent } from './Components/display/display.component'
 import { TrashnotesComponent } from './Components/trashnotes/trashnotes.component'
 import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.component';
 import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
+import { SearchbarComponent } from './Components/searchbar/searchbar.component';
 const routes: Routes = [
 
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
       { 
         path: 'dialogbox',
         component: DialogboxComponent
+      },
+      {
+        path: 'search',
+        component:SearchbarComponent
       }
     ]
   

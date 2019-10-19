@@ -27,7 +27,10 @@ import { TrashoptionComponent } from './Components/trashoption/trashoption.compo
 import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.component';
 import { ArchiveoptionComponent } from './Components/archiveoption/archiveoption.component';
 import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
-
+import { UploadprofilepicComponent } from './Components/uploadprofilepic/uploadprofilepic.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { SearchpipePipe } from '../app/pipe/searchpipe.pipe';
+import { SearchbarComponent } from './Components/searchbar/searchbar.component';
 
 @NgModule({
   declarations: [
@@ -45,9 +48,13 @@ import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
     ArchivenotesComponent,
     ArchiveoptionComponent,
     DialogboxComponent,
+    UploadprofilepicComponent,
+    SearchpipePipe,
+    SearchbarComponent,
     
    
   ],
+  entryComponents:[UploadprofilepicComponent,DialogboxComponent],
   imports: [
     BrowserModule,
     routing,
@@ -60,6 +67,7 @@ import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
     HttpClientModule,
     StorageServiceModule,
     ColorPickerModule,
+    ImageCropperModule
     
   ],
   providers: [AppServiceService,NoteService,AuthGuard],

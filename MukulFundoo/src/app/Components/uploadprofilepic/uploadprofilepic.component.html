@@ -1,0 +1,26 @@
+<div fxFlex="100" class="upload-container" fxLayout="column" fxLayoutAlign="space-around stretch">
+    <div fxFLex="20" class="header-container" fxLayout="column">
+        <h1>Select profile photo</h1>
+    </div>
+    <div fxFlex="80" class="tab-container">
+        <mat-tab-group>
+            <mat-tab label="Upload Photo">
+               <div fxFlex="95" fxLayout="row" class="upload-photo-container">
+                <input type="file" (change)="fileChangeEvent($event)">
+                <image-cropper fxFlex="80" fxFlex="column" class="image-cropper-container"
+                [imageChangedEvent]="imageChangedEvent" 
+                [maintainAspectRatio]="true" 
+                [aspectRatio]="4 / 3"   
+                [resizeToWidth]="128" 
+                format="png" 
+                (imageCropped)="imageCropped($event)">
+                </image-cropper>
+                <button class="upload-button" fxLayout="column" type="button" fxLayoutAlign="center center" (click)="onUpload()">Upload</button>
+               </div> 
+            </mat-tab>
+            <mat-tab label="Your Photo"></mat-tab>
+        </mat-tab-group>
+        
+    </div>
+    
+</div>

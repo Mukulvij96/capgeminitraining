@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, ɵConsole } from '@angular/core';
+import { Component, OnInit, Output, Input, ɵConsole,EventEmitter } from '@angular/core';
 import { NoteService } from '../../services/appservices/app-service.service'
 import { Notes } from '../models/noteModel'
 import { DataserviceService } from 'src/app/services/data services/dataservice.service';
@@ -7,6 +7,7 @@ import { DialogboxComponent } from '../dialogbox/dialogbox.component';
 import { PatternValidator } from '@angular/forms';
 import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import { Labels } from '../models/labelModel';
+
 // import { NotefieldComponent } from '../notefield/notefield.component';
 @Component({
   selector: 'app-display',
@@ -18,12 +19,14 @@ export class DisplayComponent implements OnInit {
   constructor(private noteService: NoteService, private data: DataserviceService, private dialog: MatDialog) { }
   message: String = ""
   notes: Notes[]
-  pinnedNotes: Notes[]
+  
   hoverId: any
   labels: Labels[]
   noteLabels:Labels[]
   @Input() noteId: Notes
   @Input() searchBox:any;
+  @Input() pinnedNotes:Notes[]
+  @Output() messageEvent=new EventEmitter<String>();
   ngOnInit() {
     this.data.currentMessage$.subscribe(message => {
       this.message = message;
@@ -109,10 +112,14 @@ export class DisplayComponent implements OnInit {
       });
   }
   hover(val) {
-    this.hoverId = val;
-    console.log("Hovering")
+    this.hoverId=val
   }
-
+visibilityHover(id){
+  if(this.hoverId==id)
+  return true;
+  else 
+  return false;
+}
   showLabel($event, id) {
     const labelData={
       "noteId":[id],
@@ -138,6 +145,8 @@ removeLabel(id,labelId){
   this.displayNotes();
   this.displayPinnedNotes();
 }
+
+
   }
 
 

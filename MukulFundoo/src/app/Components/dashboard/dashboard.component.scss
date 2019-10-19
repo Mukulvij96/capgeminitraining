@@ -18,6 +18,8 @@ body{
     height: $searchBarHeight;
     width:$searchBarWidth;
     background-color: $searchBarColor;
+    white-space: nowrap;
+    cursor:pointer;
 }
 .sideNav-container{
     height:100%;
@@ -30,19 +32,37 @@ body{
 .span{
     margin-left: 20px;
 }
-.icon-item{
-    padding-right:5px;
-    font-size:35px;
+
+    .image{
+        width:43px;
+        height:45px;
+        border-radius: 125px;
+        -webkit-border-radius: 125px;
+        -moz-border-radius: 125px;
+        cursor: pointer;
+        margin-left:30px;
+        }
+    
+
+::ng-deep.icon-item{
+    .mat-fab.mat-button-wrapper{
+        padding:0px;
+    }
 }
 ::ng-deep.image-menu{
     .mat-menu-content:not(:empty) {
         padding-top: 0px;
         padding-bottom: 0px;
+
     }
 }
+::ng-deep.mat-menu-panel.ng-trigger.ng-trigger-transformMenu.ng-tns-c5-0.image-menu.mat-menu-before.mat-menu-below.mat-elevation-z4.ng-star-inserted{
+    max-width:none;
+    max-height:none;
+}
 .image-menu-container{
-    width:250px;
-    height:150px;
+    width:320px;
+    height:220px;
     padding:16px;
     padding-top:10px;
 }
@@ -62,7 +82,23 @@ body{
     color: #666;
 }
 .image-button{
-    font-size: 80%;
-    height:80px;
-    width:80px;
+    // font-size: 80%;
+    
+    height:100px;
+    width:100px;
+    background-color: #ffffff;
+    border-radius: 125px;
+ -webkit-border-radius: 125px;
+ -moz-border-radius: 125px;
+ margin-left:10px;
+ margin-right:10px;
+ margin-bottom: 30px;
+ cursor: pointer;
+
 }
+.text-label{
+    font-size:10px;
+    z-index: 2;
+  
+}
+

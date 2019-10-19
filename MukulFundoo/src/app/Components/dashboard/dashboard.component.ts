@@ -6,6 +6,8 @@ import { routing } from '../../app-routing.module'
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { UploadprofilepicComponent } from '../uploadprofilepic/uploadprofilepic.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,10 +17,12 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 export class DashboardComponent implements OnInit {
 
   notes: Notes[]
-  searchText;
-  
-  constructor(private noteService: NoteService, private data: DataserviceService, private router: Router,
-    private Dialog:MatDialog,private appService:AppServiceService) { }
+  searchText:any;
+  pic:any;
+  baseUrlPic=environment.baseUrlPic;
+  url:any
+  constructor(private noteService: NoteService, private dataService: DataserviceService, private router: Router,
+    private dialog:MatDialog,private appService:AppServiceService) { }
   message: String;
   firstName:String=''
   lastName:String=''
@@ -28,6 +32,7 @@ export class DashboardComponent implements OnInit {
     this.firstName=sessionStorage.getItem('firstName');
     this.lastName=sessionStorage.getItem('lastName');
     this.email=sessionStorage.getItem('email');
+    this.getPic()
   }
   display: string = "";
   displayTrashNotes() {
@@ -44,16 +49,30 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(){
-    const user={
-      "id":sessionStorage.getItem('id')
-    }
-  this.appService.postRequest(user ,'user/logout').subscribe((data:any) => {
-    console.log("logout");
-    this.router.navigate(['/login'])
-  })
+  sessionStorage.removeItem('id')
+this.router.navigate(['/login'])
   }
-  registerAccount(){
-  this.router.navigate(['/login'])
+//   registerAccount(){
+//   this.router.navigate(['/login'])
+// }
+
+openDialog(){
+  const dialogRef=this.dialog.open(UploadprofilepicComponent, {
+    
+  })
+  console.log("clicking")
+}
+
+getPic(){
+  this.pic=localStorage.getItem('pic');
+  this.url=this.baseUrlPic+this.pic;
+  console.log('image',this.url);
+  this.router.navigate(['/display'])
+
+}
+onKeyUp(event){
+  this.searchText=event.target.value;
+  this.dataService.changeMessage(this.searchText);
 }
 
 }

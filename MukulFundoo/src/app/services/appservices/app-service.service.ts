@@ -10,7 +10,14 @@ export class AppServiceService {
   postRequest(user,url:string){
     return this.http.post(environment.baseurl+url,user);
   }
-
+  httpOptionsPic = {
+    headers: new HttpHeaders({
+      'Authorization': localStorage.getItem('id')
+    })
+  };
+  postImageRequest(user,url:string){
+    return this.http.post(environment.baseurl+url,user,this.httpOptionsPic);
+  }
 }
 export class NoteService{
 
