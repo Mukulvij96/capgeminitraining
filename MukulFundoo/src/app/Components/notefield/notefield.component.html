@@ -11,7 +11,7 @@
       <img style="height: 18px" *ngIf=!pin src="../../../assets/images/icons8-pin-50.png" (click)=pinNotes()>
     </div>
     <div>
-      <img style="height: 18px" *ngIf=pin src="../../../assets/images/icons8-pin-50 (1).png">
+      <img style="height: 18px" *ngIf=pin src="../../../assets/images/icons8-pin-50 (1).png" (click)=pinNotes()>
     </div>
   </div>
   <div *ngIf=!showTitle class="description-container">
@@ -23,9 +23,6 @@
     <button mat-button matTooltip="Close Note" (click)="addNotes(pin)"  >Close</button>
   </div>
 </mat-card>
-
-  
-
 
 
 

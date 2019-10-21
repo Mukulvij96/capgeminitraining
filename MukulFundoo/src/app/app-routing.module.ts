@@ -12,6 +12,7 @@ import { TrashnotesComponent } from './Components/trashnotes/trashnotes.componen
 import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.component';
 import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
 import { SearchbarComponent } from './Components/searchbar/searchbar.component';
+import { LabelnotesdisplayComponent } from './Components/labelnotesdisplay/labelnotesdisplay.component';
 const routes: Routes = [
 
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
       {
         path: 'search',
         component:SearchbarComponent
+      },
+      {
+        path:'labelList',
+        component:LabelnotesdisplayComponent
       }
     ]
   

@@ -1,17 +1,16 @@
-
-<div mat-dialog-content fxLayout="column"  class="container" >
-     <mat-card fxLayout="column" fxFlex="100" [ngStyle]='{background:note.color}'>
+<div mat-dialog-content fxLayout="column" class="container">
+      <mat-card fxLayout="column" fxFlex="100" [ngStyle]='{background:note.color}'>
             <textarea class="full-width-title" matInput name="title" [formControl]="title" cdkTextareaAutosize
-                  #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" value="{{note.title}}" [ngStyle]='{background:note.color}'></textarea>
-            <textarea class="full-width" matInput name="description" [formControl]="description"
-                  cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                  value="{{note.description}}" [ngStyle]='{background:note.color}'>
+                  #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" value="{{note.title}}"
+                  [ngStyle]='{background:note.color}'></textarea>
+            <textarea class="full-width" matInput name="description" [formControl]="description" cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" value="{{note.description}}"
+                  [ngStyle]='{background:note.color}'>
                               </textarea>
-      <div fxFlex="100" fxLayout="row">
-            <app-icontray (colorEvent)=setColor($event)></app-icontray>
-            <button mat-button class="close-button" matTooltip="Close Note" (click)="updateNotes()">Close
-            </button>
-      </div>
-     </mat-card>
-</div>  
-
+            <div fxFlex="100" fxLayout="row">
+                  <app-icontray (colorEvent)=setColor($event) (checkboxEvent)=showLabels($event)></app-icontray>
+                  <button mat-button class="close-button" matTooltip="Close Note" (click)="updateNotes()">Close
+                  </button>
+            </div>
+      </mat-card>
+</div>

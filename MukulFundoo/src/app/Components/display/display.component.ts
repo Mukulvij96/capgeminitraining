@@ -18,7 +18,7 @@ export class DisplayComponent implements OnInit {
 
   constructor(private noteService: NoteService, private data: DataserviceService, private dialog: MatDialog) { }
   message: String = ""
-  notes: Notes[]
+  
   
   hoverId: any
   labels: Labels[]
@@ -26,11 +26,12 @@ export class DisplayComponent implements OnInit {
   @Input() noteId: Notes
   @Input() searchBox:any;
   @Input() pinnedNotes:Notes[]
+  @Input() notes:Notes[]
   @Output() messageEvent=new EventEmitter<String>();
   ngOnInit() {
     this.data.currentMessage$.subscribe(message => {
       this.message = message;
-      this.checkNotes()
+      this.checkNotes();
     })
     this.displayNotes();
     this.displayPinnedNotes()
@@ -89,7 +90,7 @@ export class DisplayComponent implements OnInit {
   }
   private dialogRef;
   // hover:boolean=false;
-  openDialog(value) {
+  openDialog(value,noteLabels) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = false;
@@ -99,7 +100,7 @@ export class DisplayComponent implements OnInit {
       title: value.title,
       description: value.description,
       id: value.id,
-      color: value.color
+      color: value.color,
     }
     console.log(dialogConfig.data);
     this.dialogRef = this.dialog.open(DialogboxComponent, dialogConfig)
@@ -120,6 +121,7 @@ visibilityHover(id){
   else 
   return false;
 }
+
   showLabel($event, id) {
     const labelData={
       "noteId":[id],
@@ -127,6 +129,7 @@ visibilityHover(id){
     }
     this.noteService.postJson(labelData,'/'+id+'/addLabelToNotes/'+$event.id+'/add').subscribe((data:any) => {
       console.log("Notes after label is added",data);
+          
     })
     this.displayNotes()
     this.displayPinnedNotes()
@@ -146,7 +149,28 @@ removeLabel(id,labelId){
   this.displayPinnedNotes();
 }
 
-
+pinNotes(id){
+  const data={
+    "isPined":true,
+    "noteIdList":[id]
+  }
+  this.noteService.postJson(data,'/pinUnpinNotes').subscribe((response:any) => {
+    console.log("Unpinned is Pinned")
+  })
+  this.displayNotes()
+  this.displayPinnedNotes()
+}
+unpinNotes(id){
+  const data={
+    "isPined":false,
+    "noteIdList":[id]
+  }
+  this.noteService.postJson(data,'/pinUnpinNotes').subscribe((response:any) => {
+    console.log("Pinned is Unpinned");
+  })
+  this.displayNotes();
+  this.displayPinnedNotes()
+}
   }
 
 

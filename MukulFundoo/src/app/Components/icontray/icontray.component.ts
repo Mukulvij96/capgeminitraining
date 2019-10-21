@@ -102,6 +102,7 @@ export class IcontrayComponent implements OnInit {
     }
     this.labelService.postRequest(this.labels, 'noteLabels').subscribe((data: any) => {
       console.log("Label Has been set", data);
+      this.label.reset()
       this.getLabels();
     })
   }
@@ -109,24 +110,19 @@ export class IcontrayComponent implements OnInit {
 
     this.labelService.getRequest('noteLabels/getNoteLabelList').subscribe((data: any) => {
       this.storedLabels = data.data.details;
+      var finalLabels=this.storedLabels.filter(function (check) {
+        if (check.isDeleted == false) 
+        return true;
+      })
+      this.storedLabels=finalLabels.reverse()
+
+      // console.log("labels available" , this.storedLabels)
 
     })
   }
 @Output() checkboxEvent=new EventEmitter<String>();
 check:Boolean=false;
 selectCheckbox($event){
-//   const labels = <FormArray>this.interestFormGroup.get('labels') as FormArray;
-
-//   if($event.checked){
-//     labels.push(new FormControl($event.label.value))
-//   }
-//   else{
-//     const i=labels.controls.findIndex(x=> x.value === $event.label.value);
-//     labels.removeAt(i);
-//   }
-//   // this.checkboxEvent.emit(label);
-// console.log("Yeah",labels);  
-
 if($event.checked){
   console.log("checked");
   console.log("find",$event.source.value);

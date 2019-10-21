@@ -41,7 +41,8 @@ export class NotefieldComponent implements OnInit {
     console.log("Emitted data", this.note)
     this.noteService.postRequest(this.note, '/addNotes').subscribe((data: any) => {
       this.show()
-      this.note=null;
+      this.title.reset()
+      this.description.reset()
       this.newMessage();
       this.color = ""
       this.pin=false;

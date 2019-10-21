@@ -30,4 +30,9 @@ getRequest(options){
     } 
   return this.http.get(environment.baseurl+options,httpOptions);
 }
+
+deleteRequest(data,options){
+  
+    return this.http.delete(environment.baseurl+options,(data))
+}
 }

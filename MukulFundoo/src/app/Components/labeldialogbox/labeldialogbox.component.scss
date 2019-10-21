@@ -1,0 +1,38 @@
+.label-list-container{
+    max-height:60vh;
+    min-width:20vw;
+    padding-left:24px;
+    padding-right:24px;
+}
+.take-label-container{
+    padding:10px;   
+}
+
+.list-container{
+    padding:10px;
+}
+
+.label-item{
+    outline: none;
+    border:none;
+    padding-left:10px;
+    color: #3c4043;
+    font-size: 13px;
+    font-family: 'Roboto',arial,sans-serif;
+    height: 25px;
+    font-weight: 500;
+}
+
+.button-container{
+    padding-top:8px;
+    cursor: pointer;
+}
+.label{
+    color: #202124;
+    letter-spacing: .00625em;
+    font-family: 'Google Sans',Roboto,Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    height: 25px;
+}

@@ -3,13 +3,14 @@
         <mat-icon>list</mat-icon>
     </button>
     <img src='../../../assets/images/FundooNotes1.jpeg' fxHide.lt-md="true">
-    <mat-card fxFlex="50" fxHide.lt-sm="true" style="padding: 2px" >
-        
-            <input class="my-form" fxFlex="100" fxFlex.xs="100" fxLayout="row" FxLayoutAlign="start stretch" matinput type="search" class="search-container" id="search" placeholder="Search" appearance="outline"
-                fxHide.lt-sm="true" (keyup)="onKeyUp($event)" routerLink="/search" >
-        
+    <mat-card fxFlex="50" fxHide.lt-sm="true" style="padding: 2px">
+
+        <input class="my-form" fxFlex="100" fxFlex.xs="100" fxLayout="row" FxLayoutAlign="start stretch" matinput
+            type="search" class="search-container" id="search" placeholder="Search" appearance="outline"
+            fxHide.lt-sm="true" (keyup)="onKeyUp($event)" routerLink="/search">
+
     </mat-card>
-    
+
     <div class="icon-tray" fxFlex="15" fxFlex.xs="100" fxLayout="row" fxLayoutAlign="space-around stretch">
         <button mat-icon-button fxHide.md="true" (click)="opened = !opened">
             <mat-icon>search</mat-icon>
@@ -28,7 +29,7 @@
         <button mat-icon-button (click)="opened = !opened">
             <mat-icon>grid_on</mat-icon>
         </button>
-            <img class="image" [src]="url" [matMenuTriggerFor]="imageMenu">
+        <img class="image" [src]="url" [matMenuTriggerFor]="imageMenu">
     </div>
     <div>
         <mat-menu class="image-menu" #imageMenu="matMenu" [overlapTrigger]="false">
@@ -36,7 +37,7 @@
                 <mat-card-content class="content-container" fxFlex="75" fxLayout="row">
                     <div class="picture-container" fxFlex="50" fxLayoutAlign="space-evenly center" fxLayout="column">
                         <img class="image-button" [src]="url" (click)=openDialog()>
-                        <!-- <label class="text-label">Change</label> -->   
+                        <!-- <label class="text-label">Change</label> -->
                     </div>
                     <div fxFlex="50">
                         <p class="name-container" fxLayoutGap="6px">{{firstName}} {{lastName}}</p>
@@ -61,25 +62,27 @@
 <mat-drawer-container class="sideNav-container" fxLayout="column">
     <mat-drawer class="sideNav-drawer" #drawer mode="side">
         <mat-nav-list fxLayout="column" fxLayoutAlign="space-around stretch">
-            <button mat-icon-button (click)="displayAvailableNotes()">
+            <mat-list-item (click)="displayAvailableNotes()" (click)=drawer.toggle()>
                 <mat-icon>note</mat-icon><span>Notes</span>
-            </button>
-            <button mat-icon-button>
-                <!-- <app-display fxFlex="100" fxLayout="column wrap" fxLayoutAlign="space-evenly stretch"></app-display> -->
+            </mat-list-item>
+            <mat-list-item >
                 <mat-icon>notifications_none</mat-icon>Reminders
-            </button>
+            </mat-list-item>
             <mat-divider></mat-divider>
-            <p>Labels</p>
-            <button mat-icon-button>
-                <mat-icon>edit</mat-icon>Edit Labels
-            </button>
+            <p class="header">Labels</p>
+            <mat-nav-list *ngFor="let value of labelList">
+                <mat-list-item (click)="showLabelsNotes(value.label)" routerLink='/labelList' ><mat-icon >label_important_outline</mat-icon>{{value.label}}</mat-list-item>
+            </mat-nav-list>
+            <mat-list-item (click)="editLabels()" (click)=drawer.toggle()>
+                <mat-icon >edit</mat-icon>Edit Labels
+            </mat-list-item>
             <mat-divider></mat-divider>
-            <button mat-icon-button (click)=displayArchiveNotes()>
+            <mat-list-item mat-icon-button (click)=displayArchiveNotes() (click)=drawer.toggle()>
                 <mat-icon>archive</mat-icon>Archive
-            </button>
-            <button mat-icon-button (click)=displayTrashNotes()>
+            </mat-list-item>
+            <mat-list-item mat-icon-button (click)=displayTrashNotes() (click)=drawer.toggle()>
                 <mat-icon>delete_outline</mat-icon>Trash
-            </button>
+            </mat-list-item>
         </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content fxLayout="row" fxLayoutAlign="center start">

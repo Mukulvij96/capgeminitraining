@@ -31,6 +31,8 @@ import { UploadprofilepicComponent } from './Components/uploadprofilepic/uploadp
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { SearchpipePipe } from '../app/pipe/searchpipe.pipe';
 import { SearchbarComponent } from './Components/searchbar/searchbar.component';
+import { LabeldialogboxComponent } from './Components/labeldialogbox/labeldialogbox.component';
+import { LabelnotesdisplayComponent } from './Components/labelnotesdisplay/labelnotesdisplay.component';
 
 @NgModule({
   declarations: [
@@ -51,10 +53,12 @@ import { SearchbarComponent } from './Components/searchbar/searchbar.component';
     UploadprofilepicComponent,
     SearchpipePipe,
     SearchbarComponent,
+    LabeldialogboxComponent,
+    LabelnotesdisplayComponent,
     
    
   ],
-  entryComponents:[UploadprofilepicComponent,DialogboxComponent],
+  entryComponents:[UploadprofilepicComponent,DialogboxComponent,LabeldialogboxComponent],
   imports: [
     BrowserModule,
     routing,

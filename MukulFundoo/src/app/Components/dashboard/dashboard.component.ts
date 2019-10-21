@@ -8,6 +8,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { UploadprofilepicComponent } from '../uploadprofilepic/uploadprofilepic.component';
 import { environment } from 'src/environments/environment';
+import { LabelserviceService } from 'src/app/services/labelservice/labelservice.service';
+import { Labels } from '../models/labelModel';
+import { LabeldialogboxComponent } from '../labeldialogbox/labeldialogbox.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +25,7 @@ export class DashboardComponent implements OnInit {
   baseUrlPic=environment.baseUrlPic;
   url:any
   constructor(private noteService: NoteService, private dataService: DataserviceService, private router: Router,
-    private dialog:MatDialog,private appService:AppServiceService) { }
+    private dialog:MatDialog,private appService:AppServiceService,private labelService:LabelserviceService) { }
   message: String;
   firstName:String=''
   lastName:String=''
@@ -33,6 +36,8 @@ export class DashboardComponent implements OnInit {
     this.lastName=sessionStorage.getItem('lastName');
     this.email=sessionStorage.getItem('email');
     this.getPic()
+    this.getAllLabels();
+    this.dataService.currentMessage$.subscribe(message => this.message = message)
   }
   display: string = "";
   displayTrashNotes() {
@@ -74,5 +79,30 @@ onKeyUp(event){
   this.searchText=event.target.value;
   this.dataService.changeMessage(this.searchText);
 }
+labelList:Labels[];
+getAllLabels(){
+  this.labelService.getRequest('noteLabels/getNoteLabelList').subscribe((data:any) => {
+    this.labelList=data.data.details;
+    this.labelList=this.labelList.reverse();
+  })
+}
+private dialogRef
+editLabels(){
+  const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    console.log("Dialog box opened")
+    this.dialogRef = this.dialog.open(LabeldialogboxComponent, dialogConfig)
+}
+
+showLabelsNotes(label){
+this.newMessage(label)
+// this.noteService.postJson(data,'/getNotesListByLabel/'+label).subscribe((response:any) => {
+//   console.log("Notes in this label is " , response.data.data)
+
+}
+newMessage(labelName){
+  this.dataService.changeMessage(labelName);
+}
 }

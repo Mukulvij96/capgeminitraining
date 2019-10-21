@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter, Output, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NoteService } from 'src/app/services/appservices/app-service.service';
 import { Notes } from '../models/noteModel';
@@ -6,7 +6,7 @@ import { DataserviceService } from 'src/app/services/data services/dataservice.s
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { DisplayComponent } from '../display/display.component'
 import { NotefieldComponent } from '../notefield/notefield.component';
-
+import { Labels } from '../models/labelModel'
 @Component({
   selector: 'app-dialogbox',
   templateUrl: './dialogbox.component.html',
@@ -17,6 +17,7 @@ export class DialogboxComponent implements OnInit {
   public title = new FormControl('');
   public description = new FormControl('');
   message: String = ""
+   noteLabels:Labels[]
   constructor(private noteService: NoteService, private data: DataserviceService, private dialogRef: MatDialogRef<DisplayComponent>,
     @Inject(MAT_DIALOG_DATA) data1, ) {
     this.note = {
@@ -81,6 +82,16 @@ export class DialogboxComponent implements OnInit {
     }
     this.noteService.postJson(data, '/changesColorNotes').subscribe((data: any) => {
       console.log("Color Updated")
+    })
+  }
+  showLabels($event){
+    const labelData={
+      "noteIdList":[this.note.noteId],
+      "lableId":[$event.id]
+    }
+    this.noteService.postJson(labelData,'/'+this.note.noteId+'/addLabelToNotes/'+$event.id+'/add').subscribe((data:any) => {
+      console.log("Notes after label is added",data);
+      this.updateNotes();
     })
   }
   newMessage() {

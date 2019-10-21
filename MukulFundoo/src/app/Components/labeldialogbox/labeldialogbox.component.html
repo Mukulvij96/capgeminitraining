@@ -1,0 +1,29 @@
+<div mat-dialog-content fxLayout="column" class="label-list-container" >
+    <label class="label">Edit Labels</label>
+    <div class="take-label-container" fxLayout="row" fxLayoutAlign="space-evenly stretch">
+        <div class="button-container" (click)=deleteLabel(value.id)>
+            <mat-icon>close</mat-icon>
+        </div>
+        <div fxLayoutAlign="center center">
+            <input class="label-item" fxLayoutAlign="center" [formControl]="labelValue">
+        </div>
+        <div class="button-container">
+            <mat-icon (click)=addNewLabel()>done</mat-icon>
+        </div>
+    </div>
+    <mat-list class="list-container" fxLayout="column" *ngFor="let value of labelList">
+        <div class="item-container" fxLayout="row" fxLayoutAlign="space-evenly stretch">
+            <div class="button-container" (click)=deleteLabel(value.id)>
+                <mat-icon>close</mat-icon>
+            </div>
+            <div fxLayoutAlign="center center">
+                <input class="label-item" fxLayoutAlign="center center" value="{{value.label}}"  [formControl]="editLabel">
+            </div>
+            <div class="button-container" (click)=updateLabel(value.id)>
+                <mat-icon>done</mat-icon>
+            </div>
+        </div>
+    </mat-list>
+    <mat-divider></mat-divider>
+    <button mat-button mat-dialog-close>Done</button>
+</div>

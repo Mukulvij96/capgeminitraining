@@ -17,7 +17,7 @@ export class SearchbarComponent implements OnInit {
   ngOnInit() {
     this.searchNote();
   }
-  records:Notes[]
+  @Input() records:Notes[]
 filteredRecords:Notes[]
   searchNote(){
     this.dataService.currentMessage$.subscribe((searchText:any  ) => {
