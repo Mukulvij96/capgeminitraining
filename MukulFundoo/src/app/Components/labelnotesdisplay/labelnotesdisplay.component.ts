@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DataserviceService } from 'src/app/services/data services/dataservice.service';
 import { NoteService } from 'src/app/services/appservices/app-service.service';
 import { Notes } from '../models/noteModel'
+import { ActivatedRoute } from '@angular/router'
 @Component({
   selector: 'app-labelnotesdisplay',
   templateUrl: './labelnotesdisplay.component.html',
@@ -9,14 +10,20 @@ import { Notes } from '../models/noteModel'
 })
 export class LabelnotesdisplayComponent implements OnInit {
 
-  constructor(private dataService:DataserviceService,private noteService:NoteService) { }
-  @Input() pinnedNotes:Notes[]
-  @Input() unpinnedNotes:Notes[]
-  notes:Notes[]
+  constructor(private dataService:DataserviceService,private noteService:NoteService,private route: ActivatedRoute) { }
+   pinnedNotes:Notes[];
+   unpinnedNotes:Notes[];
+  //  unpinnedNotes:Notes[]
+  //  notes:Notes[]
   message:String;
+  labelname:any;
+  isDeleted=false;
   ngOnInit() {
     this.dataService.currentMessage$.subscribe(message => {
       this.message = message
+      this.checkLabel()
+      this.labelname = this.route.snapshot.paramMap.get('labelname');
+      sessionStorage.setItem('labelname', this.labelname);
       this.displayNotesPerLabel()
     })
   }
@@ -27,16 +34,13 @@ export class LabelnotesdisplayComponent implements OnInit {
     }
     this.noteService.postJson(data,'/getNoteslistByLabel/'+this.message).subscribe((response:any) => {
       console.log("Notes per label:" , response.data.data)
-      this.pinnedNotes=response.data.data
-      var notes=this.pinnedNotes.filter(function (check) {
-        if(check.isPined==true){
-          return true;
-        }
-        this.pinnedNotes=notes.reverse();
-         console.log("Notes Are") 
-      })
+      this.pinnedNotes=response.data.data.reverse()
+      console.log("pinnedNotes",this.pinnedNotes)
       
     })
     
+  }
+  checkLabel(){
+
   }
 }

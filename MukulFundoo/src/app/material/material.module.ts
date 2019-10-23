@@ -27,7 +27,7 @@ MatExpansionModule,
 MatTooltipModule,
 MatGridListModule,
 MatMenuModule,MatButtonModule,
-MatDialogModule,MatTabsModule
+MatDialogModule,MatTabsModule,MatButtonModule
 ],
  
 exports: [MatNativeDateModule,FormsModule,ReactiveFormsModule,
@@ -43,7 +43,7 @@ MatExpansionModule,
 MatTooltipModule,
 MatGridListModule,MatMenuModule,
 MatButtonModule,MatDialogModule,
-MatTabsModule
+MatTabsModule,MatButtonModule
 ],
  
 })

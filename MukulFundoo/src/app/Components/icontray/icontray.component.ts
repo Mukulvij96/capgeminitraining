@@ -6,6 +6,8 @@ import { FormControl } from '@angular/forms';
 import { LabelserviceService } from 'src/app/services/labelservice/labelservice.service';
 import { Labels } from '../models/labelModel';
 import { FormGroup,FormBuilder,FormArray } from '@angular/forms'
+import { DataserviceService } from 'src/app/services/data services/dataservice.service';
+
 @Component({
   selector: 'app-icontray',
   templateUrl: './icontray.component.html',
@@ -15,26 +17,27 @@ export class IcontrayComponent implements OnInit {
   note: Notes
   panelOpenState: boolean = false;
   save: Boolean = false;
-  archive: Boolean = false
+  archive: String=''
   storedLabels: Labels[]
   interestFormGroup : FormGroup
   labels:any;
   selected: any;
 
   @Output() displayNoteAfterArchive = new EventEmitter<Boolean>();
-  @Input() noteId: Notes;
+  @Input() noteId: Notes; 
   @Output() saveNote = new EventEmitter<Boolean>();
   @Output() close = new EventEmitter<Boolean>();
   @Output() colorEvent = new EventEmitter<string>();
   public label = new FormControl('');
   
-
+  message:String=""
   constructor(public vcRef: ViewContainerRef,
-    private cpService: ColorPickerService, private noteService: NoteService, private labelService: LabelserviceService, private formBuilder: FormBuilder) { }
+    private cpService: ColorPickerService, private noteService: NoteService, private labelService: LabelserviceService, private formBuilder: FormBuilder,private data:DataserviceService) { }
    
   ngOnInit() {
     this.getLabels()
-    
+    this.data.currentMessage$.subscribe(message => {
+      this.message = message;})
   }
   colorArray =
     [
@@ -86,10 +89,8 @@ export class IcontrayComponent implements OnInit {
     }
     console.log("emitted", data)
     this.noteService.postJson(data, '/archiveNotes').subscribe((data: any) => {
-      console.log("deleted note", data)
-      console.log("trash");
-      this.archive = true
-      this.displayNoteAfterArchive.emit(this.archive);
+      this.archive = "archived";
+      this.newMessage(this.archive);
     })
   }
   
@@ -135,6 +136,10 @@ if($event.checked){
 }
 changeValue(check){
   check = !check
+}
+
+newMessage(value){
+  this.data.changeMessage(value);
 }
 }
 

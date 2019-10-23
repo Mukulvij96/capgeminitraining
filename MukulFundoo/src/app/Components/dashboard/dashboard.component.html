@@ -71,13 +71,13 @@
             <mat-divider></mat-divider>
             <p class="header">Labels</p>
             <mat-nav-list *ngFor="let value of labelList">
-                <mat-list-item (click)="showLabelsNotes(value.label)" routerLink='/labelList' ><mat-icon >label_important_outline</mat-icon>{{value.label}}</mat-list-item>
+                <mat-list-item (click)="showLabelsNotes(value.label)" routerLink='/labelList' (click)=drawer.toggle() ><mat-icon >label_important_outline</mat-icon>{{value.label}}</mat-list-item>
             </mat-nav-list>
             <mat-list-item (click)="editLabels()" (click)=drawer.toggle()>
                 <mat-icon >edit</mat-icon>Edit Labels
             </mat-list-item>
             <mat-divider></mat-divider>
-            <mat-list-item mat-icon-button (click)=displayArchiveNotes() (click)=drawer.toggle()>
+            <mat-list-item mat-icon-button  (click)=displayArchiveNotes() (click)=drawer.toggle()>
                 <mat-icon>archive</mat-icon>Archive
             </mat-list-item>
             <mat-list-item mat-icon-button (click)=displayTrashNotes() (click)=drawer.toggle()>

@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
   lastName:String=''
   email:String=''
   ngOnInit() {
-    this.router.navigate(['/display'])
+    // this.router.navigate(['notes'])
     this.firstName=sessionStorage.getItem('firstName');
     this.lastName=sessionStorage.getItem('lastName');
     this.email=sessionStorage.getItem('email');
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/trash'])
   }
   displayAvailableNotes() {
-    this.router.navigate(['/display'])
+    this.router.navigate(['/notes'])
   }
   displayArchiveNotes() {
     this.router.navigate(['/archive'])

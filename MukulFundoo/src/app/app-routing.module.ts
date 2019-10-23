@@ -13,6 +13,8 @@ import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.co
 import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
 import { SearchbarComponent } from './Components/searchbar/searchbar.component';
 import { LabelnotesdisplayComponent } from './Components/labelnotesdisplay/labelnotesdisplay.component';
+import { NotesComponent } from './Components/notes/notes.component'
+
 const routes: Routes = [
 
   {
@@ -36,9 +38,10 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard], 
     children:[
+      
       {
-        path: 'display',
-        component: DisplayComponent
+        path: 'notes',
+        component: NotesComponent
       },
       {
         path: 'trash',
@@ -62,13 +65,7 @@ const routes: Routes = [
       }
     ]
   
-  },
-  
-  // otherwise redirect to home
-  {
-    path: '**',
-    redirectTo: 'login'
   }
-
+  // otherwise redirect to home
 ];
 export const routing=RouterModule.forRoot(routes);

@@ -58,7 +58,7 @@ export class DisplayComponent implements OnInit {
           return true;
       })
       this.notes = finalNotes.reverse()
-      console.log("retrieved")
+      // console.log("retrieved")
     })
   }
   displayPinnedNotes() {
@@ -70,20 +70,18 @@ export class DisplayComponent implements OnInit {
           return true;
       })
       this.pinnedNotes = finalPinnedNotes.reverse()
-        console.log("Pinned Notes",this.pinnedNotes)
+        // console.log("Pinned Notes",this.pinnedNotes)
     })
   }
   display($event) {
     this.displayNotes();
     this.displayPinnedNotes()
   }
-  displayArch($event) {
-    this.displayNotes()
-    this.displayPinnedNotes()
-  }
+  
+
   checkNotes() {
     console.log(this.message);
-    if (this.message == "Note Added")
+    if (this.message == "Note Added" )
       this.displayNotes();
     this.displayPinnedNotes()
     this.message = ""

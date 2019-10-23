@@ -11,8 +11,8 @@ import { Notes } from '../models/noteModel'
 export class SearchbarComponent implements OnInit {
 
   searchText:any;
-  
-  constructor(private dataService:DataserviceService,private noteService:NoteService,private filterPipe:SearchpipePipe) { }
+ filterPipe:SearchpipePipe=new SearchpipePipe()
+  constructor(private dataService:DataserviceService,private noteService:NoteService) { }
 
   ngOnInit() {
     this.searchNote();

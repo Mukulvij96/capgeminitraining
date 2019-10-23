@@ -33,6 +33,8 @@ import { SearchpipePipe } from '../app/pipe/searchpipe.pipe';
 import { SearchbarComponent } from './Components/searchbar/searchbar.component';
 import { LabeldialogboxComponent } from './Components/labeldialogbox/labeldialogbox.component';
 import { LabelnotesdisplayComponent } from './Components/labelnotesdisplay/labelnotesdisplay.component';
+import { DataserviceService } from './services/data services/dataservice.service';
+import { NotesComponent } from './Components/notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -55,8 +57,7 @@ import { LabelnotesdisplayComponent } from './Components/labelnotesdisplay/label
     SearchbarComponent,
     LabeldialogboxComponent,
     LabelnotesdisplayComponent,
-    
-   
+    NotesComponent,
   ],
   entryComponents:[UploadprofilepicComponent,DialogboxComponent,LabeldialogboxComponent],
   imports: [
@@ -74,7 +75,7 @@ import { LabelnotesdisplayComponent } from './Components/labelnotesdisplay/label
     ImageCropperModule
     
   ],
-  providers: [AppServiceService,NoteService,AuthGuard],
+  providers: [AppServiceService,NoteService,AuthGuard,DataserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
