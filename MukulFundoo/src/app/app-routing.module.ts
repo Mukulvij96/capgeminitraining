@@ -62,7 +62,8 @@ const routes: Routes = [
       {
         path:'labelList',
         component:LabelnotesdisplayComponent
-      }
+      },
+      { path: '**', redirectTo: 'notes' }
     ]
   
   }

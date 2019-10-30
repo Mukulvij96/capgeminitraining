@@ -11,16 +11,13 @@ import { identifierModuleUrl } from '@angular/compiler';
 })
 export class ArchivenotesComponent implements OnInit {
   
- 
   archivedNotes:Notes[]
+  component:string="archive"  
   message:String=''
   constructor(private noteService:NoteService,private data:DataserviceService) { }
 
   ngOnInit() {
-    this.data.currentMessage$.subscribe( message => {
-      this.message=message;
-      this.checkArchive()
-    })
+   
     this.displayNotes()
    
   }
@@ -32,36 +29,10 @@ export class ArchivenotesComponent implements OnInit {
         return true;
       })
       this.archivedNotes=finalNotes.reverse();
-      console.log("Archived Notes" ,this.archivedNotes)
-    })
-}
-// unarchiveNote($event,id){
-//   const data = {
-//     "noteIdList": [id],
-//     "isArchived": false
-//   }
-//   console.log("emitted", data)
-//   this.noteService.postJson(data,'/archiveNotes').subscribe((data: any) => {
-//     console.log("Unarchived note", data)
-//     this.displayNotes();    
-// })
-// }
-// deleteNote($event,id){
-//   const data={
-//     "noteIdList":[id],
-//     "isArchived":false,
-//     "isDeleted":true
-//   }
-//   this.noteService.postJson(data,'/trashNotes').subscribe((data:any) => {
-//     console.log("Deleted Note", data)
-//     this.displayNotes()
-   
-//   })
-// }
+      return this.archivedNotes;
+})
+  }
+ 
 
-checkArchive(){
-if(this.message=="archived"){
-  this.displayNotes();
-}
-}
+
 }

@@ -25,7 +25,6 @@ import { DisplayComponent } from './Components/display/display.component';
 import { TrashnotesComponent } from './Components/trashnotes/trashnotes.component';
 import { TrashoptionComponent } from './Components/trashoption/trashoption.component';
 import { ArchivenotesComponent } from './Components/archivenotes/archivenotes.component';
-import { ArchiveoptionComponent } from './Components/archiveoption/archiveoption.component';
 import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
 import { UploadprofilepicComponent } from './Components/uploadprofilepic/uploadprofilepic.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -50,7 +49,7 @@ import { NotesComponent } from './Components/notes/notes.component';
     TrashnotesComponent,
     TrashoptionComponent,
     ArchivenotesComponent,
-    ArchiveoptionComponent,
+    
     DialogboxComponent,
     UploadprofilepicComponent,
     SearchpipePipe,

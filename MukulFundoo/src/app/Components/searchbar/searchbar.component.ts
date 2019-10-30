@@ -12,13 +12,14 @@ export class SearchbarComponent implements OnInit {
 
   searchText:any;
  filterPipe:SearchpipePipe=new SearchpipePipe()
+ component:String="search"
   constructor(private dataService:DataserviceService,private noteService:NoteService) { }
 
   ngOnInit() {
     this.searchNote();
   }
   @Input() records:Notes[]
-filteredRecords:Notes[]
+filteredRecords:any
   searchNote(){
     this.dataService.currentMessage$.subscribe((searchText:any  ) => {
       this.searchText = searchText
@@ -30,6 +31,7 @@ filteredRecords:Notes[]
       // this.records=this.filterDeleted(this.records);
       this.filteredRecords=this.filterPipe.transform(this.records,this.searchText);
       console.log("here",this.filteredRecords);
+      
     }, (error) => {
       console.log(error);
     });

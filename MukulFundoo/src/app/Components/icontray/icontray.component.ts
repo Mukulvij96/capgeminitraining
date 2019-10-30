@@ -17,11 +17,28 @@ export class IcontrayComponent implements OnInit {
   note: Notes
   panelOpenState: boolean = false;
   save: Boolean = false;
-  archive: String=''
+  archive: Boolean=false
   storedLabels: Labels[]
   interestFormGroup : FormGroup
   labels:any;
   selected: any;
+
+  pickedDate = new FormControl(new Date());
+  minDate=new Date();
+ 
+  reminderList = [
+    {"Day": "Later Today", "Time": "20:00", "dayCount": 0, "timeCount": 20 },
+    {"Day": "Tomorrow", "Time": "08:00", "dayCount": 1, "timeCount": 8},
+    {"Day": "Next Week", "Time": "08:00", "dayCount": 7, "timeCount": 8 }
+  ]
+  timeList = [
+    { "title": "Morning", "time": "08:00","timeCount":8 },
+    { "title": "AfterNoon", "time": "13:00","timeCount":13 },
+    { "title": "Evening", "time": "18:00","timeCount":18 },
+    { "title": "Night", "time": "20:00","timeCount":20 }]
+    timeSelected:any;
+    dayCount:number=0;
+    timeCount:number=0;
 
   @Output() displayNoteAfterArchive = new EventEmitter<Boolean>();
   @Input() noteId: Notes; 
@@ -62,6 +79,7 @@ export class IcontrayComponent implements OnInit {
 
   @Output() displayNoteAfterDelete = new EventEmitter<Boolean>();
   delete: Boolean = false;
+  deleted:String=''
   deleteNotes() {
     console.log(this.noteId);
     const data = {
@@ -74,6 +92,8 @@ export class IcontrayComponent implements OnInit {
       console.log("trash");
       this.delete = true
       this.displayNoteAfterDelete.emit(this.delete);
+      this.deleted="deleted"
+      this.newMessage(this.deleted);
     })
   }
 
@@ -82,18 +102,36 @@ export class IcontrayComponent implements OnInit {
     this.colorEvent.emit(newColor);
     console.log("color", color);
   }
+  archived:Boolean=true;
   archiveNotes() {
+    
     const data = {
       "noteIdList": [this.noteId],
-      "isArchived": true
+      "isArchived": true,
+      "isDeleted":false
     }
-    console.log("emitted", data)
+    // console.log("emitted", data)
     this.noteService.postJson(data, '/archiveNotes').subscribe((data: any) => {
-      this.archive = "archived";
-      this.newMessage(this.archive);
+      this.archive =true;
+      this.displayNoteAfterArchive.emit(this.archive)
+      this.archived = !this.archived
     })
   }
   
+  unarchiveNotes(){
+    const data = {
+          "noteIdList": [this.noteId],
+          "isArchived": false
+        }
+        // console.log("emitted", data)
+        this.noteService.postJson(data,'/archiveNotes').subscribe((data: any) => {
+          console.log("Unarchived note", data)
+          this.archive=true
+          this.displayNoteAfterArchive.emit(this.archive)
+          this.archived = !this.archived
+         
+  })
+}
   createLabel() {
     this.labels = {
       label: this.label.value,
@@ -117,8 +155,6 @@ export class IcontrayComponent implements OnInit {
       })
       this.storedLabels=finalLabels.reverse()
 
-      // console.log("labels available" , this.storedLabels)
-
     })
   }
 @Output() checkboxEvent=new EventEmitter<String>();
@@ -141,7 +177,44 @@ changeValue(check){
 newMessage(value){
   this.data.changeMessage(value);
 }
+
+printDate() {
+  console.log(this.pickedDate.value);
 }
+reminderAdd(reminder){
+  //console.log("this is picked date"+this.pickedDate,"this is picked time",this.timeSelected,this.note['id'] )
+  //this.timeCount=this.timeSelected  
+
+  
+  let data={
+    "noteIdList":[this.noteId],
+    "reminder": new Date(this.pickedDate.value.getFullYear(), this.pickedDate.value.getMonth(),
+      this.pickedDate.value.getDate() + reminder.dayCount, reminder.timeCount, 0, 0, 0)
+  }
+  this.noteService.postJson(data,'/addUpdateReminderNotes').subscribe((data:any)=>{
+ 
+    this.data.changeMessage("Note Edited")
+  });
+  
+}
+reminderAddPicked(){
+  console.log(this.timeSelected)
+  let data={
+    "noteIdList":[this.noteId],
+    "reminder": new Date(this.pickedDate.value.getFullYear(), this.pickedDate.value.getMonth(),
+    this.pickedDate.value.getDate() , this.timeSelected.timeCount, 0, 0, 0)
+  }
+console.log("Sending Data",data)
+  this.noteService.postJson(data,'/addUpdateReminderNotes').subscribe((data:any)=>{
+    
+    this.data.changeMessage("Note Edited")
+  });
+
+}
+
+}
+
+
 
 
 

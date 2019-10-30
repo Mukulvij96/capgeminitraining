@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem("lastName",data.lastName)
       sessionStorage.setItem("email",data.email)
       console.log("Login Successful")
-      this.routing.navigate([''])
+      this.routing.navigate(['/notes'])
 
     })
 

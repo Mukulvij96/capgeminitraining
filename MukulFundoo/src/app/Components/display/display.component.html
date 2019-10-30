@@ -1,8 +1,9 @@
+<div *ngIf="componentNotesOrlabels()">
 <p class="header">PINNED</p>
 <div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start">
-  <mat-card fxFlex="30" *ngFor="let value of pinnedNotes" class="grid-item" fxLayout="column"
-    fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseover)=hover(value.id)
-    (mouseout)=hover(value.id)>
+  <mat-card fxFlex="30" *ngFor="let value of pinedNotes" class="grid-item" fxLayout="column"
+    fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseover)=hoverIn(value)
+    (mouseout)=hoverOut()>
     <div fxFlex="70">
       <div fxLayout="row" fxLayoutAlign="space-evenly stretch">
         <div>
@@ -15,14 +16,14 @@
       </div>
       <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}</mat-card-content>
     </div>
-    <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
+    <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start"  (mouseover)="hoverOnLabel(label)"  (mouseout)="hoverOutLabel()">
       <label *ngFor="let labels of value.noteLabels"  class="label-item"
-        [ngStyle]='{background:value.color}'>{{labels.label}}
+        [ngStyle]='{background:value.color}' [style.visibility]="labelHoverCheck(label,value) ? 'visible' : 'hidden'" >{{labels.label}}
         <mat-icon class="close-icon" (click)=removeLabel(value.id,labels.id)>close</mat-icon>
       </label>
     </div>
     <mat-card-footer fxFlex="15" [style.visibility]="{ visibility:value.id==hoverId ? 'visibile' : 'hidden'}">
-      <app-icontray [noteId]="value.id" (displayNoteAfterDelete)="display($event)"
+      <app-icontray [noteId]="value.id" (displayNoteAfterDelete)="displayDeleted($event)"
         (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"
         (checkboxEvent)=showLabel($event,value.id)></app-icontray>
     </mat-card-footer>
@@ -30,7 +31,7 @@
 </div>
 <p class="header">OTHERS</p>
 <div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start">
-  <mat-card fxFlex="30" *ngFor="let value of notes; let i = index" class="grid-item" fxLayout="column"
+  <mat-card fxFlex="30" *ngFor="let value of unpinedNotes; let i = index" class="grid-item" fxLayout="column"
     fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}'>
     <div fxFlex="70">
       <div fxLayout="row" fxLayoutAlign="space-evenly stretch">
@@ -55,4 +56,35 @@
         (checkboxEvent)=showLabel($event,value.id)></app-icontray>
     </mat-card-footer>
   </mat-card>
+</div>
+</div>
+
+<div *ngIf="componentSearch()" >
+  <div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start">
+    <mat-card fxFlex="30" *ngFor="let value of searchedNotes; let i = index" class="grid-item" fxLayout="column"
+      fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}'>
+      <div fxFlex="70">
+        <div fxLayout="row" fxLayoutAlign="space-evenly stretch">
+          <div>
+            <mat-card-title fxLayout="row wrap" (click)="openDialog(this.value)">{{value.title}}</mat-card-title>
+          </div>
+          <!-- <div fxLayoutAlign="center center">
+            <img style="height: 15px"  src="../../../assets/images/icons8-pin-50.png" (click)=pinNotes(value.id)>
+          </div> -->
+        </div>
+        <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}</mat-card-content>
+      </div>
+      <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
+        <label *ngFor="let labels of value.noteLabels" class="label-item"
+          [ngStyle]='{background:value.color}'>{{labels.label}} <mat-icon class="close-icon"
+            (click)=removeLabel(value.id,labels.id)>close</mat-icon>
+        </label>
+      </div>
+      <mat-card-footer fxFlex="15">
+        <app-icontray [noteId]="value.id" (displayNoteAfterDelete)="display($event)"
+          (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"
+          (checkboxEvent)=showLabel($event,value.id)></app-icontray>
+      </mat-card-footer>
+    </mat-card>
+  </div>
 </div>

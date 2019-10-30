@@ -2,9 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataserviceService } from '../../services/data services/dataservice.service'
 import { NoteService, AppServiceService } from '../../services/appservices/app-service.service'
 import { Notes } from '../models/noteModel'
-import { routing } from '../../app-routing.module'
-import { Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { Router } from '@angular/router';;
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { UploadprofilepicComponent } from '../uploadprofilepic/uploadprofilepic.component';
 import { environment } from 'src/environments/environment';
@@ -31,7 +29,8 @@ export class DashboardComponent implements OnInit {
   lastName:String=''
   email:String=''
   ngOnInit() {
-    // this.router.navigate(['notes'])
+    
+    console.log("On Dashboard")
     this.firstName=sessionStorage.getItem('firstName');
     this.lastName=sessionStorage.getItem('lastName');
     this.email=sessionStorage.getItem('email');
