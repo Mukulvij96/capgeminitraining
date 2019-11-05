@@ -7,6 +7,8 @@ import { LabelserviceService } from 'src/app/services/labelservice/labelservice.
 import { Labels } from '../models/labelModel';
 import { FormGroup,FormBuilder,FormArray } from '@angular/forms'
 import { DataserviceService } from 'src/app/services/data services/dataservice.service';
+import { MatDialog } from '@angular/material';
+import { CollaboratorComponent } from '../collaborator/collaborator.component';
 
 @Component({
   selector: 'app-icontray',
@@ -14,7 +16,7 @@ import { DataserviceService } from 'src/app/services/data services/dataservice.s
   styleUrls: ['./icontray.component.scss']
 })
 export class IcontrayComponent implements OnInit {
-  note: Notes
+  @Input() note: Notes
   panelOpenState: boolean = false;
   save: Boolean = false;
   archive: Boolean=false
@@ -48,7 +50,7 @@ export class IcontrayComponent implements OnInit {
   public label = new FormControl('');
   
   message:String=""
-  constructor(public vcRef: ViewContainerRef,
+  constructor(public vcRef: ViewContainerRef,private dialog:MatDialog,
     private cpService: ColorPickerService, private noteService: NoteService, private labelService: LabelserviceService, private formBuilder: FormBuilder,private data:DataserviceService) { }
    
   ngOnInit() {
@@ -182,9 +184,6 @@ printDate() {
   console.log(this.pickedDate.value);
 }
 reminderAdd(reminder){
-  //console.log("this is picked date"+this.pickedDate,"this is picked time",this.timeSelected,this.note['id'] )
-  //this.timeCount=this.timeSelected  
-
   
   let data={
     "noteIdList":[this.noteId],
@@ -210,6 +209,18 @@ console.log("Sending Data",data)
     this.data.changeMessage("Note Edited")
   });
 
+}
+
+addCollaborator(){
+  
+  let dialogref = this.dialog.open(CollaboratorComponent,{
+    data : {
+      note:this.note     
+    }
+  });
+  dialogref.afterClosed().subscribe(result=> {
+    //console.log("dialog result ", result);
+  })
 }
 
 }

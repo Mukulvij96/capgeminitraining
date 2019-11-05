@@ -34,6 +34,10 @@ import { LabeldialogboxComponent } from './Components/labeldialogbox/labeldialog
 import { LabelnotesdisplayComponent } from './Components/labelnotesdisplay/labelnotesdisplay.component';
 import { DataserviceService } from './services/data services/dataservice.service';
 import { NotesComponent } from './Components/notes/notes.component';
+import { CollaboratorComponent } from './Components/collaborator/collaborator.component';
+import { HttpserviceService } from './services/httpservice/httpservice.service';
+import { LabelserviceService } from './services/labelservice/labelservice.service';
+import { NotesService } from './services/noteservices/note-service.service';
 
 @NgModule({
   declarations: [
@@ -57,8 +61,9 @@ import { NotesComponent } from './Components/notes/notes.component';
     LabeldialogboxComponent,
     LabelnotesdisplayComponent,
     NotesComponent,
+    CollaboratorComponent,
   ],
-  entryComponents:[UploadprofilepicComponent,DialogboxComponent,LabeldialogboxComponent],
+  entryComponents:[UploadprofilepicComponent,DialogboxComponent,LabeldialogboxComponent,CollaboratorComponent],
   imports: [
     BrowserModule,
     routing,
@@ -74,7 +79,7 @@ import { NotesComponent } from './Components/notes/notes.component';
     ImageCropperModule
     
   ],
-  providers: [AppServiceService,NoteService,AuthGuard,DataserviceService],
+  providers: [AppServiceService,NoteService,AuthGuard,DataserviceService,HttpserviceService,LabelserviceService,NotesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

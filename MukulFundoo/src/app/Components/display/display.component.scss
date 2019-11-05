@@ -27,17 +27,24 @@
 .label-container{
   padding-top: 5px;
   padding-bottom:5px;
-  width:17vw;
+  width:inherit;
   height:inherit;
 }
-.label-item{
-  padding-left:2px;
-  padding-top:2px;
-border-radius: 25%;
-font-size:12px;
-cursor: pointer;
-filter: brightness(80%);
+::ng-deep.label-item{
+  margin:3px;
+  //background-color: rgb(230, 223, 223);
+  border-radius: 20px;
+ //max-width:70px;
+ width: inherit;
+ height: 20px;
+ line-height: 17px;
+ filter: brightness(85%);
+ 
+ .mat-button-wrapper {
+ padding: 0px;
+ line-height: 18px;
 
+}
 }
 .close-icon{
   font-size:10px;

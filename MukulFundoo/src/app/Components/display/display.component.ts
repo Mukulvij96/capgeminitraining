@@ -82,6 +82,25 @@ export class DisplayComponent implements OnInit {
     this.displayPinnedNotes()
   }
 
+  hoverIn(note){
+    this.hoverDiv={
+      "noteId":note.id
+    }
+  }
+
+  hoverOut(note){
+    this.hoverDiv={}
+  }
+  isFootVisible(note){
+
+    if(note!=undefined && this.hoverDiv != undefined)
+    if(note.id==this.hoverDiv.noteId)
+    return true;
+    else 
+    return false;
+
+  }
+
   checkNotes() {
     console.log(this.message);
     if (this.message == "Note Added")
@@ -113,19 +132,7 @@ export class DisplayComponent implements OnInit {
         this.displayPinnedNotes()
       });
   }
-  hoverOnLabel(label){
-    //console.log(label)
-      this.hoverLabel=label.id;
-  }
-  hoverOutLabel(){
-    this.hoverLabel="";
-  }
-  labelHoverCheck(label,value){
-      if(this.hoverLabel==label.id && this.hoverDiv.noteid==value.id)
-        return true;
-        else
-        return false;
-  }
+ 
 
   showLabel($event, id) {
     const labelData = {
@@ -194,21 +201,20 @@ export class DisplayComponent implements OnInit {
     else return false;
   }
 
-  // removeReminder(note) {
+  removeReminder(note) {
   
-  //   this.noteService.deleteReminder(
-  //     {
-  //       "noteIdList": [note.id]
-  //     })
-  //     .subscribe(
-  //       (data) => {
-  //         this.snackbar.open('Reminder Deleted')
-  //         this.displayNotes();
-  //       },
-  //       error => {
-  //         this.snackbar.open('Error deleting reminder', 'Retry')
-  //       })
-  // }
+    const data={
+      "noteIdList":[note.id]
+    }
+    this.noteService.postJson(data,'/removeReminderNotes').subscribe((data) => {
+          this.snackbar.open('Reminder Deleted')
+          this.displayNotes();
+          this.displayPinnedNotes()
+        },
+        error => {
+          this.snackbar.open('Error deleting reminder', 'Retry')
+        })
+  }
 }
 
 
