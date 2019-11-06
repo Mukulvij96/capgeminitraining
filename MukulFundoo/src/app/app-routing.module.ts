@@ -14,9 +14,14 @@ import { DialogboxComponent } from './Components/dialogbox/dialogbox.component';
 import { SearchbarComponent } from './Components/searchbar/searchbar.component';
 import { LabelnotesdisplayComponent } from './Components/labelnotesdisplay/labelnotesdisplay.component';
 import { NotesComponent } from './Components/notes/notes.component'
+import { CartComponent } from './Components/cart/cart.component';
+import { RemindernotesComponent } from './Components/remindernotes/remindernotes.component';
 
 const routes: Routes = [
-
+  {
+    path: 'cart',
+    component: CartComponent
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -36,12 +41,16 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    canActivate: [AuthGuard], 
-    children:[
-      
+    canActivate: [AuthGuard],
+    children: [
+
       {
         path: 'notes',
         component: NotesComponent
+      },
+      {
+        path:'reminder',
+        component:RemindernotesComponent
       },
       {
         path: 'trash',
@@ -51,22 +60,22 @@ const routes: Routes = [
         path: 'archive',
         component: ArchivenotesComponent,
       },
-      { 
+      {
         path: 'dialogbox',
         component: DialogboxComponent
       },
       {
         path: 'search',
-        component:SearchbarComponent
+        component: SearchbarComponent
       },
       {
-        path:'labelList',
-        component:LabelnotesdisplayComponent
+        path: 'labelList',
+        component: LabelnotesdisplayComponent
       },
       { path: '**', redirectTo: 'notes' }
     ]
-  
+
   }
   // otherwise redirect to home
 ];
-export const routing=RouterModule.forRoot(routes);
+export const routing = RouterModule.forRoot(routes);

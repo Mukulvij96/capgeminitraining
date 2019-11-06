@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms'
 import { AppServiceService } from '../../services/appservices/app-service.service'
 import { Router, RouterLink } from '@angular/router';
+import { DataserviceService } from 'src/app/services/data services/dataservice.service';
 
 @Component({
   selector: 'app-register',
@@ -18,10 +19,27 @@ export class RegisterComponent implements OnInit {
   public email = new FormControl('', [Validators.required, Validators.email]);
   public password = new FormControl('', [Validators.required, Validators.minLength(8)])
   public confirmPassword = new FormControl('', [Validators.required, Validators.minLength(8)])
-  constructor(private appService: AppServiceService,private routing:Router) { }
-
+  constructor(private appService: AppServiceService,private routing:Router,private data:DataserviceService) { }
+  message:string;
+  advanceColor:String="white";
+  basicColor:String="white";
   ngOnInit() {
+    this.data.currentMessage$.subscribe(message => {
+      this.message = message
+      this.checkSelectedService();
+    })
+    
+  
   }
+  checkSelectedService(){
+    if(this.message=="advance")
+      this.advanceColor="gold"
+      else{
+        this.basicColor="gold"
+      }
+  }
+
+
   getEmailInvalidMessage() {
     return this.email.hasError('required') ? 'You must enter a value' :
       this.email.hasError('email') ? 'Not a valid email' : '';
@@ -44,11 +62,12 @@ validate(fname,lname,email,pass,password,confirmPassword){
   return false
 }
   registerUser(firstName,lastName,email,confirmPassword){
+    // console.log(this.message)
     let user=
     {
       "firstName":firstName,
       "lastName": lastName,
-      "service":"advance",
+      "service":this.message,
       "email": email,
       "password":confirmPassword ,
       

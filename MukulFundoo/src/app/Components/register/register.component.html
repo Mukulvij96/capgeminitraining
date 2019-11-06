@@ -1,5 +1,5 @@
-<div class="bod" fxFlex="100" fxLayoutAlign="center center">
-    <mat-card fxFlex="40" fxFlex.xs="100" class="register-container" fxLayout="column"
+<div class="bod"  fxLayoutAlign="center center">
+    <mat-card  fxFlex.xs="100" class="register-container"  fxLayout="column"
         fxLayoutAlign="space-around stretch">
         <mat-card-content class="fundooNotesLogo" fxFlex="10" fxLayoutAlign="space-around center">
             <img src="../../../assets/images/FundooNotes.jpeg">
@@ -37,10 +37,44 @@
                         <mat-label>Confirm Password</mat-label>
                         <input matInput name="confirmPassword" [formControl]="confirmPassword"
                             [type]="hide ? 'password' : 'text'">
-                        <mat-error *ngIf="password.invalid || password.value!=confirmPassword.value">{{getMatchedPasswordsMessage()}} </mat-error>
+                        <mat-error *ngIf="password.invalid || password.value!=confirmPassword.value">
+                            {{getMatchedPasswordsMessage()}} </mat-error>
                     </mat-form-field>
                 </mat-card-content>
             </form>
+
+            <div class="card-container" fxLayout="row" fxLayoutAlign="space-evenly center">
+                <mat-card [style.backgroundColor]="advanceColor" class="mat-card-container" >
+                    <mat-card-title class="title">
+                        price $99:price per month
+                    </mat-card-title>
+                    <p class="service">advance</p>
+                    <div>
+                        <mat-list class="list">
+                            <mat-list-item class="listItem">$99/month</mat-list-item>
+                            <mat-list-item class="listItem">Ability to add title, description, images, labels, checklist
+                                and
+                                colors
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                </mat-card>
+                <mat-card class="mat-card-container" [style.backgroundColor]="basicColor" >
+                    <mat-card-title class="title">
+                        price $45:price per month
+                    </mat-card-title>
+                    <p class="service">basic</p>
+                    <div>
+                        <mat-list class="list">
+                            <mat-list-item class="listItem">$45/month</mat-list-item>
+                            <mat-list-item class="listItem">Ability to add only title and description
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                </mat-card>
+
+            </div>
+
             <mat-card-actions class="button" fxLayout="row" fxLayoutAlign="space-around center">
                 <a [routerLink]="['./login']">Sign in instead</a>
                 <button mat-raised-button [disabled]="validate()"
@@ -48,4 +82,5 @@
             </mat-card-actions>
         </mat-card-content>
     </mat-card>
+
 </div>

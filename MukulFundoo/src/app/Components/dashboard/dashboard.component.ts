@@ -51,7 +51,9 @@ export class DashboardComponent implements OnInit {
   search(){
     this.searchText;
   }
-
+  displayReminderNotes(){
+    this.router.navigate(['/reminder'])
+  }
   logout(){
   sessionStorage.removeItem('id')
 this.router.navigate(['/login'])
@@ -103,5 +105,24 @@ this.newMessage(label)
 }
 newMessage(labelName){
   this.dataService.changeMessage(labelName);
+}
+
+view:string=""
+changeView(){
+this.view="list"
+  this.dataService.changeMessage(this.view)
+}
+changeBack(){
+  this.view="grid"
+  this.dataService.changeMessage(this.view)
+}
+show:boolean=true;
+changeIcon(){
+  this.show = !this.show
+}
+
+full:boolean=false;
+extendSearchBar(){
+  this.full = !this.full
 }
 }

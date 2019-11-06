@@ -16,7 +16,7 @@ export class DisplayComponent implements OnInit {
 
   constructor(private noteService: NoteService, private data: DataserviceService, private dialog: MatDialog, private snackbar: SnackbarService) { }
   message: String = ""
-
+  flex:number;
   reminders:any;
   hoverLabel: any
   hoverDiv:any;
@@ -28,10 +28,12 @@ export class DisplayComponent implements OnInit {
   @Input() unpinedNotes: Notes[]
   @Input() component: string
   @Input() searchedNotes: Notes[];
+  @Input() reminderNotes:Notes[];
   ngOnInit() {
     this.data.currentMessage$.subscribe(message => {
       this.message = message;
       console.log("Message recieved ", message)
+      this.view()
       this.checkNotes();
     })
     this.displayNotes();
@@ -195,7 +197,7 @@ export class DisplayComponent implements OnInit {
 
   componentSearch() {
     //console.log("inside search",this.component,this.searchedNotes)
-    if (this.component == "search" || this.component == "archived") {
+    if (this.component == "search" || this.component == "archive") {
       return true
     }
     else return false;
@@ -214,6 +216,24 @@ export class DisplayComponent implements OnInit {
         error => {
           this.snackbar.open('Error deleting reminder', 'Retry')
         })
+  }
+
+  view(){
+    if(this.message=="list"){
+      this.flex=100;
+      return true;
+    }
+   if(this.message=="grid"){
+     this.flex=30;
+     return true;
+   }
+  }
+
+  componentReminder(){
+    // console.log("Inside reminder")
+    if(this.component=="reminder")
+    return true;
+    else return false;
   }
 }
 

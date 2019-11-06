@@ -38,6 +38,8 @@ import { CollaboratorComponent } from './Components/collaborator/collaborator.co
 import { HttpserviceService } from './services/httpservice/httpservice.service';
 import { LabelserviceService } from './services/labelservice/labelservice.service';
 import { NotesService } from './services/noteservices/note-service.service';
+import { CartComponent } from './Components/cart/cart.component';
+import { RemindernotesComponent } from './Components/remindernotes/remindernotes.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { NotesService } from './services/noteservices/note-service.service';
     LabelnotesdisplayComponent,
     NotesComponent,
     CollaboratorComponent,
+    CartComponent,
+    RemindernotesComponent,
   ],
   entryComponents:[UploadprofilepicComponent,DialogboxComponent,LabeldialogboxComponent,CollaboratorComponent],
   imports: [

@@ -163,7 +163,7 @@ export class NotesService {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': localStorage.getItem('id')
+        'Authorization': sessionStorage.getItem('id')
       })
     };
     return this.http.get(this.link + "notes/"+url, httpOptions);
@@ -181,4 +181,6 @@ export class NotesService {
   deleteReminder(body) {
     return this.httpService.postJSON('notes/removeReminderNotes', body)
   }
+
+ 
   }
