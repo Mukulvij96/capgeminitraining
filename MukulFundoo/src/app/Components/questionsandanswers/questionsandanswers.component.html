@@ -1,0 +1,63 @@
+<div *ngIf="time.length ==0" fxLayout="column">
+    <div>
+        <mat-card [ngStyle]='{background:this.color}'>
+            <h1>{{this.title}}</h1>
+            <p fxLayout="row wrap">{{this.description}}</p>
+        </mat-card>
+    </div>
+    <div class="heading">
+        <p>Ask a Question</p>
+    </div>
+
+    <div class="editor-box" fxFlex="100" [froalaEditor] [(froalaModel)]="questionText">
+    </div>
+    <button mat-raised-button (click)=questionInput()>Submit</button>
+</div>
+
+<div *ngIf="time.length>0" fxLayout="column">
+    <div>
+        <mat-card [ngStyle]='{background:this.color}'>
+            <h1>{{this.title}}</h1>
+            <p>{{this.description}}</p>
+        </mat-card>
+    </div>
+
+    <div>
+        <h3>Questions and Answers</h3>
+        <div fxLayout="column">
+            <div *ngFor="let time of time" fxLayout="row">
+                <img  *ngIf="time.isApproved==true && url != undefined" class="image-button" [src]="url">
+                <button mat-mini-fab *ngIf="time.isApproved==true && url==undefined" >I</button> 
+                <div  *ngIf="time.isApproved==true" fxLayout="column">
+                    <div fxLayout="row" fxLayoutGap="2px">
+                        <div style="font-size: 10px;" [froalaView]="time.user.firstName | titlecase"></div>
+                        <div style="font-size: 10px;" [froalaView]="time.user.lastName | titlecase"></div>
+                        <div style="font-size: 10px;" [froalaView]="time.modifiedDate | date:'short'"></div>
+                    </div>
+                    <div class="container" fxLayout="row wrap">
+                        <div class="message-container" fxLayout="row wrap" [froalaView]="time.message">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div *ngIf="time.isApproved==true">
+                    <mat-icon class="reply-icon" (click)=openEditor()>reply</mat-icon>
+                </div>
+                <div  *ngIf="time.isApproved==true">
+                   <app-like [parent]="time"></app-like>
+                </div>
+                <div *ngIf="time.isApproved==true">
+                        <bar-rating [(rate)]="rate" [max]="5"></bar-rating>
+                </div>
+            </div>
+            <div *ngIf="open" class="editor-box" fxFlex="100" [froalaEditor] [(froalaModel)]="questionText">
+                    
+            </div>
+            <button *ngIf="open" mat-raised-button (click)=close(this.time[0].id)>Submit</button>
+            
+        </div><br>
+
+    </div>
+
+</div>

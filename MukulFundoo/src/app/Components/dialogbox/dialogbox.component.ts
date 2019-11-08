@@ -23,7 +23,7 @@ export class DialogboxComponent implements OnInit {
     this.note = {
       description: data1.description,
       title: data1.title,
-      noteId: data1.id,
+      id: data1.id,
       color: data1.color
     }
   }
@@ -62,7 +62,7 @@ export class DialogboxComponent implements OnInit {
     const data = {
       title: this.newTitle,
       description: this.newDescription,
-      noteId: this.note.noteId,
+      noteId: this.note.id,
       color: this.note.color
     }
 
@@ -78,7 +78,7 @@ export class DialogboxComponent implements OnInit {
     this.note.color = $event;
     const data = {
       color: $event,
-      "noteIdList": [this.note.noteId]
+      "noteIdList": [this.note.id]
     }
     this.noteService.postJson(data, '/changesColorNotes').subscribe((data: any) => {
       console.log("Color Updated")
@@ -86,10 +86,10 @@ export class DialogboxComponent implements OnInit {
   }
   showLabels($event){
     const labelData={
-      "noteIdList":[this.note.noteId],
+      "noteIdList":[this.note.id],
       "lableId":[$event.id]
     }
-    this.noteService.postJson(labelData,'/'+this.note.noteId+'/addLabelToNotes/'+$event.id+'/add').subscribe((data:any) => {
+    this.noteService.postJson(labelData,'/'+this.note.id+'/addLabelToNotes/'+$event.id+'/add').subscribe((data:any) => {
       console.log("Notes after label is added",data);
       this.updateNotes();
     })

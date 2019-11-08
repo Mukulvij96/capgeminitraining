@@ -40,6 +40,10 @@ import { LabelserviceService } from './services/labelservice/labelservice.servic
 import { NotesService } from './services/noteservices/note-service.service';
 import { CartComponent } from './Components/cart/cart.component';
 import { RemindernotesComponent } from './Components/remindernotes/remindernotes.component';
+import { QuestionsandanswersComponent } from './Components/questionsandanswers/questionsandanswers.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { BarRatingModule } from "ngx-bar-rating";
+import { LikeComponent } from './Components/like/like.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +70,9 @@ import { RemindernotesComponent } from './Components/remindernotes/remindernotes
     CollaboratorComponent,
     CartComponent,
     RemindernotesComponent,
+    QuestionsandanswersComponent,
+    LikeComponent,
+    
   ],
   entryComponents:[UploadprofilepicComponent,DialogboxComponent,LabeldialogboxComponent,CollaboratorComponent],
   imports: [
@@ -80,7 +87,9 @@ import { RemindernotesComponent } from './Components/remindernotes/remindernotes
     HttpClientModule,
     StorageServiceModule,
     ColorPickerModule,
-    ImageCropperModule
+    ImageCropperModule,
+    FroalaEditorModule, FroalaViewModule,
+    BarRatingModule
     
   ],
   providers: [AppServiceService,NoteService,AuthGuard,DataserviceService,HttpserviceService,LabelserviceService,NotesService],

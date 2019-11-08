@@ -6,6 +6,7 @@ import { Image } from 'ngx-image';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { DataserviceService } from '../../services/data services/dataservice.service'
 import { AppServiceService } from 'src/app/services/appservices/app-service.service';
+import { SnackbarService } from 'src/app/services/snackbarservices/snackbar.service';
 @Component({
   selector: 'app-uploadprofilepic',
   templateUrl: './uploadprofilepic.component.html',
@@ -17,7 +18,7 @@ export class UploadprofilepicComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
   message:string='upload';
-  constructor(public dialogRef: MatDialogRef<DisplayComponent>,
+  constructor(public dialogRef: MatDialogRef<DisplayComponent>,private snackbar:SnackbarService,
     @Inject(MAT_DIALOG_DATA) dialogData,private dataService:DataserviceService,private appService:AppServiceService) { }
 
   ngOnInit() {
@@ -39,7 +40,8 @@ export class UploadprofilepicComponent implements OnInit {
     fd.append('file',this.croppedImage);
     this.appService.postImageRequest(fd,'user/uploadProfileImage').subscribe((data:any) => {
       console.log("uploading profile pic")
-      localStorage.setItem('pic', data.status.imageUrl);
+      // this.snackbar.open("Profile picture changed")
+     localStorage.setItem('pic', data.status.imageUrl);
       this.dataService.changeMessage(this.message);
       this.dialogRef.close();
     })

@@ -6,6 +6,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogboxComponent } from '../dialogbox/dialogbox.component';
 import { Labels } from '../models/labelModel';
 import { SnackbarService } from 'src/app/services/snackbarservices/snackbar.service';
+import { routing } from 'src/app/app-routing.module';
+import { Router } from '@angular/router';
 // import { NotefieldComponent } from '../notefield/notefield.component';
 @Component({
   selector: 'app-display',
@@ -14,7 +16,7 @@ import { SnackbarService } from 'src/app/services/snackbarservices/snackbar.serv
 })
 export class DisplayComponent implements OnInit {
 
-  constructor(private noteService: NoteService, private data: DataserviceService, private dialog: MatDialog, private snackbar: SnackbarService) { }
+  constructor(private routing:Router,private noteService: NoteService, private data: DataserviceService, private dialog: MatDialog, private snackbar: SnackbarService) { }
   message: String = ""
   flex:number;
   reminders:any;
@@ -30,6 +32,7 @@ export class DisplayComponent implements OnInit {
   @Input() searchedNotes: Notes[];
   @Input() reminderNotes:Notes[];
   ngOnInit() {
+    this.flex=30
     this.data.currentMessage$.subscribe(message => {
       this.message = message;
       console.log("Message recieved ", message)
@@ -72,7 +75,7 @@ export class DisplayComponent implements OnInit {
           return true;
       })
       this.pinedNotes = finalPinnedNotes.reverse()
-
+      console.log(this.pinedNotes)
     })
   }
   displayDeleted($event) {
@@ -197,7 +200,7 @@ export class DisplayComponent implements OnInit {
 
   componentSearch() {
     //console.log("inside search",this.component,this.searchedNotes)
-    if (this.component == "search" || this.component == "archive") {
+    if (this.component == "search" || this.component == "archive" || this.component == "labels") {
       return true
     }
     else return false;
@@ -227,6 +230,7 @@ export class DisplayComponent implements OnInit {
      this.flex=30;
      return true;
    }
+   
   }
 
   componentReminder(){
@@ -235,6 +239,12 @@ export class DisplayComponent implements OnInit {
     return true;
     else return false;
   }
+
+  navigateToQuestion(id){
+    this.data.changeMessage("Question Asked")
+    this.routing.navigate(['/QuestionAnswer',id])
+  }
+
 }
 
 

@@ -5,6 +5,7 @@ import { NoteService } from '../../services/appservices/app-service.service';
 import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 import { DataserviceService } from 'src/app/services/data services/dataservice.service';
 import { ShowHideDirective } from '@angular/flex-layout';
+import { SnackbarService } from 'src/app/services/snackbarservices/snackbar.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class NotefieldComponent implements OnInit {
   pin:Boolean=false;
   
   constructor(private noteService: NoteService, public vcRef: ViewContainerRef,
-    private cpService: ColorPickerService, private data: DataserviceService) { }
+    private cpService: ColorPickerService, private data: DataserviceService,private snackbar:SnackbarService) { }
   message: String = ""
 
   ngOnInit() {
@@ -47,6 +48,8 @@ export class NotefieldComponent implements OnInit {
       this.color = ""
       this.pin=false;
       console.log("added");
+      this.snackbar.open("Note Added")
+
 
     })
   }

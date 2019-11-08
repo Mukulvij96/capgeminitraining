@@ -16,6 +16,7 @@ import { LabelnotesdisplayComponent } from './Components/labelnotesdisplay/label
 import { NotesComponent } from './Components/notes/notes.component'
 import { CartComponent } from './Components/cart/cart.component';
 import { RemindernotesComponent } from './Components/remindernotes/remindernotes.component';
+import { QuestionsandanswersComponent } from './Components/questionsandanswers/questionsandanswers.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
       {
         path: 'labelList',
         component: LabelnotesdisplayComponent
+      },
+      {
+        path: 'QuestionAnswer/:noteId', 
+        component: QuestionsandanswersComponent
       },
       { path: '**', redirectTo: 'notes' }
     ]

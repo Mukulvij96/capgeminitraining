@@ -47,16 +47,26 @@
       </div>
         
       </div>
-      <mat-card-footer fxFlex="15" [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
+      <div fxFlex="15" >
         <app-icontray [noteId]="value.id" [note]="value" (displayNoteAfterDelete)="displayDeleted($event)"
           (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"
           (checkboxEvent)=showLabel($event,value.id)></app-icontray>
-      </mat-card-footer>
+      </div>
+
+      <div class="question-container">
+      <mat-divider *ngIf="value.questionAndAnswerNotes.length>0"></mat-divider>
+      <div *ngIf="value.questionAndAnswerNotes.length>0">
+        <h3>Questions</h3>
+      </div>
+        <div (click)="navigateToQuestion(value.id)" *ngIf="value.questionAndAnswerNotes.length>0">
+            <div [froalaView]="value.questionAndAnswerNotes[0].message"></div>
+        </div>
+      </div>
     </mat-card>
   </div>
   <p class="header">OTHERS</p>
   <div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start">
-    <mat-card fxFlex="30" *ngFor="let value of unpinedNotes; let i = index" class="grid-item" fxLayout="column"
+    <mat-card [fxFlex]="flex" *ngFor="let value of unpinedNotes; let i = index" class="grid-item" fxLayout="column"
       fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseover)=hoverIn(value)
       (mouseout)=hoverOut()>
       <div fxFlex="70">
@@ -70,24 +80,59 @@
         </div>
         <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}</mat-card-content>
       </div>
+
+      <div>
+        <mat-icon *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}">
+            person_pin</mat-icon>
+    </div>
+
       <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
-        <label *ngFor="let labels of value.noteLabels" class="label-item"
-          [ngStyle]='{background:value.color}'>{{labels.label}} <mat-icon class="close-icon"
-            (click)=removeLabel(value.id,labels.id)>close</mat-icon>
-        </label>
+        
+        <div fxFlex="50" *ngIf="value.reminder.length!=0">
+          <button mat-mini-fab class="label-item" [ngStyle]="{background: value.color}">
+              <div fxLayout="row">
+                  <img src="../../../assets/images/schedule-24px.svg" class="reminder" width="15px"
+                      height="15px">
+                  <a class="labelText">{{value.reminder|date:shortdate}}</a>
+                  <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
+                      <img src="../../../assets/images/clear-24px.svg" class="tick"
+                          (click)="removeReminder(value)" class="clear" width="10px" height="10px">
+
+                  </div>
+              </div>
+
+          </button>
       </div>
-      <mat-card-footer fxFlex="15" [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
+      <div fxFlex="50" fxLayout="row wrap">
+        <button mat-mini-fab *ngFor="let labels of value.noteLabels" class="label-item"
+          [ngStyle]='{background:value.color}'>{{labels.label}}
+          <mat-icon class="close-icon" (click)=removeLabel(value.id,labels.id)>close</mat-icon>
+        </button>
+      </div>
+        
+      </div>
+      <div fxFlex="15" [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
         <app-icontray [noteId]="value.id" [note]="value" (displayNoteAfterDelete)="display($event)"
           (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"
           (checkboxEvent)=showLabel($event,value.id)></app-icontray>
-      </mat-card-footer>
+      </div>
+
+      <div class="question-container">
+          <mat-divider *ngIf="value.questionAndAnswerNotes.length>0"></mat-divider>
+          <div *ngIf="value.questionAndAnswerNotes.length>0">
+              <h3>Questions</h3>
+            </div>
+            <div (click)="navigateToQuestion(value.id)" *ngIf="value.questionAndAnswerNotes.length>0">
+                <div [froalaView]="value.questionAndAnswerNotes[0].message"></div>
+            </div>
+          </div>
     </mat-card>
   </div>
 </div>
 
 <div *ngIf="componentSearch()">
   <div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start">
-    <mat-card fxFlex="30" *ngFor="let value of searchedNotes; let i = index" class="grid-item" fxLayout="column"
+    <mat-card [fxFlex]="flex" *ngFor="let value of searchedNotes; let i = index" class="grid-item" fxLayout="column"
       fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseover)=hoverIn(value)
       (mouseout)=hoverOut()>
       <div fxFlex="70">
@@ -98,17 +143,52 @@
         </div>
         <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}</mat-card-content>
       </div>
+      <div>
+        <mat-icon *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}">
+            person_pin</mat-icon>
+    </div>
+
       <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
-        <label *ngFor="let labels of value.noteLabels" class="label-item"
-          [ngStyle]='{background:value.color}'>{{labels.label}} <mat-icon class="close-icon"
-            (click)=removeLabel(value.id,labels.id)>close</mat-icon>
-        </label>
+        
+        <div fxFlex="50" *ngIf="value.reminder.length!=0">
+          <button mat-mini-fab class="label-item" [ngStyle]="{background: value.color}">
+              <div fxLayout="row">
+                  <img src="../../../assets/images/schedule-24px.svg" class="reminder" width="15px"
+                      height="15px">
+                  <a class="labelText">{{value.reminder|date:shortdate}}</a>
+                  <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
+                      <img src="../../../assets/images/clear-24px.svg" class="tick"
+                          (click)="removeReminder(value)" class="clear" width="10px" height="10px">
+
+                  </div>
+              </div>
+
+          </button>
       </div>
-      <mat-card-footer fxFlex="15"  [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
+      <div fxFlex="50" fxLayout="row wrap">
+        <button mat-mini-fab *ngFor="let labels of value.noteLabels" class="label-item"
+          [ngStyle]='{background:value.color}'>{{labels.label}}
+          <mat-icon class="close-icon" (click)=removeLabel(value.id,labels.id)>close</mat-icon>
+        </button>
+      </div>
+        
+      </div>
+      <div fxFlex="15"  [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
         <app-icontray [noteId]="value.id" [note]="value"  (displayNoteAfterDelete)="display($event)"
           (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"
           (checkboxEvent)=showLabel($event,value.id)></app-icontray>
-      </mat-card-footer>
+      </div>
+
+      <div class="question-container">
+          
+          <mat-divider *ngIf="value.questionAndAnswerNotes.length>0"></mat-divider>
+          <div *ngIf="value.questionAndAnswerNotes.length>0">
+              <h3>Questions</h3>
+            </div>
+            <div *ngIf="value.questionAndAnswerNotes.length>0">
+                <div [froalaView]="value.questionAndAnswerNotes[0].message"></div>
+            </div>
+          </div>
     </mat-card>
   </div>
 </div>
@@ -117,7 +197,7 @@
 <div *ngIf="componentReminder()">
   <p class="header">FIRED</p>
     <div class="display-container" fxLayout="row wrap" fxLayoutAlign="space-around start">
-      <mat-card fxFlex="30" *ngFor="let value of reminderNotes; let i = index" class="grid-item" fxLayout="column"
+      <mat-card [fxFlex]="flex" *ngFor="let value of reminderNotes; let i = index" class="grid-item" fxLayout="column"
         fxLayoutAlign="space-between start" [ngStyle]='{background:value.color}' (mouseover)=hoverIn(value)
         (mouseout)=hoverOut()>
         <div fxFlex="70">
@@ -128,17 +208,52 @@
           </div>
           <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}</mat-card-content>
         </div>
+        <div>
+          <mat-icon *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}">
+              person_pin</mat-icon>
+      </div>
+  
         <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
-          <label *ngFor="let labels of value.noteLabels" class="label-item"
-            [ngStyle]='{background:value.color}'>{{labels.label}} <mat-icon class="close-icon"
-              (click)=removeLabel(value.id,labels.id)>close</mat-icon>
-          </label>
+          
+          <div fxFlex="50" *ngIf="value.reminder.length!=0">
+            <button mat-mini-fab class="label-item" [ngStyle]="{background: value.color}">
+                <div fxLayout="row">
+                    <img src="../../../assets/images/schedule-24px.svg" class="reminder" width="15px"
+                        height="15px">
+                    <a class="labelText">{{value.reminder|date:shortdate}}</a>
+                    <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
+                        <img src="../../../assets/images/clear-24px.svg" class="tick"
+                            (click)="removeReminder(value)" class="clear" width="10px" height="10px">
+  
+                    </div>
+                </div>
+  
+            </button>
         </div>
-        <mat-card-footer fxFlex="15"  [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
+        <div fxFlex="50" fxLayout="row wrap">
+          <button mat-mini-fab *ngFor="let labels of value.noteLabels" class="label-item"
+            [ngStyle]='{background:value.color}'>{{labels.label}}
+            <mat-icon class="close-icon" (click)=removeLabel(value.id,labels.id)>close</mat-icon>
+          </button>
+        </div>
+          
+        </div>
+        <div fxFlex="15"  [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
           <app-icontray [noteId]="value.id" [note]="value"  (displayNoteAfterDelete)="display($event)"
             (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"
             (checkboxEvent)=showLabel($event,value.id)></app-icontray>
-        </mat-card-footer>
+        </div>
+
+        <div class="question-container">
+            
+            <mat-divider *ngIf="value.questionAndAnswerNotes.length>0"></mat-divider>
+            <div *ngIf="value.questionAndAnswerNotes.length>0">
+                <h3>Questions</h3>
+              </div>
+              <div *ngIf="value.questionAndAnswerNotes.length>0">
+                <div [froalaView]="value.questionAndAnswerNotes[0].message"></div>
+              </div>
+            </div>
       </mat-card>
     </div>
   </div>

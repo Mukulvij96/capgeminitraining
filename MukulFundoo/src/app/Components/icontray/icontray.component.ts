@@ -9,6 +9,9 @@ import { FormGroup,FormBuilder,FormArray } from '@angular/forms'
 import { DataserviceService } from 'src/app/services/data services/dataservice.service';
 import { MatDialog } from '@angular/material';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
+import { SnackbarService } from 'src/app/services/snackbarservices/snackbar.service';
+import { routing } from 'src/app/app-routing.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-icontray',
@@ -19,7 +22,7 @@ export class IcontrayComponent implements OnInit {
   @Input() note: Notes
   panelOpenState: boolean = false;
   save: Boolean = false;
-  archive: Boolean=false
+  
   storedLabels: Labels[]
   interestFormGroup : FormGroup
   labels:any;
@@ -50,12 +53,12 @@ export class IcontrayComponent implements OnInit {
   public label = new FormControl('');
   
   message:String=""
-  constructor(public vcRef: ViewContainerRef,private dialog:MatDialog,
-    private cpService: ColorPickerService, private noteService: NoteService, private labelService: LabelserviceService, private formBuilder: FormBuilder,private data:DataserviceService) { }
+  constructor(public vcRef: ViewContainerRef,private dialog:MatDialog,private snackbar:SnackbarService,private routing:Router,
+    private cpService: ColorPickerService, private noteService: NoteService, private labelService: LabelserviceService, private formBuilder: FormBuilder,private dataService:DataserviceService) { }
    
   ngOnInit() {
     this.getLabels()
-    this.data.currentMessage$.subscribe(message => {
+    this.dataService.currentMessage$.subscribe(message => {
       this.message = message;})
   }
   colorArray =
@@ -90,8 +93,7 @@ export class IcontrayComponent implements OnInit {
     }
     console.log("emitted", data)
     this.noteService.postJson(data, '/trashNotes').subscribe((data: any) => {
-      console.log("deleted note", data)
-      console.log("trash");
+      this.snackbar.open("Note Deleted")
       this.delete = true
       this.displayNoteAfterDelete.emit(this.delete);
       this.deleted="deleted"
@@ -102,9 +104,10 @@ export class IcontrayComponent implements OnInit {
   changeColor(color) {
     let newColor = color
     this.colorEvent.emit(newColor);
-    console.log("color", color);
+    this.snackbar.open("Note color changed")
   }
-  archived:Boolean=true;
+  archived:string="";
+  signIcon:Boolean=true
   archiveNotes() {
     
     const data = {
@@ -114,9 +117,10 @@ export class IcontrayComponent implements OnInit {
     }
     // console.log("emitted", data)
     this.noteService.postJson(data, '/archiveNotes').subscribe((data: any) => {
-      this.archive =true;
-      this.displayNoteAfterArchive.emit(this.archive)
-      this.archived = !this.archived
+      this.snackbar.open("Note Archived.Go check Archive section")
+      this.archived="archived"
+      this.dataService.changeMessage(this.archived)
+     this.signIcon = !this.signIcon
     })
   }
   
@@ -128,9 +132,10 @@ export class IcontrayComponent implements OnInit {
         // console.log("emitted", data)
         this.noteService.postJson(data,'/archiveNotes').subscribe((data: any) => {
           console.log("Unarchived note", data)
-          this.archive=true
-          this.displayNoteAfterArchive.emit(this.archive)
-          this.archived = !this.archived
+          this.snackbar.open("Note Unarchived.It will appear in Notes section")
+          this.archived="unarchived"
+          this.dataService.changeMessage(this.archived)
+          this.signIcon = !this.signIcon
          
   })
 }
@@ -143,6 +148,7 @@ export class IcontrayComponent implements OnInit {
     }
     this.labelService.postRequest(this.labels, 'noteLabels').subscribe((data: any) => {
       console.log("Label Has been set", data);
+      this.snackbar.open("Label Created" ,this.label.value)
       this.label.reset()
       this.getLabels();
     })
@@ -177,7 +183,7 @@ changeValue(check){
 }
 
 newMessage(value){
-  this.data.changeMessage(value);
+  this.dataService.changeMessage(value);
 }
 
 printDate() {
@@ -191,8 +197,8 @@ reminderAdd(reminder){
       this.pickedDate.value.getDate() + reminder.dayCount, reminder.timeCount, 0, 0, 0)
   }
   this.noteService.postJson(data,'/addUpdateReminderNotes').subscribe((data:any)=>{
- 
-    this.data.changeMessage("Note Edited")
+    this.snackbar.open("Reminder Set")
+    this.dataService.changeMessage("Note Edited")
   });
   
 }
@@ -205,8 +211,8 @@ reminderAddPicked(){
   }
 console.log("Sending Data",data)
   this.noteService.postJson(data,'/addUpdateReminderNotes').subscribe((data:any)=>{
-    
-    this.data.changeMessage("Note Edited")
+    this.snackbar.open("Reminder Set")
+    this.dataService.changeMessage("Note Edited")
   });
 
 }
@@ -221,6 +227,16 @@ addCollaborator(){
   dialogref.afterClosed().subscribe(result=> {
     //console.log("dialog result ", result);
   })
+}
+
+askQuestion(){
+  this.dataService.changeMessage("Question")
+  this.routing.navigate(['/QuestionAnswer', this.note.id])
+
+}
+showQuestion(){
+  this.dataService.changeMessage("Question Asked")
+  this.routing.navigate(['/QuestionAnswer', this.note.id])
 }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from 'src/app/services/data services/dataservice.service';
 import { NoteService } from 'src/app/services/appservices/app-service.service';
 import { Notes } from '../models/noteModel'
+import { SnackbarService } from 'src/app/services/snackbarservices/snackbar.service';
 
 @Component({
   selector: 'app-trashnotes',
@@ -11,7 +12,7 @@ import { Notes } from '../models/noteModel'
 export class TrashnotesComponent implements OnInit {
 
   notes: Notes[]
-  constructor(private data:DataserviceService,private noteService:NoteService) { }
+  constructor(private data:DataserviceService,private noteService:NoteService,private snackbar:SnackbarService) { }
 
   ngOnInit() {
     this.displayNotes()
@@ -32,6 +33,7 @@ export class TrashnotesComponent implements OnInit {
     }
     this.noteService.postJson(data,'/deleteForeverNotes').subscribe((data:any) => {
       console.log("Deleted Forever");
+      this.snackbar.open("Note Deleted Forever")
       this.displayNotes();
     })
   }
@@ -42,6 +44,7 @@ export class TrashnotesComponent implements OnInit {
     }
     this.noteService.postJson(data,'/trashNotes').subscribe((data:any) => {
       console.log("Note Retrieved");
+      this.snackbar.open("Note Retrieved")
       this.displayNotes();
     })
   }

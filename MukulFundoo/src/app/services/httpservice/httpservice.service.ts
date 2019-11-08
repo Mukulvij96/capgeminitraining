@@ -12,6 +12,7 @@ export class HttpserviceService {
   postRequest(url, user) {
     let headers = new HttpHeaders({
       'Accept': 'application/json',
+
     });
     console.log("service");
     return this.http.post(this.API_URL + url, user, { headers: headers });
@@ -69,7 +70,7 @@ export class HttpserviceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': sessionStorage.getItem('id')
+        'Authorization': localStorage.getItem('id')
       })
     }
     console.log(url,body,httpOptions)
@@ -87,5 +88,5 @@ export class HttpserviceService {
   }
   getConfig(url) {
     return this.http.get(environment.baseurl + url);
-  }
+  }   
 }

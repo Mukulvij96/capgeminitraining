@@ -1,0 +1,41 @@
+::ng-deep.editor-box{
+margin-top:10px;
+}
+::ng-deep.heading{
+    margin-top:25px;
+    margin-left:2px;
+}
+.image-button{
+    height:25px;
+    width:25px;
+    background-color: #ffffff;
+    border-radius: 125px;
+ -webkit-border-radius: 125px;
+ -moz-border-radius: 125px;
+ margin-left:10px;
+ margin-right:10px;
+ margin-bottom: 15px;
+ margin-top: 15px;
+}
+.message-container{
+    max-width:20vw;
+}
+@media only screen and (max-width:760px){
+    [class*="message-container"]{
+        max-width:50vw;
+    }
+}
+.container{
+    max-width:80vw;
+}
+
+@media only screen and (max-width:760px){
+    [class*="container"]{
+        max-width:80vw;
+    }
+}
+.reply-icon{
+    margin-top:18px;
+    margin-left:20px;
+    cursor:pointer
+}

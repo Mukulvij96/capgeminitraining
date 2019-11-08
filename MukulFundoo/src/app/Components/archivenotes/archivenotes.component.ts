@@ -17,7 +17,12 @@ export class ArchivenotesComponent implements OnInit {
   constructor(private noteService:NoteService,private data:DataserviceService) { }
 
   ngOnInit() {
-   
+    
+    this.data.currentMessage$.subscribe(message => {
+      this.message = message
+      this.check()
+    })
+
     this.displayNotes()
    
   }
@@ -32,7 +37,13 @@ export class ArchivenotesComponent implements OnInit {
       return this.archivedNotes;
 })
   }
- 
 
+  check(){
+    if(this.message == "archived" || this.message == "unarchived")
+    {
+      return true
+    }
+    else return false;
+  }
 
 }

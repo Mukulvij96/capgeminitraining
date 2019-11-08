@@ -99,8 +99,6 @@ editLabels(){
 
 showLabelsNotes(label){
 this.newMessage(label)
-// this.noteService.postJson(data,'/getNotesListByLabel/'+label).subscribe((response:any) => {
-//   console.log("Notes in this label is " , response.data.data)
 
 }
 newMessage(labelName){

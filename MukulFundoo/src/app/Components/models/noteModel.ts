@@ -8,7 +8,7 @@ export interface Notes{
     isDeleted?:Boolean;
     color?:String;
     reminder?:String;
-    collaberators?:String;
-    noteId?:String;
+    collaborators?:String;
+    id?:String;
     noteLabels?:String;
 }

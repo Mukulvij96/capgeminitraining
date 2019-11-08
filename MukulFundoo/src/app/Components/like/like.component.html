@@ -1,0 +1,6 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-icon *ngIf="!like" class="reply-icon" (click)=dislikeReply() >thumb_up_alt</mat-icon>
+        <mat-icon *ngIf="like" class="reply-icon" (click)=likeReply() >thumb_up_off_alt</mat-icon> 
+        <p class="text">{{count}} &nbsp;</p><p class="text-word">Likes</p>
+</div>
+
