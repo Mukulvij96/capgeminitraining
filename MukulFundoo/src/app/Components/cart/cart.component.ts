@@ -49,8 +49,8 @@ addServiceToCart(service){
     this.productService.addToCart(data).subscribe((response:any) => {
       console.log("cart service",response)
       this.generatedCartId=response.data.details.id
+
       
-  
       this.dataService.changeTypeOfService(service);
       this.dataService.sendCartId(this.generatedCartId)
       this.routing.navigate(['/register'])

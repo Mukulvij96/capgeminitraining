@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   advanceColor:String="white";
   basicColor:String="white";
 
-  generatedCardId:any;
+  generatedCartId:any;
   typeOfService:any
   ngOnInit() {
    this.data.currentService.subscribe((typeOfService) => {
@@ -38,8 +38,9 @@ export class RegisterComponent implements OnInit {
      this.checkSelectedService()
    })
     
-   this.data.cartId.subscribe((generatedCardId) => {
-     this.generatedCardId = generatedCardId;
+   this.data.cartId.subscribe((generatedCartId) => {
+     this.generatedCartId = generatedCartId;
+     console.log("cartId",this.generatedCartId)
    })
   
   }
@@ -82,9 +83,10 @@ validate(fname,lname,email,pass,password,confirmPassword){
       "service":this.typeOfService,
       "email": email,
       "password":confirmPassword ,
-      "cartId":this.generatedCardId
+      "cartId":this.generatedCartId
       
     }
+    localStorage.setItem('cartId',this.generatedCartId)
     console.log("Register Object",user)
 this.appService.postRequest(user,'user/userSignUp').subscribe((data:any) => {
   console.log("Registered user Details",data)

@@ -32,10 +32,11 @@ export class MycartComponent implements OnInit {
     this.getMyCartDetails();
   }
   getMyCartDetails(){
-    return this.productCartService.getCartDetails().subscribe((response: any) => {
+    
+    return this.productCartService.getCartDetails(localStorage.getItem('cartId')).subscribe((response: any) => {
       console.log("dd",response);
-      this.cartId=response.data[0].id;
-      this.typeOfService=response.data[0].product.name;
+      this.cartId=response.data.id;
+      this.typeOfService=response.data.product.name;
     }, (error) => {
       console.log(error);
     });

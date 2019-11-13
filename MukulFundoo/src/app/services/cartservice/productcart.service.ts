@@ -13,8 +13,8 @@ export class ProductcartService {
     return this.http.postJSON('productcarts/placeOrder',data);
 
   }
-  getCartDetails(){
-    return this.http.httpGetData('productcarts/myCart');
+  getCartDetails(a){
+    return this.http.httpGetData('productcarts/getCartDetails/'+a);
   }
   addToCart(data){
     return this.http.postJSON('productcarts/addToCart',data);
