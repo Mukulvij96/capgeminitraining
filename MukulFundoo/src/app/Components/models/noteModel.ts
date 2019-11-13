@@ -10,5 +10,6 @@ export interface Notes{
     reminder?:String;
     collaborators?:String;
     id?:String;
-    noteLabels?:String;
+    noteLabels?:any;
+    questionAndAnswerNotes?:any;
 }

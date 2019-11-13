@@ -44,6 +44,7 @@ import { QuestionsandanswersComponent } from './Components/questionsandanswers/q
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { BarRatingModule } from "ngx-bar-rating";
 import { LikeComponent } from './Components/like/like.component';
+import { MycartComponent } from './Components/mycart/mycart.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { LikeComponent } from './Components/like/like.component';
     RemindernotesComponent,
     QuestionsandanswersComponent,
     LikeComponent,
+    MycartComponent,
     
   ],
   entryComponents:[UploadprofilepicComponent,DialogboxComponent,LabeldialogboxComponent,CollaboratorComponent],

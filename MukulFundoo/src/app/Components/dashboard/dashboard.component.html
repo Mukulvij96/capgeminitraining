@@ -29,8 +29,8 @@
         <button *ngIf=show mat-icon-button (click)=changeView() (click)=changeIcon()>
             <mat-icon>list_view</mat-icon>
         </button>
-        <button mat-icon-button >
-            <mat-icon>settings</mat-icon>
+        <button mat-icon-button (click)="takeMeToCart()" >
+            <mat-icon>shopping_cart</mat-icon>
         </button>
     </div>
     <div fxFlex="10" fxFlex.xs="100" fxLayout="row" fxLayoutAlign="start center">
@@ -45,9 +45,9 @@
                         <img class="image-button" [src]="url" (click)=openDialog()>
                         <!-- <label class="text-label">Change</label> -->
                     </div>
-                    <div fxFlex="50">
+                    <div fxFlex="50" fxLayout="column">
                         <p class="name-container" fxLayoutGap="6px">{{firstName}} {{lastName}}</p>
-                        <p class="email-container">{{email}}</p>
+                        <p class="email-container" >{{email}}</p>
                     </div>
                 </mat-card-content>
                 <mat-divider></mat-divider>
@@ -78,7 +78,7 @@
             <p class="header">Labels</p>
             <mat-nav-list *ngFor="let value of labelList">
                 <mat-list-item (click)="showLabelsNotes(value.label)" routerLink='/labelList' (click)=drawer.toggle()>
-                    <mat-icon>label_important_outline</mat-icon>{{value.label}}
+                    <mat-icon>label_important_fill</mat-icon>{{value.label}}
                 </mat-list-item>
             </mat-nav-list>
             <mat-list-item (click)="editLabels()" (click)=drawer.toggle()>

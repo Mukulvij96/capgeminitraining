@@ -18,8 +18,32 @@
       <textarea class="full-width" matInput placeholder="Description" name="description" [formControl]="description" cdkTextareaAutosize
       #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3" [ngStyle]='{background:color}'></textarea>
   </div>
+
+  <div >
+    <div *ngIf= "reminder.length!=0">
+      <button mat-mini-fab class="label-item" [ngStyle]="{background: 0000}">
+        <div fxLayout="row">
+            <img src="../../../assets/images/schedule-24px.svg" class="reminder" width="15px"
+                height="15px">
+            <a class="labelText">{{reminder|date: 'medium'}}</a>
+            <div >
+                <img src="../../../assets/images/clear-24px.svg" class="tick"
+                     class="clear" (click)=removeReminder() width="10px" height="10px">
+
+            </div>
+        </div>
+
+    </button>
+    </div>
+
+    <button mat-mini-fab *ngFor="let labels of noteLabel" class="label-item"
+    [ngStyle]='{background:color}'>{{labels.label}}
+    <mat-icon class="close-icon" >close</mat-icon>
+  </button>
+
+  </div>
   <div *ngIf=!showTitle class="icon-container" fxLayout="row">
-    <app-icontray fxLayoutAlign="space-between stretch"  (colorEvent)="setColor($event)"></app-icontray>
+    <app-icontray [note]="note" fxLayoutAlign="space-between stretch" (checkboxEvent)="addLabels($event)" (reminderEvent)=setReminder($event)  (colorEvent)="setColor($event)"></app-icontray>
     <button mat-button matTooltip="Close Note" (click)="addNotes(pin)"  >Close</button>
   </div>
 </mat-card>

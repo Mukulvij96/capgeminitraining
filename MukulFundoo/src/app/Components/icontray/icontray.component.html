@@ -1,4 +1,4 @@
-<div class="icontray-container" fxLayoutGap="2px">
+<div class="icontray-container">
     <button mat-icon-button matTooltip="Add Reminder" [matMenuTriggerFor]="reminderSetter">
         <mat-icon>
             add_alert
@@ -77,10 +77,10 @@
     </mat-icon>
 </button>
 <mat-menu #rootMenu="matMenu" [overlapTrigger]="false">
-    <button mat-menu-item *ngIf="note.questionAndAnswerNotes.length==0" (click)=askQuestion()>Ask a Question</button>
-    <button mat-menu-item *ngIf="note.questionAndAnswerNotes.length!=0" (click)=showQuestion()>Show Question</button> 
-    <button mat-menu-item (click)=deleteNotes()>Delete note</button>
-    <button mat-menu-item>Settings</button>
+    <button mat-menu-item *ngIf="this.message != 'NoteField Opened' && note.questionAndAnswerNotes.length==0" (click)=askQuestion()>Ask a Question</button>
+    <button mat-menu-item *ngIf="this.message != 'NoteField Opened' && note.questionAndAnswerNotes.length!=0" (click)=showQuestion()>Show Question</button> 
+    <button mat-menu-item *ngIf="this.message != 'NoteField Opened' " (click)=deleteNotes()>Delete note</button>
+    <button mat-menu-item >Settings</button>
     <button mat-menu-item [matMenuTriggerFor]="subMenu">Add Labels</button>
 </mat-menu>
 <mat-menu #subMenu="matMenu">

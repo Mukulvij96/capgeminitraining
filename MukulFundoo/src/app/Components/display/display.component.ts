@@ -8,6 +8,7 @@ import { Labels } from '../models/labelModel';
 import { SnackbarService } from 'src/app/services/snackbarservices/snackbar.service';
 import { routing } from 'src/app/app-routing.module';
 import { Router } from '@angular/router';
+import { identifierModuleUrl } from '@angular/compiler';
 // import { NotefieldComponent } from '../notefield/notefield.component';
 @Component({
   selector: 'app-display',
@@ -75,10 +76,10 @@ export class DisplayComponent implements OnInit {
           return true;
       })
       this.pinedNotes = finalPinnedNotes.reverse()
-      console.log(this.pinedNotes)
+      
     })
   }
-  displayDeleted($event) {
+  display($event) {
     this.displayNotes();
     this.displayPinnedNotes()
   }
@@ -105,13 +106,16 @@ export class DisplayComponent implements OnInit {
     return false;
 
   }
-
+id:string
+labelId:string;
   checkNotes() {
-    console.log(this.message);
+    
     if (this.message == "Note Added")
-      this.displayNotes();
+     { this.displayNotes();
     this.displayPinnedNotes()
     this.message = ""
+     }
+     
   }
   private dialogRef;
   // hover:boolean=false;
@@ -126,6 +130,10 @@ export class DisplayComponent implements OnInit {
       description: value.description,
       id: value.id,
       color: value.color,
+      questionAndAnswerNotes:value.questionAndAnswerNotes,
+      noteLabels:value.noteLabels,
+      reminder:value.reminder,
+      collaborators:value.collaborators
     }
     console.log(dialogConfig.data);
     this.dialogRef = this.dialog.open(DialogboxComponent, dialogConfig)
@@ -161,7 +169,8 @@ export class DisplayComponent implements OnInit {
     console.log("remove", labelData);
     this.noteService.postJson(labelData, '/' + id + '/addLabelToNotes/' + labelId + '/remove').subscribe((data: any) => {
       console.log("Notes after label is removed", data);
-    })
+  })
+  
     this.displayNotes();
     this.displayPinnedNotes();
   }
@@ -245,7 +254,13 @@ export class DisplayComponent implements OnInit {
     this.routing.navigate(['/QuestionAnswer',id])
   }
 
+  navigateToReminderList(){
+    console.log("NAvigating")
+  this.routing.navigate(['/reminder'])
+  }
 }
+
+
 
 
 

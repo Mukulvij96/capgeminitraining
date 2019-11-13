@@ -24,9 +24,10 @@
     }
 }
 .close-button{
-    width:150px;
+    width:100px;
+    padding-top:2px;
     padding-bottom:6px;
-    padding-left:80px;
+    padding-left:20px;
 }
 
 .full-width{
@@ -42,3 +43,25 @@
     font-size: 30px;
 }
 
+::ng-deep.label-item{
+    margin:3px;
+    //background-color: rgb(230, 223, 223);
+    border-radius: 20px;
+   //max-width:70px;
+   width: inherit;
+   height: 20px;
+   line-height: 17px;
+   filter: brightness(85%);
+   
+   .mat-button-wrapper {
+   padding: 0px;
+   line-height: 18px;
+  
+  }
+}
+
+.label-container{
+    padding-top: 5px;
+    padding-bottom:5px;
+    
+  }

@@ -57,9 +57,12 @@ export class IcontrayComponent implements OnInit {
     private cpService: ColorPickerService, private noteService: NoteService, private labelService: LabelserviceService, private formBuilder: FormBuilder,private dataService:DataserviceService) { }
    
   ngOnInit() {
-    this.getLabels()
+    
     this.dataService.currentMessage$.subscribe(message => {
-      this.message = message;})
+      this.message = message;
+      
+    })
+      this.getLabels()
   }
   colorArray =
     [
@@ -162,7 +165,7 @@ export class IcontrayComponent implements OnInit {
         return true;
       })
       this.storedLabels=finalLabels.reverse()
-
+      
     })
   }
 @Output() checkboxEvent=new EventEmitter<String>();
@@ -189,8 +192,11 @@ newMessage(value){
 printDate() {
   console.log(this.pickedDate.value);
 }
+
+@Output() reminderEvent=new EventEmitter<any>();
 reminderAdd(reminder){
   
+
   let data={
     "noteIdList":[this.noteId],
     "reminder": new Date(this.pickedDate.value.getFullYear(), this.pickedDate.value.getMonth(),
@@ -201,9 +207,11 @@ reminderAdd(reminder){
     this.dataService.changeMessage("Note Edited")
   });
   
+  this.reminderEvent.emit(data.reminder)
+
 }
 reminderAddPicked(){
-  console.log(this.timeSelected)
+ 
   let data={
     "noteIdList":[this.noteId],
     "reminder": new Date(this.pickedDate.value.getFullYear(), this.pickedDate.value.getMonth(),
@@ -213,8 +221,10 @@ console.log("Sending Data",data)
   this.noteService.postJson(data,'/addUpdateReminderNotes').subscribe((data:any)=>{
     this.snackbar.open("Reminder Set")
     this.dataService.changeMessage("Note Edited")
+
   });
 
+  this.reminderEvent.emit(data.reminder)
 }
 
 addCollaborator(){
@@ -225,11 +235,12 @@ addCollaborator(){
     }
   });
   dialogref.afterClosed().subscribe(result=> {
-    //console.log("dialog result ", result);
+    
   })
 }
 
 askQuestion(){
+
   this.dataService.changeMessage("Question")
   this.routing.navigate(['/QuestionAnswer', this.note.id])
 

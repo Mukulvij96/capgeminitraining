@@ -1,15 +1,51 @@
 <div mat-dialog-content fxLayout="column" class="container">
       <mat-card fxLayout="column" fxFlex="100" [ngStyle]='{background:note.color}'>
-            <textarea class="full-width-title" matInput name="title" [formControl]="title" cdkTextareaAutosize
+            <textarea  class="full-width-title" matInput name="title" [formControl]="title" cdkTextareaAutosize
                   #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" value="{{note.title}}"
                   [ngStyle]='{background:note.color}'></textarea>
-            <textarea class="full-width" matInput name="description" [formControl]="description" cdkTextareaAutosize
+            <textarea  class="full-width" matInput name="description" [formControl]="description" cdkTextareaAutosize
                   #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" value="{{note.description}}"
                   [ngStyle]='{background:note.color}'>
                               </textarea>
-            <div fxFlex="100" fxLayout="row">
-                  <app-icontray (colorEvent)=setColor($event) (checkboxEvent)=showLabels($event)></app-icontray>
-                  <button mat-button class="close-button" matTooltip="Close Note" (click)="updateNotes()">Close
+
+            <div>
+                  <mat-icon *ngFor="let collaborator of note.collaborators" matTooltip="{{collaborator.firstName}}">
+                        person_pin</mat-icon>
+            </div>
+
+            <div  class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
+
+                  <div fxFlex="50" *ngIf="note.reminder.length!=0">
+                        <button mat-mini-fab class="label-item" [ngStyle]="{background: note.color}">
+                              <div fxLayout="row">
+                                    <img src="../../../assets/images/schedule-24px.svg" class="reminder" width="15px"
+                                          height="15px">
+                                    <a class="labelText">{{note.reminder|date: 'medium'}}</a>
+                                    <div>
+                                          <img src="../../../assets/images/clear-24px.svg" class="tick" width="10px"
+                                                height="10px">
+
+                                    </div>
+                              </div>
+
+                        </button>
+                  </div>
+                  <div fxFlex="50" fxLayout="row wrap">
+                        <button mat-mini-fab *ngFor="let labels of note.noteLabels" class="label-item"
+                              [ngStyle]='{background:note.color}'>{{labels.label}}
+                              <img src="../../../assets/images/clear-24px.svg" (click)=removeLabel(labels.id) class="tick" width="10px" height="10px">
+                        </button>
+                  </div>
+
+            </div>
+
+
+
+            <div fxFlex="25" fxLayout="row" fxLayotAlign="space-between stretch">
+                  <app-icontray [note]="this.note" fxFlex="60" (colorEvent)=setColor($event) (reminderEvent)=setReminder($event)
+                        (checkboxEvent)=showLabels($event)></app-icontray>
+                  <button fxFlex="40" mat-button class="close-button" matTooltip="Close Note"
+                        (click)="updateNotes()">Close
                   </button>
             </div>
       </mat-card>

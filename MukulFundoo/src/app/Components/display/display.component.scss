@@ -4,7 +4,7 @@
   border-radius:4%; 
   width:20vw;
   word-break: break-all;
-  min-height:15vh;
+  min-height:inherit;
   padding:10px;
 }
 .display-container{
@@ -21,8 +21,7 @@
 .label-container{
   padding-top: 5px;
   padding-bottom:5px;
-  width:inherit;
-  height:inherit;
+  
 }
 ::ng-deep.label-item{
   margin:3px;
@@ -30,7 +29,7 @@
   border-radius: 20px;
  //max-width:70px;
  width: inherit;
- height: 20px;
+ 
  line-height: 17px;
  filter: brightness(85%);
  
@@ -48,8 +47,7 @@
 
 @media only screen and (max-width:760px){
   [class*="label-"]{
-    width: inherit;
-    height:inherit;
+    height:20px;
   }
 }
 
@@ -67,3 +65,5 @@
     .question-container{
       cursor:pointer
     }
+
+  

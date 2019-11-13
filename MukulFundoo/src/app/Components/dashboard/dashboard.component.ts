@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { LabelserviceService } from 'src/app/services/labelservice/labelservice.service';
 import { Labels } from '../models/labelModel';
 import { LabeldialogboxComponent } from '../labeldialogbox/labeldialogbox.component';
+import { routing } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-dashboard',
@@ -122,5 +123,9 @@ changeIcon(){
 full:boolean=false;
 extendSearchBar(){
   this.full = !this.full
+}
+
+takeMeToCart(){
+ this.router.navigate(['/MyCart'])
 }
 }

@@ -13,7 +13,7 @@ export class LikeComponent implements OnInit {
 
   @Input() parent:any;
   count:number=0;
-  like:boolean=true
+  like:boolean=false
   ngOnInit() {
     this.numberOfLikes()
   }
@@ -28,7 +28,7 @@ export class LikeComponent implements OnInit {
       console.log("after Like" ,response)
       this.snackbar.open("Like Updated")
     })
-    this.like =!this.like
+    this.like=true
     this.numberOfLikes()
   }
 
@@ -41,6 +41,7 @@ export class LikeComponent implements OnInit {
       console.log("after dislike" ,response)
       this.snackbar.open("Dislike updated")
     })
+    this.like=false
     this.numberOfLikes()
   }
 

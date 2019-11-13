@@ -1,0 +1,197 @@
+
+ <mat-horizontal-stepper *ngIf="this.typeOfService =='advance' " #stepper>
+    <mat-step [stepControl]="firstForm">
+        <form [formGroup]="firstForm">
+            <ng-template matStepLabel>Sign In</ng-template>
+            <h5 class="heading">Shopping Cart</h5>
+            <mat-divider></mat-divider>
+            <div fxLayout="row">
+                <mat-card class="card">
+                    <p class="text">$99 per month</p>
+                    <p class="text">Advance</p>
+                </mat-card>
+                <div fxLayout="column">
+                    <span class="blueheading">Advance pack details</span>
+                    <span class="blacktext">* Ability to add title, description, images, labels, checklist and colors</span>
+                </div>
+                <div fxLayout="column">
+                    <span class="blueheading">Price</span>
+                    <span class="blacktext">$99</span>
+                </div>
+                <div fxLayout="column">
+                    <span class="blueheading">Validity</span>
+                    <span class="blacktext">1 month</span>
+                </div>
+                <div fxLayout="column" class="box">
+                    <span class="blacktext">Subtotal(1 item) : $99</span>
+                    <button class="button" mat-button matStepperNext>Proceed to checkout</button>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="column">
+                <span class="bluebigtext">Subtotal ( 1 item ): $99</span>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondForm">
+        <form [formGroup]="secondForm">
+            <ng-template matStepLabel>Add address and review</ng-template>
+            <h5 class="heading">Review your Order</h5>
+            <mat-divider></mat-divider>
+            <div fxLayout="row">
+                <mat-card class="card">
+                    <p class="text">$99 per month</p>
+                    <p class="text">Advance</p>
+                </mat-card>
+                <div fxLayout="column">
+                    <span class="blueheading">Advance pack details</span>
+                    <span class="blacktext">* Ability to add title, description, images, labels, checklist and colors</span>
+                </div>
+                <div fxLayout="column">
+                    <span class="blueheading">$99</span>
+                    <span class="blacktext">per month</span>
+                </div>
+                <div fxLayout="column">
+                    <span class="blueheading">Payment Method</span>
+                    <span class="blacktext">Cash On Delivery</span>
+                </div>
+                <div fxLayout="column" class="box">
+                    <span class="blacktext">Total(1 item) : $99</span>
+                    <button class="button" (click)="onPlaceOrder()" mat-button matStepperNext>Place your order</button>
+                </div>
+            </div>
+            <div class="textbox">
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" placeholder="Address" formControlName="addressControl" required></textarea>
+            </div>
+
+            <mat-divider></mat-divider>
+            <div fxLayout="column">
+                <span class="bluebigtext">Total ( 1 item ): $99</span>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Complete</ng-template>
+        <h5 class="heading">Order Summary</h5>
+        <mat-divider></mat-divider>
+        <div fxLayout="row">
+            <mat-card class="card">
+                <p class="text">$99 per month</p>
+                <p class="text">Advance</p>
+            </mat-card>
+            <div fxLayout="column">
+                <span class="blueheading">Advance pack details</span>
+                <span class="blacktext">* Ability to add title, description, images, labels, checklist and colors</span>
+            </div>
+            <div fxLayout="column">
+                <span class="blueheading">$99</span>
+                <span class="blacktext">per month</span>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="column">
+            <span class="bluebigtext">Total ( 1 item ): $99</span>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>
+
+
+<mat-horizontal-stepper *ngIf= "this.typeOfService =='basic'" #stepper>
+        <mat-step [stepControl]="firstForm">
+            <form [formGroup]="firstForm">
+                <ng-template matStepLabel>Sign In</ng-template>
+                <h5 class="heading">Shopping Cart</h5>
+                <mat-divider></mat-divider>
+                <div fxLayout="row">
+                    <mat-card class="card">
+                        <p class="text">$49 per month</p>
+                        <p class="text">Basic</p>
+                    </mat-card>
+                    <div fxLayout="column">
+                        <span class="blueheading">Basic pack details</span>
+                        <span class="blacktext">* Ability to add only title and description</span>
+                    </div>
+                    <div fxLayout="column">
+                        <span class="blueheading">Price</span>
+                        <span class="blacktext">$49</span>
+                    </div>
+                    <div fxLayout="column">
+                        <span class="blueheading">Validity</span>
+                        <span class="blacktext">1 month</span>
+                    </div>
+                    <div fxLayout="column" class="box">
+                        <span class="blacktext">Subtotal(1 item) : $49</span>
+                        <button class="button" mat-button matStepperNext>Proceed to checkout</button>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div fxLayout="column">
+                    <span class="bluebigtext">Subtotal ( 1 item ): $49</span>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondForm" errorMessage="Address is required.">
+            <form [formGroup]="secondForm">
+                <ng-template matStepLabel>Add address and review</ng-template>
+                <h5 class="heading">Review your Order</h5>
+                <mat-divider></mat-divider>
+                <div fxLayout="row">
+                    <mat-card class="card">
+                        <p class="text">$49 per month</p>
+                        <p class="text">Basic</p>
+                    </mat-card>
+                    <div fxLayout="column">
+                        <span class="blueheading">Basic pack details</span>
+                        <span class="blacktext">* Ability to add only title and description</span>
+                    </div>
+                    <div fxLayout="column">
+                        <span class="blueheading">$49</span>
+                        <span class="blacktext">per month</span>
+                    </div>
+                    <div fxLayout="column">
+                        <span class="blueheading">Payment Method</span>
+                        <span class="blacktext">Cash On Delivery</span>
+                    </div>
+                    <div fxLayout="column" class="box">
+                        <span class="blacktext">Total(1 item) : $49</span>
+                        <button class="button" (click)="onPlaceOrder()" mat-button matStepperNext>Place your order</button>
+                    </div>
+                </div>
+                <div class="textbox">
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" placeholder="Address" formControlName="addressControl" required></textarea>
+                </div>
+    
+                <mat-divider></mat-divider>
+                <div fxLayout="column">
+                    <span class="bluebigtext">Total ( 1 item ): $49</span>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Complete</ng-template>
+            <h5 class="heading">Order Summary</h5>
+            <mat-divider></mat-divider>
+            <div fxLayout="row">
+                <mat-card class="card">
+                    <p class="text">$49 per month</p>
+                    <p class="text">Basic</p>
+                </mat-card>
+                <div fxLayout="column">
+                    <span class="blueheading">Basic pack details</span>
+                    <span class="blacktext">* Ability to add only title and description</span>
+                </div>
+                <div fxLayout="column">
+                    <span class="blueheading">$49</span>
+                    <span class="blacktext">per month</span>+
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div fxLayout="column">
+                <span class="bluebigtext">Total ( 1 item ): $49</span>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+    
+    
+    
+   

@@ -14,7 +14,12 @@
             <img style="height: 15px" src="../../../assets/images/icons8-pin-50 (1).png" (click)=unpinNotes(value.id)>
           </div>
         </div>
-        <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}</mat-card-content>
+        <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}
+          <!-- <textarea  class="full-width" matInput name="description" [formControl]="description" cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" value="{{value.description}}"
+          [ngStyle]='{background:value.color}'>
+                      </textarea> -->
+                    </mat-card-content>
       </div>
 
       <div>
@@ -22,14 +27,14 @@
             person_pin</mat-icon>
     </div>
 
-      <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
+      <div fxFlex="15" class="label-container" fxLayout="column" fxLayoutGap="4px" fxLayoutAlign="start start">
         
-        <div fxFlex="50" *ngIf="value.reminder.length!=0">
-          <button mat-mini-fab class="label-item" [ngStyle]="{background: value.color}">
+        <div  *ngIf="value.reminder.length!=0">
+          <button   mat-mini-fab class="label-item" [ngStyle]="{background: value.color}">
               <div fxLayout="row">
                   <img src="../../../assets/images/schedule-24px.svg" class="reminder" width="15px"
                       height="15px">
-                  <a class="labelText">{{value.reminder|date:shortdate}}</a>
+                  <a (click)="navigateToReminderList()" class="labelText" >{{value.reminder|date: 'medium'}}</a>
                   <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
                       <img src="../../../assets/images/clear-24px.svg" class="tick"
                           (click)="removeReminder(value)" class="clear" width="10px" height="10px">
@@ -39,7 +44,7 @@
 
           </button>
       </div>
-      <div fxFlex="50" fxLayout="row wrap">
+      <div  fxLayout="row wrap">
         <button mat-mini-fab *ngFor="let labels of value.noteLabels" class="label-item"
           [ngStyle]='{background:value.color}'>{{labels.label}}
           <mat-icon class="close-icon" (click)=removeLabel(value.id,labels.id)>close</mat-icon>
@@ -47,8 +52,8 @@
       </div>
         
       </div>
-      <div fxFlex="15" >
-        <app-icontray [noteId]="value.id" [note]="value" (displayNoteAfterDelete)="displayDeleted($event)"
+      <div fxFlex="15" [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"  >
+        <app-icontray [noteId]="value.id" [note]="value" (displayNoteAfterDelete)="display($event)"
           (colorEvent)="setColor($event,value.id)" (displayNoteAfterArchive)="displayArch($event)"
           (checkboxEvent)=showLabel($event,value.id)></app-icontray>
       </div>
@@ -78,7 +83,12 @@
             <img style="height: 15px" src="../../../assets/images/icons8-pin-50.png" (click)=pinNotes(value.id)>
           </div>
         </div>
-        <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}</mat-card-content>
+        <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}
+          <!-- <textarea  class="full-width" matInput name="description" [formControl]="description" cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" value="{{value.description}}"
+          [ngStyle]='{background:value.color}'>
+                      </textarea> -->
+                    </mat-card-content>
       </div>
 
       <div>
@@ -89,11 +99,11 @@
       <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
         
         <div fxFlex="50" *ngIf="value.reminder.length!=0">
-          <button mat-mini-fab class="label-item" [ngStyle]="{background: value.color}">
+          <button  mat-mini-fab class="label-item" [ngStyle]="{background: value.color}">
               <div fxLayout="row">
                   <img src="../../../assets/images/schedule-24px.svg" class="reminder" width="15px"
                       height="15px">
-                  <a class="labelText">{{value.reminder|date:shortdate}}</a>
+                  <a (click)="navigateToReminderList()" class="labelText" >{{value.reminder|date:'medium'}}</a>
                   <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
                       <img src="../../../assets/images/clear-24px.svg" class="tick"
                           (click)="removeReminder(value)" class="clear" width="10px" height="10px">
@@ -141,7 +151,12 @@
             <mat-card-title fxLayout="row wrap" (click)="openDialog(this.value)">{{value.title}}</mat-card-title>
           </div>
         </div>
-        <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}</mat-card-content>
+        <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}
+          <!-- <textarea  class="full-width" matInput name="description" [formControl]="description" cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" value="{{value.description}}"
+          [ngStyle]='{background:value.color}'>
+                      </textarea> -->
+                    </mat-card-content>
       </div>
       <div>
         <mat-icon *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}">
@@ -151,11 +166,11 @@
       <div fxFlex="15" class="label-container" fxLayout="row wrap" fxLayoutGap="4px" fxLayoutAlign="start start">
         
         <div fxFlex="50" *ngIf="value.reminder.length!=0">
-          <button mat-mini-fab class="label-item" [ngStyle]="{background: value.color}">
+          <button  mat-mini-fab class="label-item" [ngStyle]="{background: value.color}">
               <div fxLayout="row">
                   <img src="../../../assets/images/schedule-24px.svg" class="reminder" width="15px"
                       height="15px">
-                  <a class="labelText">{{value.reminder|date:shortdate}}</a>
+                  <a (click)="navigateToReminderList()" class="labelText">{{value.reminder|date:'medium'}}</a>
                   <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
                       <img src="../../../assets/images/clear-24px.svg" class="tick"
                           (click)="removeReminder(value)" class="clear" width="10px" height="10px">
@@ -206,7 +221,12 @@
               <mat-card-title fxLayout="row wrap" (click)="openDialog(this.value)">{{value.title}}</mat-card-title>
             </div>
           </div>
-          <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}</mat-card-content>
+          <mat-card-content fxLayout="row wrap" (click)="openDialog(this.value)">{{value.description}}
+            <!-- <textarea  class="full-width" matInput name="description" [formControl]="description" cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" value="{{value.description}}"
+            [ngStyle]='{background:value.color}'>
+                        </textarea> -->
+                      </mat-card-content>
         </div>
         <div>
           <mat-icon *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}">
@@ -220,7 +240,7 @@
                 <div fxLayout="row">
                     <img src="../../../assets/images/schedule-24px.svg" class="reminder" width="15px"
                         height="15px">
-                    <a class="labelText">{{value.reminder|date:shortdate}}</a>
+                    <a class="labelText">{{value.reminder|date:'medium'}}</a>
                     <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
                         <img src="../../../assets/images/clear-24px.svg" class="tick"
                             (click)="removeReminder(value)" class="clear" width="10px" height="10px">

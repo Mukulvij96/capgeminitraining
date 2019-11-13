@@ -17,7 +17,7 @@ import { NotesComponent } from './Components/notes/notes.component'
 import { CartComponent } from './Components/cart/cart.component';
 import { RemindernotesComponent } from './Components/remindernotes/remindernotes.component';
 import { QuestionsandanswersComponent } from './Components/questionsandanswers/questionsandanswers.component';
-
+import { MycartComponent } from './Components/mycart/mycart.component'
 const routes: Routes = [
   {
     path: 'cart',
@@ -76,6 +76,10 @@ const routes: Routes = [
       {
         path: 'QuestionAnswer/:noteId', 
         component: QuestionsandanswersComponent
+      },
+      {
+        path:'MyCart',
+        component: MycartComponent
       },
       { path: '**', redirectTo: 'notes' }
     ]

@@ -7,6 +7,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { DisplayComponent } from '../display/display.component'
 import { NotefieldComponent } from '../notefield/notefield.component';
 import { Labels } from '../models/labelModel'
+import { RemindernotesComponent } from '../remindernotes/remindernotes.component';
+import { SnackbarService } from 'src/app/services/snackbarservices/snackbar.service';
 @Component({
   selector: 'app-dialogbox',
   templateUrl: './dialogbox.component.html',
@@ -17,21 +19,29 @@ export class DialogboxComponent implements OnInit {
   public title = new FormControl('');
   public description = new FormControl('');
   message: String = ""
-   noteLabels:Labels[]
+  //  noteLabels:Labels[]
   constructor(private noteService: NoteService, private data: DataserviceService, private dialogRef: MatDialogRef<DisplayComponent>,
-    @Inject(MAT_DIALOG_DATA) data1, ) {
+    @Inject(MAT_DIALOG_DATA) data1,private snackbar:SnackbarService ) {
     this.note = {
       description: data1.description,
       title: data1.title,
       id: data1.id,
-      color: data1.color
+      color: data1.color,
+      questionAndAnswerNotes:data1.questionAndAnswerNotes,
+      noteLabels:data1.noteLabels,
+      reminder:data1.reminder,
+      collaborators:data1.collaborators
     }
   }
   @Output() saveNoteEvent = new EventEmitter<boolean>();
   editable: boolean = false;
 
   ngOnInit() {
-    this.data.currentMessage$.subscribe(message => this.message = message)
+    console.log("ss",this.note)
+    this.data.currentMessage$.subscribe(message => {
+      this.message = message
+      this.checkMessage()
+    })
   }
   newTitle: String = ""
   newDescription: String = ""
@@ -63,15 +73,19 @@ export class DialogboxComponent implements OnInit {
       title: this.newTitle,
       description: this.newDescription,
       noteId: this.note.id,
-      color: this.note.color
+      color: this.note.color,
+      reminder:this.note.reminder,
+      noteLabels:this.note.noteLabels,
+      collaborators:this.note.collaborators
     }
 
     console.log("Emitted data", data)
-    this.dialogRef.close(this.note);
+   
 
     this.noteService.postRequest(data, 'updateNotes').subscribe((data1: any) => {
       this.newMessage();
       console.log("added");
+       this.dialogRef.close(this.note);
     })
   }
   setColor($event) {
@@ -84,17 +98,49 @@ export class DialogboxComponent implements OnInit {
       console.log("Color Updated")
     })
   }
-  showLabels($event){
-    const labelData={
-      "noteIdList":[this.note.id],
-      "lableId":[$event.id]
-    }
-    this.noteService.postJson(labelData,'/'+this.note.id+'/addLabelToNotes/'+$event.id+'/add').subscribe((data:any) => {
-      console.log("Notes after label is added",data);
-      this.updateNotes();
-    })
-  }
+  
   newMessage() {
     this.data.changeMessage("Note Added");
   }
+  checkMessage(){
+    if(this.message == "Label Added"){
+      return true
+    }
+  }
+
+  setReminder(reminderValue){
+    
+    this.note.reminder=reminderValue
+   const data={
+     "noteIdList":[this.note.id],
+     "reminder":reminderValue
+   }
+   this.noteService.postJson(data,'/addUpdateReminderNotes').subscribe((data:any)=>{
+    this.snackbar.open("Reminder Set")
+
+  })
+}
+noteLabel:Labels[]
+showLabels($event){
+  this.noteLabel=$event
+  const labelData = {
+    "noteId": [this.note.id],
+    "lableId": [$event.id]
+  }
+
+  this.noteService.postJson(labelData, '/' + this.note.id + '/addLabelToNotes/' + $event.id + '/add').subscribe((data: any) => {
+    console.log("Notes after label is added", data);
+
+  })
+}
+removeLabel(labelId){
+  const labelData = {
+    "noteId": [this.note.id],
+    "lableId": [labelId]
+  }
+  console.log("remove", labelData);
+  this.noteService.postJson(labelData, '/' + this.note.id + '/addLabelToNotes/' + labelId + '/remove').subscribe((data: any) => {
+    console.log("Notes after label is removed", data);
+})
+}
 }

@@ -34,6 +34,7 @@ export class QuestionsandanswersComponent implements OnInit {
   time=[];
   question:string
   color:string
+  initials:string
   getNoteDetails() {
     this.noteService.getNotesDetailById(this.noteId).subscribe((response: any) => {
       
@@ -42,7 +43,9 @@ export class QuestionsandanswersComponent implements OnInit {
       this.user = response.data.data[0].user
       this.time=response.data.data[0].questionAndAnswerNotes;
       this.color=response.data.data[0].color
-      console.log("OnLoading",response.data.data[0].questionAndAnswerNotes)
+      this.initials=response.data.data[0].user.firstName[0]
+      
+      console.log("OnLoading",response.data.data[0])
       
     })  
 

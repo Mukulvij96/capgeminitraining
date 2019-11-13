@@ -28,13 +28,20 @@
 .description-container{
     padding-top:10px;
 }
-// mat-accordion{
-//     margin-top: 10px;
-// }
-// .mat-action-row{
-//     padding-top:10px;
-//     padding-bottom: 10px;
-//     padding-left:5px;
-//     padding-right:5px;
 
-// }
+::ng-deep.label-item{
+    margin:3px;
+    //background-color: rgb(230, 223, 223);
+    border-radius: 20px;
+   //max-width:70px;
+   width: inherit;
+   height: 20px;
+   line-height: 17px;
+   filter: brightness(85%);
+   
+   .mat-button-wrapper {
+   padding: 0px;
+   line-height: 18px;
+  
+  }
+}

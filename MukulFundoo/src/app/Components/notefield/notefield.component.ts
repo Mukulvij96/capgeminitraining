@@ -24,20 +24,27 @@ export class NotefieldComponent implements OnInit {
   close: Boolean;
   showTitle:Boolean=true;
   pin:Boolean=false;
-  
+  reminder:string=""
+  noteLabel=[]
   constructor(private noteService: NoteService, public vcRef: ViewContainerRef,
     private cpService: ColorPickerService, private data: DataserviceService,private snackbar:SnackbarService) { }
   message: String = ""
 
   ngOnInit() {
-    this.data.currentMessage$.subscribe(message => this.message = message)
+    this.data.currentMessage$.subscribe(message => 
+      {
+        this.message = message
+        
+      })
   }
   addNotes(pinValue) {
     this.note = {
       title: this.title.value,
       description: this.description.value,
       color: this.color,
-      isPined:pinValue
+      isPined:pinValue,
+      reminder:this.reminder,
+      noteLabels:JSON.stringify(this.noteLabel)    
     }
     console.log("Emitted data", this.note)
     this.noteService.postRequest(this.note, '/addNotes').subscribe((data: any) => {
@@ -46,6 +53,7 @@ export class NotefieldComponent implements OnInit {
       this.description.reset()
       this.newMessage();
       this.color = ""
+      this.reminder=""
       this.pin=false;
       console.log("added");
       this.snackbar.open("Note Added")
@@ -64,12 +72,29 @@ export class NotefieldComponent implements OnInit {
   }
   show() {
     this.showTitle = !this.showTitle
+    this.sendMessage()
   }
   pinNotes(){
     this.pin = !this.pin
   }
+
+  setReminder(reminderValue){
+    
+    this.reminder=reminderValue
+  }
+  sendMessage(){
+    this.data.changeMessage("NoteField Opened")
+  }
   
+  removeReminder(){
+    this.reminder=""
+  }
   
+  addLabels(label){
+    
+    this.noteLabel=label.label
+    
+  }
 }
 
 

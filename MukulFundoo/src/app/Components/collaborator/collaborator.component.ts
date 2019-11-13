@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NotesService } from '../../services/noteservices/note-service.service'
 import { SnackbarService } from '../../services/snackbarservices/snackbar.service';
+import { DataserviceService } from 'src/app/services/data services/dataservice.service';
 
 @Component({
   selector: 'app-collaborator',
@@ -16,7 +17,7 @@ export class CollaboratorComponent implements OnInit {
   collaborator;
   collaborators: any[];
   collaboratorBody;
-  constructor(public dialogRef: MatDialogRef<CollaboratorComponent>,
+  constructor(public dialogRef: MatDialogRef<CollaboratorComponent>,private dataService:DataserviceService,
     @Inject(MAT_DIALOG_DATA) public data, public noteService: NotesService,private snackbar : SnackbarService) { }
 
   ngOnInit() {
@@ -55,6 +56,7 @@ export class CollaboratorComponent implements OnInit {
         else {
           this.noteService.addCollaborator(this.data['id'], this.collaboratorBody).subscribe(result => {
             this.collaborators.push(this.collaboratorBody);
+            this.dataService.changeMessage("Collaborator Added")
             this.collaborator = "";
             this.snackbar.open("Collaborator added successfully")
             

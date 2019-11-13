@@ -38,7 +38,7 @@ export class LabelnotesdisplayComponent implements OnInit {
     this.noteService.postJson(data,'/getNoteslistByLabel/'+this.message).subscribe((response:any) => {
       console.log("Notes per label:" , response.data.data)
       this.labeledNotes=response.data.data.reverse()
-       this.snackbar.open("Dosplaying Notes for label" ,this.message)    
+       this.snackbar.open("Displaying Notes for label" ,this.message)    
     })
     
   }

@@ -13,7 +13,7 @@
     </div>
 
     <div class="card-container" fxLayout="row" fxLayoutAlign="space-evenly center">
-        <mat-card class="mat-card-container" (click)="advanceService()">
+        <mat-card class="mat-card-container" (click)="addServiceToCart('advance')">
             <mat-card-title class="title">
                 price $99:price per month
             </mat-card-title>
@@ -27,7 +27,7 @@
                 </mat-list>
             </div>
         </mat-card>
-        <mat-card class="mat-card-container" (click)="basicService()">
+        <mat-card class="mat-card-container" (click)="addServiceToCart('basic')">
             <mat-card-title class="title">
                 price $45:price per month
             </mat-card-title>

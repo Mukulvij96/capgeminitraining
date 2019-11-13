@@ -43,7 +43,7 @@
                 </mat-card-content>
             </form>
 
-            <div class="card-container" fxLayout="row" fxLayoutAlign="space-evenly center">
+            <div *ngIf="typeOfService== 'advance'" class="card-container" fxLayout="row" fxLayoutAlign="space-evenly center">
                 <mat-card [style.backgroundColor]="advanceColor" class="mat-card-container" >
                     <mat-card-title class="title">
                         price $99:price per month
@@ -58,6 +58,42 @@
                             </mat-list-item>
                         </mat-list>
                     </div>
+                    <mat-card-footer *ngIf="typeOfService== 'advance'" >SELECTED</mat-card-footer>
+                </mat-card>
+                <mat-card class="mat-card-container" [style.backgroundColor]="000000" >
+                    <mat-card-title class="title">
+                        price $45:price per month
+                    </mat-card-title>
+                    <p class="service">basic</p>
+                    <div>
+                        <mat-list class="list">
+                            <mat-list-item class="listItem">$45/month</mat-list-item>
+                            <mat-list-item class="listItem">Ability to add only title and description
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                    <mat-card-footer *ngIf="typeOfService== 'advance'" >ADD TO CART</mat-card-footer>
+                </mat-card>
+
+            </div>
+
+
+            <div *ngIf="typeOfService== 'basic'" class="card-container" fxLayout="row" fxLayoutAlign="space-evenly center">
+                <mat-card [style.backgroundColor]="000000" class="mat-card-container" >
+                    <mat-card-title class="title">
+                        price $99:price per month
+                    </mat-card-title>
+                    <p class="service">advance</p>
+                    <div>
+                        <mat-list class="list">
+                            <mat-list-item class="listItem">$99/month</mat-list-item>
+                            <mat-list-item class="listItem">Ability to add title, description, images, labels, checklist
+                                and
+                                colors
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                    <mat-card-footer *ngIf="typeOfService== 'basic'" >ADD TO CART</mat-card-footer>
                 </mat-card>
                 <mat-card class="mat-card-container" [style.backgroundColor]="basicColor" >
                     <mat-card-title class="title">
@@ -71,9 +107,11 @@
                             </mat-list-item>
                         </mat-list>
                     </div>
+                    <mat-card-footer *ngIf="typeOfService== 'basic'" >SELECTED</mat-card-footer>
                 </mat-card>
 
             </div>
+
 
             <mat-card-actions class="button" fxLayout="row" fxLayoutAlign="space-around center">
                 <a [routerLink]="['./login']">Sign in instead</a>
